@@ -140,6 +140,25 @@
                 width: 70%;
             }
         }
+
+        /* Styl pro fotografii */
+        .photo {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+
+        /* Styl pro sekci "Moje výtvory" */
+        .projects {
+            background-color: #e0e6c0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -156,53 +175,27 @@
         <button class="button" onclick="toggleSection('about')">O mně</button>
         <button class="button" onclick="toggleSection('experience')">Moje zkušenosti</button>
         <button class="button" onclick="toggleSection('contact')">Kontakt</button>
+        <button class="button" onclick="toggleSection('projects')">Moje výtvory</button>
     </div>
 
     <!-- Sekce "O mně" -->
     <div id="about" class="section-content">
-        <div id="about" class="section-content">
-            <!-- Česká verze -->
-            <div id="about-cz">
-                <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým nezná hranic. 🧠💬 Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
+        <img src="static/foto.jpg" alt="Marie Šimovcová" class="photo"> <!-- Fotografie -->
+        <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým nezná hranic. 🧠💬 Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
                 
-                <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
+        <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
                 
-                <p>Věřím, že změna oboru mi poskytne příležitost kombinovat mé dosavadní zkušenosti v práci s lidmi s nově nabytými dovednostmi v technologiích a programování. Jsem připravena na novou výzvu, která mě posune a umožní mi neustále se rozvíjet. 💚 Také mám v plánu dál pracovat na tvorbě webových stránek, což je další oblast, která mě nadchla – a i proto teď vidíte tuto stránku. 🎯</p>
-            </div>
+        <p>Věřím, že změna oboru mi poskytne příležitost kombinovat mé dosavadní zkušenosti v práci s lidmi s nově nabytými dovednostmi v technologiích a programování. Jsem připravena na novou výzvu, která mě posune a umožní mi neustále se rozvíjet. 💚 Také mám v plánu dál pracovat na tvorbě webových stránek, což je další oblast, která mě nadchla – a i proto teď vidíte tuto stránku. 🎯</p>
+    </div>
 
-            <!-- Anglická verze -->
-            <div id="about-en" style="display: none;">
-                <p>I am a psychology student, currently focused on writing my thesis. However, my passion for helping people has always pushed me to explore beyond the limits of my field. 🧠💬 For the past year, I've been honing my skills in customer support and banking, offering clients guidance on their financial matters and ensuring their security. Yet, I have long felt the pull of something bigger—something that challenges me further. 💼</p>
-                
-                <p>In my free time, I've turned to software development. 💻 I began learning Python and Java, and I'm gradually immersing myself in the world of coding and web development. Each project I tackle, I do with great attention to detail and the drive to produce high-quality work. 🔍 The more I learn, the more I realize that this is my true calling. 🚀</p>
-                
-                <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You can find my personal web portfolio here: <a href="https://marusima.github.io/marusimo/" target="_blank">check it out here</a>. 🎯</p>
-            </div>
-
-        
-            <!-- Tlačítka pro přepínání jazyků -->
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="button" onclick="showAbout('cz')">Česky</button>
-                <button class="button" onclick="showAbout('en')">English</button>
-            </div>
+    <!-- Sekce "Moje výtvory" -->
+    <div id="projects" class="section-content">
+        <h1>Moje výtvory</h1>
+        <p>V této sekci postupně přidám některé z mých projektů, včetně her napsaných v Pythonu, webových aplikací a dalších zajímavých kódů, které jsem vytvořila. 🌐</p>
+        <div class="projects">
+            <p>Jednoduchá hra v Pythonu: <a href="#">Odkaz na hru</a></p>
+            <p>Ukázka mého kódu pro webovou aplikaci: <a href="#">Odkaz na GitHub</a></p>
         </div>
-        
-        <script>
-            // Funkce pro přepínání mezi českou a anglickou verzí
-            function showAbout(lang) {
-                const aboutCz = document.getElementById('about-cz');
-                const aboutEn = document.getElementById('about-en');
-        
-                if (lang === 'cz') {
-                    aboutCz.style.display = 'block';
-                    aboutEn.style.display = 'none';
-                } else if (lang === 'en') {
-                    aboutCz.style.display = 'none';
-                    aboutEn.style.display = 'block';
-                }
-            }
-        </script>
-        
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
@@ -235,20 +228,19 @@
     <!-- Sekce "Kontakt" -->
     <div id="contact" class="section-content">
         <h2>Jak se se mnou spojit?</h2>
-        <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:
+        <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
         <ul>
-            <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a><br>Preferuji emailové zprávy. Odpovím co nejdříve!</li>
-            <li><strong>Na telefonu:</strong> <a href="tel:+420728883022">+420 728 883 022</a><br>Pokud preferujete rychlejší komunikaci. Samozřejmě nejsem vždy dostupná, a je lepší se na hovoru dopředu domluvit.</li>
-            <li><strong>Také mi můžete napsat na LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">www.linkedin.com/in/marie-simovcova</a><br></li>
-            <li><strong>Nově jsem se přidala i na GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a><br></li>
+            <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
+            <li><strong>Na telefonu:</strong> <a href="tel:+420728883022">+420 728 883 022</a></li>
+            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a></li>
         </ul>
 
         <h3>Co oceňuji:</h3>
-        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či i rovnou vývoje aplikací. <strong>Ráda se s Vámi mrknu na nabídky na pozici testera nebo junior developera</strong>. Jsem sice entry level, ale zapálená se učit. 🌱</p>
+        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na nabídky na pozici testera nebo junior developera</strong>.</p>
 
-        <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy a příležitosti k rozvoji! 💼</p>
+        <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
     </div>
-
 
     <!-- Funkce pro zobrazení/skrytí sekcí -->
     <script>
