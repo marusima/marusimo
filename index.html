@@ -192,6 +192,45 @@
             width: 70%;
             margin: 20px auto;
         }
+    
+     /* Styl pro tlačítka přepínání jazyků */
+    .language-button {
+        background-color: #586b4a; /* Tmavší zelená pro jazyková tlačítka */
+        color: white;
+        border: none;
+        padding: 8px 16px; /* Menší padding než hlavní tlačítka */
+        border-radius: 20px;
+        font-size: 1.1rem; /* Trochu menší písmo než hlavní tlačítka */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-family: "Garamond", sans-serif;
+    }
+
+    /* Změna barvy při hoveru */
+    .language-button:hover {
+        background-color: rgb(109, 139, 111); /* Světlejší zelená při hoveru */
+        transform: scale(1.05); /* Trochu zvětšení při hoveru */
+    }
+
+    /* Styl pro tlačítko CV */
+    .cv-box {
+        background-color: #586b4a; /* Tmavší zelená pro tlačítko CV */
+        padding: 10px 18px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    /* Změna barvy při hoveru */
+    .cv-box:hover {
+        background-color: #4a5b38; /* Tmavší odstín při hoveru */
+        color: white;
+    }
     </style>
 </head>
 
@@ -216,9 +255,10 @@
     </div>
     <!-- Sekce "O mně" -->
     <div id="about" class="section-content">
+        <!-- Tlačítka pro přepínání jazyků -->
         <div class="language-buttons">
-            <button class="button" onclick="showAbout('cz')">Česky</button>
-            <button class="button" onclick="showAbout('en')">English</button>
+            <button class="button language-button" onclick="showAbout('cz')">Česky</button>
+            <button class="button language-button" onclick="showAbout('en')">English</button>
         </div>
         <h1>O mně</h1>
         <div id="about-cz" class="about-text">
