@@ -171,46 +171,34 @@
             margin: 10px 0;
         }
 
-        /* Styl pro tlačítka přepínání jazyků */
-        .language-button {
-            background-color: #748a64;
+        /* Styl pro tlačítka přepínání jazyků a tlačítko CV */
+        .button, .language-button, .cv-box {
+            background-color: #748a64; /* Stejná barva pro všechna tlačítka */
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 1rem;
+            padding: 10px 20px; /* Stejné velikosti pro všechna tlačítka */
+            border-radius: 25px;
+            font-size: 1.3rem; /* Stejná velikost písma pro všechna tlačítka */
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             font-family: "Garamond", sans-serif;
-            float: right;
-            margin-right: 10px;
+            min-width: 150px;  /* Nastavení minimální šířky */
+            text-align: center;
         }
 
-        .language-button:hover {
+        /* Změna barvy při hoveru pro všechna tlačítka */
+        .button:hover, .language-button:hover, .cv-box:hover {
             background-color: #657b54;
-            transform: scale(1.05);
+            transform: scale(1.05); /* Trochu zvětšení při hoveru */
         }
 
-        /* Styl pro tlačítko CV */
         .cv-box {
-            background-color: #748a64;
-            padding: 8px 16px;
-            border-radius: 20px;
             font-weight: bold;
             text-decoration: none;
-            color: white;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, color 0.2s ease;
-            margin-top: 15px;
-            font-family: "Garamond", sans-serif;
-        }
-
-        .cv-box:hover {
-            background-color: #657b54;
-            color: white;
         }
     </style>
 </head>
+
 
 
 
