@@ -138,57 +138,6 @@
     </style>
 </head>
 
-<body>
-    <!-- Úvodní sekce -->
-    <div id="welcome-text">
-        <h1>Vítejte na mé stránce!</h1>
-        <p>Ráda bych se vám představila a nabídla informace o mých zkušenostech, dovednostech a projektech.</p>
-        <div class="button-container">
-            <button class="button" onclick="toggleSection('about')">O mně</button>
-            <button class="button" onclick="toggleSection('experience')">Zkušenosti</button>
-            <button class="button" onclick="toggleSection('contact')">Kontakt</button>
-        </div>
-    </div>
-
-    <!-- Sekce "O mně" -->
-    <div id="about" class="section-content">
-        <h2>O mně</h2>
-        <p>Jsem studentka psychologie a ráda se učím nové věci. Mám zkušenosti s testováním a vývojem softwaru a jsem také vášnivá o přírodní vědy.</p>
-    </div>
-
-    <!-- Sekce "Zkušenosti" -->
-    <div id="experience" class="section-content">
-        <h2>Zkušenosti</h2>
-        <p>Pracovala jsem jako asistentka v HR a současně jsem i specialistka v bankovní službě.</p>
-    </div>
-
-    <!-- Sekce "Kontakt" -->
-    <div id="contact" class="section-content">
-        <h2>Kontakt</h2>
-        <p>Pokud máte zájem o spolupráci nebo dotazy, můžete mě kontaktovat na emailu: marie.s@exemplemail.com.</p>
-    </div>
-
-    <!-- Tlačítka pro změnu jazyka a stažení CV -->
-    <div class="button-container">
-        <button class="language-button">Čeština</button>
-        <a href="CV.pdf" class="cv-box">Stáhnout CV</a>
-    </div>
-
-    <script>
-        function toggleSection(sectionId) {
-            // Skrytí všech sekcí
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(function (section) {
-                section.classList.remove('open');
-            });
-
-            // Zobrazení vybrané sekce
-            const sectionToShow = document.getElementById(sectionId);
-            sectionToShow.classList.add('open');
-        }
-    </script>
-</body>
-
 
 
 <body>
