@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marie Šimovcová</title>
     <style>
-        /* Globální styl */
+        /* Základní styl pro stránku */
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Comic Sans MS", sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f0;
@@ -24,17 +24,13 @@
             border-radius: 10px;
             margin: 20px auto;
             width: 70%;
+            font-family: "Garamond", serif;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        header h1 {
+        h1 {
             margin: 0;
-            font-size: 2em;
-        }
-
-        header p {
-            margin: 5px 0 0;
-            font-size: 1.2rem;
+            font-size: 1.8em;
         }
 
         /* Tlačítka */
@@ -49,41 +45,33 @@
             background-color: #92b974;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 20px;
             min-width: 120px;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             cursor: pointer;
             border-radius: 25px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .button:hover {
             background-color: #8faf5e;
         }
 
-        .button.active {
-            background-color: #7c8f6d;
-        }
-
         /* Sekce */
         .section-content {
-            display: none;
             background-color: #e8eddf;
             padding: 20px;
             margin: 20px auto;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 70%;
-            box-sizing: border-box;
             line-height: 1.8;
+            text-align: justify;
+            display: none;
         }
 
-        .section-content h2 {
-            color: #445744;
-        }
-
-        /* Tlačítka jazyků */
+        /* Tlačítka pro jazyky */
         .language-buttons {
             display: flex;
             justify-content: flex-end;
@@ -102,30 +90,10 @@
             background-color: #7a9b49;
             color: white;
         }
-
-        /* Kontaktní informace */
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin: 10px 0;
-        }
-
-        ul li a {
-            color: #445744;
-            text-decoration: none;
-        }
-
-        ul li a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
-
     <!-- Hlavička -->
     <header>
         <h1>Marie Šimovcová</h1>
@@ -134,10 +102,10 @@
 
     <!-- Tlačítka sekcí -->
     <div class="button-container">
-        <button class="button" data-section="about">O mně</button>
-        <button class="button" data-section="experience">Moje zkušenosti</button>
-        <button class="button" data-section="projects">Moje výtvory</button>
-        <button class="button" data-section="contact">Kontakt</button>
+        <button class="button" id="btn-about" onclick="toggleSection('about')">O mně</button>
+        <button class="button" id="btn-experience" onclick="toggleSection('experience')">Moje zkušenosti</button>
+        <button class="button" id="btn-contact" onclick="toggleSection('contact')">Kontakt</button>
+        <button class="button" id="btn-projects" onclick="toggleSection('projects')">Moje výtvory</button>
     </div>
 
     <!-- Sekce "O mně" -->
@@ -147,107 +115,47 @@
             <button class="button" onclick="showAbout('en')">English</button>
         </div>
         <h1>O mně</h1>
-        <div id="about-cz" class="about-text">
-            <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým ne vždy zná hranic. 🧠💬</p> 
-            <p>Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
-            
-            <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
-            
-            <p>Věřím, že změna oboru mi poskytne příležitost kombinovat mé dosavadní zkušenosti v práci s lidmi s nově nabytými dovednostmi v technologiích a programování. Jsem připravena na novou výzvu, která mě posune a umožní mi neustále se rozvíjet. 💚 Také mám v plánu dál pracovat na tvorbě webových stránek, což je další oblast, která mě nadchla – a i proto teď vidíte tuto stránku. 🎯</p>        </div>
-        <div id="about-en" class="about-text" style="display: none;">
-            <p>I am a psychology student, currently focused on writing my thesis. However, my passion for helping people has always pushed me to explore beyond the limits of my field. 🧠💬 For the past year, I've been honing my skills in customer support and banking, offering clients guidance on their financial matters and ensuring their security. Yet, I have long felt the pull of something bigger—something that challenges me further. 💼</p>
-                
-            <p>In my free time, I've turned to software development. 💻 I began learning Python and Java, and I'm gradually immersing myself in the world of coding and web development. Each project I tackle, I do with great attention to detail and the drive to produce high-quality work. 🔍 The more I learn, the more I realize that this is my true calling. 🚀</p>
-            
-            <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You are looking at my personal web right here. 🎯</p>        </div>
+        <div id="about-cz">
+            <p>Jsem studentka psychologie...</p>
+            <!-- Zbytek vašeho českého textu -->
+        </div>
+        <div id="about-en" style="display: none;">
+            <p>I am a psychology student...</p>
+            <!-- Zbytek vašeho anglického textu -->
+        </div>
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
     <div id="experience" class="section-content">
-        <div class="experience-header">
-            <h1>Poslední pracovní zkušenosti</h1>
-            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV" class="cv-box">Stáhnout CV</a>
-        </div>
+        <h1>Moje zkušenosti</h1>
+        <!-- Vaše data o pracovních zkušenostech -->
+    </div>
 
-        <div class="company">
-            <img src="static/logo2.png" alt="Air Bank logo">
-            <h2>Air Bank a.s.</h2>
-        </div>
-
-        <div class="position">
-            <h2>Specialista servisního centra – senior, noční písař</h2>
-            <p class="date"><strong>říjen 2024 až současnost</strong></p>
-            <ul>
-                <li>S přechodem do pozice seniora jsem získala širší možnosti poskytovat klientům nejen kvalitní, ale i komplexní podporu, ať už prostřednictvím telefonické, nebo písemné komunikace. 💬</li>
-                <li>Každý den se zaměřuji na to, abych klientům nabídla to nejlepší řešení – nejen pro bankovní produkty, ale i pro bezpečnost jejich účtů a financí.</li>
-                <li>Nejde jen o to, co je znát na první pohled – je pro mě důležité vidět i širší souvislosti, které mohou ovlivnit život klientů i mimo banku.</li>
-                <li>Moje práce je založena na přesnosti i empatii – vždy se ujistím, že klienti dostanou správné a včasné informace a že jejich finance budou v bezpečí. 💚</li>
-                <li>Specializuji se na řešení všech dotazů ohledně půjček – ať už v Air Bank, nebo na Zonky.</li>
-            </ul>
-    
-            <h2>Specialista servisního centra</h2>
-            <p class="date"><strong>červenec 2023 až září 2024</strong></p>
-            <ul>📞 "Co pro Vás mohu udělat?"
-                <li>.... Aneb už od začátku jsem byla první hlas, který klient uslyšel, když potřeboval pomoc, podporu nebo radu. Moje cesta začala na sluchátku, kde jsem se učila o kvalitní péči o klienty a jak jim poskytovat komplexní, rychlou, ale přitom lidskou podporu.</li>
-                <li>Každý den jsem komunikovala s klienty a pomáhala jim najít řešení pro jejich bankovní záležitosti.</li>
-                <li>Byla jsem jejich „prvním kontaktem“, ujistila se, že jejich požadavky byly vyřízeny správně nebo předány do šikovných rukou kolegů, a že jejich zkušenosti s bankovními službami byly co nejhladší. 😊</li>
-            </ul>
-        </div>
+    <!-- Sekce "Kontakt" -->
+    <div id="contact" class="section-content">
+        <h1>Kontakt</h1>
+        <!-- Vaše kontaktní informace -->
     </div>
 
     <!-- Sekce "Moje výtvory" -->
     <div id="projects" class="section-content">
         <h1>Moje výtvory</h1>
-        <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
+        <!-- Obsah sekce -->
     </div>
-
-<!-- Sekce "Kontakt" -->
-<div id="contact" class="section-content">
-    <h1>Jak se se mnou spojit?</h1>
-    <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
-    <ul>
-        <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
-        <li><strong>Na telefonu</strong> (+420) 728 883 022</li>
-        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a></li>
-        <li><strong>GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a></li>
-    </ul>
-
-    <h3>Co oceňuji:</h3>
-    <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na spolupráci, kde bych pro Vás byla přínosem na pozici testera nebo junior developera</strong>. Sice se mám ještě hodně co učit, ale jsem přesvědčená, že je dnes často znamenitější mindset než skillset.</p>
-
-    <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
-</div>
 
     <!-- Skripty -->
     <script>
-        const buttons = document.querySelectorAll('.button-container .button');
-        const sections = document.querySelectorAll('.section-content');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const sectionId = button.getAttribute('data-section');
-
-                // Aktivace tlačítka
-                buttons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Zobrazení správné sekce
-                sections.forEach(section => {
-                    section.style.display = section.id === sectionId ? 'block' : 'none';
-                });
+        function toggleSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.style.display = section.id === sectionId ? 'block' : 'none';
             });
-        });
+        }
 
-        // Přepínání jazyků
-        document.querySelectorAll('.language-buttons .button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.getAttribute('data-lang');
-                document.getElementById('about-cz').style.display = lang === 'cz' ? 'block' : 'none';
-                document.getElementById('about-en').style.display = lang === 'en' ? 'block' : 'none';
-            });
-        });
+        function showAbout(lang) {
+            document.getElementById('about-cz').style.display = lang === 'cz' ? 'block' : 'none';
+            document.getElementById('about-en').style.display = lang === 'en' ? 'block' : 'none';
+        }
     </script>
-
 </body>
 
 </html>
