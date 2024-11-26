@@ -160,8 +160,42 @@
 
     <!-- Sekce "O mně" -->
     <div id="about" class="section-content">
-        <p>Studentka psychologie, momentálně soustředěná na psaní závěrečné práce. Když právě nepracuju na své diplomce, jsem k dispozici klientům, kteří potřebují pomoc s bankovními záležitostmi nebo mají obavy o bezpečnost svých účtů. 💚</p>
-        <p>Ve svém volném čase se věnuji programování – učím se Python, Javu a postupně objevuju svět softwarového vývoje.</p>
+        <div id="about" class="section-content">
+            <!-- Česká verze -->
+            <div id="about-cz">
+                <p>Studentka psychologie, momentálně soustředěná na psaní závěrečné práce. Když právě nepracuju na své diplomce, jsem k dispozici klientům, kteří potřebují pomoc s bankovními záležitostmi nebo mají obavy o bezpečnost svých účtů. Mým cílem je vždy zajistit, aby dostali správné informace a jejich finance byly v bezpečí – nejen ve dne, ale i v noci, kdy ostatní spí. 💚</p>
+                <p>Ve svém volném čase se věnuji programování – učím se Python, Javu a postupně objevuju svět softwarového vývoje. Mojí vášní je detail a kvalita, kterou se snažím přenášet do každého projektu, na kterém pracuji. 👩🏻‍💻 Momentálně jen pro sebe, ale věřím, že brzy budu větším přínosem.</p>
+            </div>
+        
+            <!-- Anglická verze -->
+            <div id="about-en" style="display: none;">
+                <p>I’m a psychology student currently focused on my thesis, helping clients navigate their banking needs, and ensuring their financial security. 💼🌙</p>
+                <p>When I’m not studying or working, I dive into the world of software development, learning Python and Java. My passion lies in attention to detail and delivering high-quality work, which drives me to keep improving my skills. 🖥️💡 I’m excited about bringing this energy to a role in testing or development. 🤖 Looking forward to new opportunities where I can contribute and grow!</p>
+            </div>
+        
+            <!-- Tlačítka pro přepínání jazyků -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="button" onclick="showAbout('cz')">Česky</button>
+                <button class="button" onclick="showAbout('en')">English</button>
+            </div>
+        </div>
+        
+        <script>
+            // Funkce pro přepínání mezi českou a anglickou verzí
+            function showAbout(lang) {
+                const aboutCz = document.getElementById('about-cz');
+                const aboutEn = document.getElementById('about-en');
+        
+                if (lang === 'cz') {
+                    aboutCz.style.display = 'block';
+                    aboutEn.style.display = 'none';
+                } else if (lang === 'en') {
+                    aboutCz.style.display = 'none';
+                    aboutEn.style.display = 'block';
+                }
+            }
+        </script>
+        
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
