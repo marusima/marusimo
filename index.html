@@ -92,22 +92,6 @@
         align-items: center;
     }
 
-    /* Styl pro CV odkaz */
-    .cv-box {
-        background-color: rgb(109, 139, 111); /* Jemný pastelový odstín */
-        padding: 5px 15px;
-        border-radius: 25px;
-        font-weight: bold;
-        text-decoration: none;
-        color: #d6d8d5; /* Tmavší zelená pro odkaz */
-        font-size: 1rem;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .cv-box:hover {
-        background-color: #586b4a;
-        color: white;
-    }
 
     /* Styl pro zaměstnavatele a logo */
     .company {
@@ -173,14 +157,7 @@
         margin: 10px 0;
     }
 
-    /* Tlačítka pro přepínání jazyků */
-    .language-buttons {
-        display: flex;
-        justify-content: flex-end; /* Zarovná tlačítka doprava */
-        gap: 10px;
-        margin-top: 0; /* Vyrovná zarovnání s textem */
-        width: 100%; /* Rozprostře sekci na šířku */
-    }
+
 
     /* Styl pro uvítací text */
     #welcome-text {
@@ -286,6 +263,7 @@
     <div id="experience" class="section-content">
         <div class="experience-header">
             <h1>Poslední pracovní zkušenosti</h1>
+            <!-- Tlačítko pro stažení CV -->
             <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV" class="cv-box">Stáhnout CV</a>
         </div>
 
