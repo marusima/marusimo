@@ -11,13 +11,13 @@
             font-family: "Comic Sans MS", sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f5f5f0; /* Jemný béžovo-zelený odstín */
             color: #333;
         }
 
         /* Styl pro hlavičku */
         header {
-            background-color: #70834f; /* Světle khaki zelená */
+            background-color: #889966; /* Khaki zelená */
             color: white;
             text-align: center;
             padding: 15px;
@@ -31,19 +31,19 @@
         h1 {
             margin: 0;
             font-size: 2.2rem;
-            font-family: "Garamond", sans-serif;
+            font-family: "Garamond", serif;
         }
 
         p {
             font-size: 1.2rem;
-            font-style: italic;
             margin: 10px 0;
         }
 
         /* Styl pro tlačítka */
         .button {
-            background-color: #6a7d5a; /* Tmavší khaki zelená */
+            background-color: #6b8e23; /* Olivově khaki */
             color: white;
+            font-weight: bold; /* Tučné písmo */
             border: none;
             padding: 10px;
             width: 100px; /* Užší tlačítka */
@@ -55,16 +55,15 @@
             display: block;
             transition: all 0.3s ease;
             font-family: "Garamond", sans-serif;
-
         }
 
         .button:hover {
-            background-color: #8ca580; /* Světlejší khaki zelená při hoveru */
+            background-color: #8faf5e; /* Světlejší zelená při hoveru */
         }
 
         /* Styl pro sekce */
         .section-content {
-            background-color: #e8eddf; /* Světlejší zelená pro sekce */
+            background-color: #eaeed3; /* Jemný světle zelený odstín */
             padding: 20px;
             margin: 20px auto;
             border-radius: 15px;
@@ -86,7 +85,7 @@
         .section-content h1 {
             font-size: 1.8rem;
             margin-bottom: 10px;
-            color: #6a7d5a; /* Khaki odstín */
+            color: #556b2f; /* Khaki odstín */
         }
 
         .section-content h2 {
@@ -127,9 +126,8 @@
     <!-- Tlačítko pro zobrazení sekce "O mně" -->
     <button class="button" onclick="toggleSection('about')">O mně</button>
     <div id="about" class="section-content">
-        <p>Studentka psychologie, momentálně soustředěná na psaní závěrečné práce. Když právě nepracuju na své diplomce, jsem k dispozici klientům, kteří potřebují pomoc s bankovními záležitostmi nebo mají obavy o bezpečnost svých účtů. Mým cílem je vždy zajistit, aby dostali správné informace a jejich finance byly v bezpečí – nejen ve dne, ale i v noci, kdy ostatní spí. 💚
-
-            Ve svém volném čase se věnuji programování – učím se Python, Javu a postupně objevuju svět softwarového vývoje. Mojí vášní je detail a kvalita, kterou se snažím přenášet do každého projektu, na kterém pracuji. 👩🏻‍💻 Momentálně jen pro sebe, ale věřím, že brzy budu větším přínosem.</p>
+        <p>Studentka psychologie, momentálně soustředěná na psaní závěrečné práce. Když právě nepracuju na své diplomce, jsem k dispozici klientům, kteří potřebují pomoc s bankovními záležitostmi nebo mají obavy o bezpečnost svých účtů. Mým cílem je vždy zajistit, aby dostali správné informace a jejich finance byly v bezpečí – nejen ve dne, ale i v noci, kdy ostatní spí. 💚</p>
+        <p>Ve svém volném čase se věnuji programování – učím se Python, Javu a postupně objevuju svět softwarového vývoje. Mojí vášní je detail a kvalita, kterou se snažím přenášet do každého projektu, na kterém pracuji. 👩🏻‍💻 Momentálně jen pro sebe, ale věřím, že brzy budu větším přínosem.</p>
     </div>
 
     <!-- Tlačítko pro zobrazení sekce "Pracovní zkušenosti" -->
@@ -137,23 +135,25 @@
     <div id="experience" class="section-content">
         <h1>Air Bank a.s.</h1>
         <h2>Specialista servisního centra – senior</h2>
-        <p class="date">říjen 2024 až současnost</p>
+        <p><strong>říjen 2024 až současnost</strong></p>
         <ul>
-            <li>S přechodem do pozice seniora jsem získala širší možnosti poskytovat klientům nejen kvalitní, ale i komplexní podporu.</li>
-            <li>Každý den se zaměřuji na to, abych klientům nabídla to nejlepší řešení.</li>
-            <li>Moje práce je založena na přesnosti i empatii.</li>
+            <li>S přechodem do pozice seniora jsem získala širší možnosti poskytovat klientům nejen kvalitní, ale i komplexní podporu, ať už prostřednictvím telefonické, nebo písemné komunikace. 💬</li>
+            <li>Každý den se zaměřuji na to, abych klientům nabídla to nejlepší řešení – nejen pro bankovní produkty, ale i pro bezpečnost jejich účtů a financí.</li>
+            <li>Nejde jen o to, co je znát na první pohled – je pro mě důležité vidět i širší souvislosti, které mohou ovlivnit život klientů i mimo banku.</li>
+            <li>Moje práce je založena na přesnosti i empatii – vždy se ujistím, že klienti dostanou správné a včasné informace a že jejich finance budou v bezpečí. 💚</li>
+            <li>Specializuji se na řešení všech dotazů ohledně půjček – ať už v Air Bank, nebo na Zonky.</li>
         </ul>
 
         <h2>Specialista servisního centra</h2>
-        <p class="date">červenec 2023 až září 2024</p>
-        <ul>
-            <li>📞 "Co pro Vás mohu udělat?"</li>
-            <li>Komunikace s klienty a pomoc s bankovními záležitostmi.</li>
-            <li>Byla jsem jejich prvním kontaktem a zajišťovala hladký průběh.</li>
+        <p><strong>červenec 2023 až září 2024</strong></p>
+        <ul>📞 "Co pro Vás mohu udělat?"
+            <li>.... Aneb už od začátku jsem byla první hlas, který klient uslyšel, když potřeboval pomoc, podporu nebo radu. Moje cesta začala na sluchátku, kde jsem se učila o kvalitní péči o klienty a jak jim poskytovat komplexní, rychlou, ale přitom lidskou podporu.</li>
+            <li>Každý den jsem komunikovala s klienty a pomáhala jim najít řešení pro jejich bankovní záležitosti.</li>
+            <li>Byla jsem jejich „prvním kontaktem“, ujistila se, že jejich požadavky byly vyřízeny správně nebo předány do šikovných rukou kolegů, a že jejich zkušenosti s bankovními službami byly co nejhladší. 😊</li>
         </ul>
         <p>
-            <strong>Stáhněte si můj životopis: </strong>
-            <a href="static/Marie Šimovcová en.pdf" download="Marie_Simovcová_CV">Klikněte zde pro stažení</a>
+            <strong>Zde je pro Vás dostupný PDF formát mého životopisu, například k vytisknutí: </strong>
+            <a href="static/Marie Šimovcová en.pdf.pdf" download="Marie_Šimovcová_CV"> Klikněte.</a>
         </p>
     </div>
 
