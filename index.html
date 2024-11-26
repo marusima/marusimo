@@ -90,9 +90,10 @@
             width: 70%;  /* Pevná šířka */
             line-height: 1.8;
             text-align: justify;
-            overflow: hidden;
             height: 0;  /* Sekce jsou na začátku skryté */
-            transition: height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;  /* Skryté sekce */
+            overflow: hidden;
+            transition: opacity 0.3s ease, height 0.3s ease;
         }
 
         /* Pokud je sekce otevřená */
@@ -173,16 +174,16 @@
 
         /* Styl pro tlačítka přepínání jazyků a tlačítko CV */
         .button, .language-button, .cv-box {
-            background-color: #748a64; /* Stejná barva pro všechna tlačítka */
+            background-color: #748a64;
             color: white;
             border: none;
             padding: 10px 20px; /* Stejné velikosti pro všechna tlačítka */
             border-radius: 25px;
-            font-size: 1.3rem; /* Stejná velikost písma pro všechna tlačítka */
+            font-size: 1.3rem;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             font-family: "Garamond", sans-serif;
-            min-width: 150px;  /* Nastavení minimální šířky */
+            min-width: 150px;
             text-align: center;
         }
 
@@ -198,6 +199,7 @@
         }
     </style>
 </head>
+
 
 
 
