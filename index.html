@@ -256,6 +256,22 @@
             
             <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You are looking at my personal web right here. 🎯</p>        </div>
     </div>
+    <script>
+
+    function showAbout(language) {
+    // Skrýt oba texty
+    document.getElementById('about-cz').style.display = 'none';
+    document.getElementById('about-en').style.display = 'none';
+
+    // Zobrazit text podle vybraného jazyka
+    if (language === 'cz') {
+        document.getElementById('about-cz').style.display = 'block';
+    } else if (language === 'en') {
+        document.getElementById('about-en').style.display = 'block';
+    }
+    }
+    </script>
+
 
     <!-- Sekce "Moje výtvory" -->
     <div id="projects" class="section-content">
