@@ -152,12 +152,12 @@
 
     /* Sekce "O mně" */
     #about {
-        display: flex;
+        display: none; /* Začínáme s display: none; */
         flex-wrap: wrap;
         gap: 20px;
         align-items: flex-start;
+        width: 100%;
     }
-
     /* Styly pro text */
     .about-text {
         flex: 1;
@@ -174,24 +174,10 @@
     /* Tlačítka pro přepínání jazyků */
     .language-buttons {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-end; /* Zarovná tlačítka doprava */
         gap: 10px;
-        margin-top: -10px;
-    }
-
-    .language-buttons .button {
-        background-color: #d5e0ba; /* Jemný pastelový odstín */
-        padding: 8px 15px;
-        border-radius: 25px;
-        font-weight: bold;
-        text-decoration: none;
-        color: #779661; /* Tmavší zelená pro odkaz */
-        font-size: 0.9rem;
-    }
-
-    .language-buttons .button:hover {
-        background-color: #7a9b49;
-        color: white;
+        margin-top: 0; /* Vyrovná zarovnání s textem */
+        width: 100%; /* Rozprostře sekci na šířku */
     }
 
     </style>
@@ -326,6 +312,11 @@
                 aboutEn.style.display = 'block';
             }
         }
+
+        // Výchozí nastavení při načtení stránky
+        document.addEventListener('DOMContentLoaded', () => {
+            showAbout('cz'); // Nastav češtinu jako výchozí jazyk
+        });
     </script>
 
 </body>
