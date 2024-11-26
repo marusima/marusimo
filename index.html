@@ -67,8 +67,9 @@
     }
 
     .active {
-    background-color: #677b58; /* Tmavší zelená barva pro aktivní tlačítko */
+        background-color: #677b58; /* Tmavší zelená barva pro aktivní tlačítko */
     }
+
 
 
     /* Styl pro sekce */
@@ -184,9 +185,6 @@
         float: right; /* Zarovnání doprava v rámci sekce */
         margin-right: 10px; /* Tento margin přidá mezery mezi tlačítka */
 }
-    }
-
-
     /* Změna barvy při hoveru */
     .language-button:hover {
         background-color: rgb(78, 111, 80); /* Světlejší zelená při hoveru */
@@ -350,6 +348,7 @@
     <!-- Funkce pro zobrazení/skrytí sekcí -->
     <script>
         function toggleSection(sectionId) {
+            // Skrytí všech sekcí
             const sections = document.querySelectorAll(".section-content");
             sections.forEach(section => {
                 section.style.display = section.id === sectionId ? "block" : "none";
@@ -365,6 +364,7 @@
                 }
             });
 
+            // Skrytí uvítacího textu
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
                 welcomeText.style.display = 'none';
@@ -372,12 +372,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Uvítací text bude na začátku viditelný
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
-                welcomeText.style.display = 'block'; // Uvítací text je viditelný
+                welcomeText.style.display = 'block';
             }
         });
     </script>
+
 
     
 
