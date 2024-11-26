@@ -30,7 +30,7 @@
 
         h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-family: "Garamond", serif;
         }
 
@@ -63,6 +63,10 @@
 
         .button:hover {
             background-color: #8faf5e; /* Světlejší zelená při hoveru */
+        }
+
+        .button.active {
+            background-color: #7c8f6d; /* Tmavší zelená pro aktivní sekci */
         }
 
         /* Styl pro sekce */
@@ -118,7 +122,7 @@
 
         .company h2 {
             margin: 0;
-            font-size: 1.6rem;
+            font-size: 1.8rem; /* Zvýšení velikosti písma názvu zaměstnavatele */
             color: #3f4f2f; /* Tmavší odstín khaki */
             font-family: "Garamond", serif;
         }
@@ -191,10 +195,10 @@
 
     <!-- Tlačítka vedle sebe -->
     <div class="button-container">
-        <button class="button" onclick="toggleSection('about')">O mně</button>
-        <button class="button" onclick="toggleSection('experience')">Moje zkušenosti</button>
-        <button class="button" onclick="toggleSection('contact')">Kontakt</button>
-        <button class="button" onclick="toggleSection('projects')">Moje výtvory</button>
+        <button class="button" id="btn-about" onclick="toggleSection('about')">O mně</button>
+        <button class="button" id="btn-experience" onclick="toggleSection('experience')">Moje zkušenosti</button>
+        <button class="button" id="btn-contact" onclick="toggleSection('contact')">Kontakt</button>
+        <button class="button" id="btn-projects" onclick="toggleSection('projects')">Moje výtvory</button>
     </div>
 
     <!-- Sekce "O mně" -->
