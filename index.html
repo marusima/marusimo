@@ -35,7 +35,7 @@
         }
 
         p {
-            font-size: 1rem; /* Nastaveno na jednotnou velikost písma */
+            font-size: 1rem;
             margin: 10px 0;
         }
 
@@ -69,6 +69,17 @@
             background-color: #657b54;
         }
 
+        /* Styl pro uvítací text */
+        #welcome-text {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8e8;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            margin: 20px auto;
+        }
+
         /* Styl pro sekce */
         .section-content {
             background-color: #ffffff;
@@ -76,17 +87,18 @@
             margin: 20px auto;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
+            width: 70%;  /* Pevná šířka */
             line-height: 1.8;
             text-align: justify;
-            height: 200px;
             overflow: hidden;
-            box-sizing: border-box;
-            transition: height 0.3s ease;
+            height: 0;  /* Sekce jsou na začátku skryté */
+            transition: height 0.3s ease, opacity 0.3s ease;
         }
 
+        /* Pokud je sekce otevřená */
         .section-content.open {
-            height: auto;
+            height: auto;  /* Výška se přizpůsobí obsahu */
+            opacity: 1;
         }
 
         .experience-header {
@@ -159,17 +171,6 @@
             margin: 10px 0;
         }
 
-        /* Styl pro uvítací text */
-        #welcome-text {
-            text-align: center;
-            padding: 20px;
-            background-color: #f0f8e8;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            margin: 20px auto;
-        }
-
         /* Styl pro tlačítka přepínání jazyků */
         .language-button {
             background-color: #748a64;
@@ -210,6 +211,7 @@
         }
     </style>
 </head>
+
 
 
 
