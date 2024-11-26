@@ -75,35 +75,50 @@
             width: 70%;
             line-height: 1.8;
             text-align: justify;
-            display: none;
             box-sizing: border-box;
         }
 
-        /* Jednotné texty v sekcích */
-        .section-content p,
-        .section-content ul {
-            font-size: 1rem;
-        }
-
-        /* Zvýraznění zaměstnavatele a pozice */
-        .section-content h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #3f4f2f; /* Tmavší odstín khaki pro Air Bank */
+        /* Styl pro nadpis sekce */
+        .experience-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        /* Obrázek logo vedle názvu zaměstnavatele */
-        .section-content h2 img {
-            height: 3em; /* Výška obrázku 3x výška řádku */
-            margin-right: 10px;
+        .cv-box {
+            background-color: #d5e0ba; /* Jemný pastelový odstín */
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #3e4e2e; /* Tmavší zelená pro odkaz */
         }
 
-        .section-content h2 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            color: #445744; /* Tmavší zelená */
+        .cv-box:hover {
+            background-color: #8faf5e;
+            color: white;
+        }
+
+        /* Styl pro Air Bank a logo */
+        .company {
+            background-color: #d7e4c5; /* Jemný odstín */
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .company img {
+            height: 3em;
+            width: auto;
+        }
+
+        .company h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: #3f4f2f; /* Tmavší odstín khaki */
             font-family: "Garamond", serif;
         }
 
@@ -113,23 +128,16 @@
             color: #555;
         }
 
-        /* Styl pro stažení CV */
-        .cv-box {
-            background-color: #d5e0ba; /* Jemný pastelový odstín */
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
+        /* Styl pro pozice */
+        .position {
+            margin-top: 5px;
         }
 
-        .cv-box a {
-            color: #3e4e2e; /* Tmavší zelená pro odkaz */
-            text-decoration: none;
-        }
-
-        .cv-box a:hover {
-            text-decoration: underline;
+        .position h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #445744; /* Tmavší zelená */
+            font-family: "Garamond", serif;
         }
 
         /* Pro větší responsivnost */
@@ -149,44 +157,6 @@
                 width: 70%;
             }
         }
-
-        /* Styl pro sekci "Moje výtvory" */
-        .projects {
-            background-color: #e0e6c0;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* Sekce "O mně" */
-        #about {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        /* Text vedle obrázku */
-        .about-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .about-text {
-            flex: 1;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        /* Styly pro text */
-        .about-text p {
-            font-size: 1.1rem;
-            margin: 10px 0;
-        }
-
     </style>
 </head>
 
@@ -200,95 +170,41 @@
 
     <!-- Tlačítka vedle sebe -->
     <div class="button-container">
-        <button class="button" onclick="toggleSection('about')">O mně</button>
         <button class="button" onclick="toggleSection('experience')">Moje zkušenosti</button>
         <button class="button" onclick="toggleSection('contact')">Kontakt</button>
-        <button class="button" onclick="toggleSection('projects')">Moje výtvory</button>
-    </div>
-
-    <!-- Sekce "O mně" -->
-    <div id="about" class="section-content">
-        <div class="about-container">
-            <h1>O mně</h1>
-            <!-- Tlačítka pro přepínání jazyků -->
-            <div style="text-align: center; margin-top: 1px;">
-                <button class="button" onclick="showAbout('cz')">Česky</button>
-                <button class="button" onclick="showAbout('en')">English</button>
-            </div>
-            <div id="about-cz" class="about-text">
-                <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým ne vždy zná hranic. 🧠💬</p> 
-                <p>Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
-                
-                <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
-                
-                <p>Věřím, že změna oboru mi poskytne příležitost kombinovat mé dosavadní zkušenosti v práci s lidmi s nově nabytými dovednostmi v technologiích a programování. Jsem připravena na novou výzvu, která mě posune a umožní mi neustále se rozvíjet. 💚 Také mám v plánu dál pracovat na tvorbě webových stránek, což je další oblast, která mě nadchla – a i proto teď vidíte tuto stránku. 🎯</p>
-            </div>
-
-            <div id="about-en" class="about-text" style="display: none;">
-                <p>I am a psychology student, currently focused on writing my thesis. However, my passion for helping people has always pushed me to explore beyond the limits of my field. 🧠💬 For the past year, I've been honing my skills in customer support and banking, offering clients guidance on their financial matters and ensuring their security. Yet, I have long felt the pull of something bigger—something that challenges me further. 💼</p>
-                
-                <p>In my free time, I've turned to software development. 💻 I began learning Python and Java, and I'm gradually immersing myself in the world of coding and web development. Each project I tackle, I do with great attention to detail and the drive to produce high-quality work. 🔍 The more I learn, the more I realize that this is my true calling. 🚀</p>
-                
-                <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You can find my personal web portfolio here: <a href="https://marusima.github.io/marusimo/" target="_blank">check it out here</a>. 🎯</p>
-            </div>
-
-            
-        </div>
-    </div>
-
-    <!-- Sekce "Moje výtvory" -->
-    <div id="projects" class="section-content">
-        <h1>Moje výtvory</h1>
-        <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
-        <div class="projects">
-            <p>Co například jednoduchá hra v Pythonu? </p>
-            <p></a></p>
-        </div>
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
     <div id="experience" class="section-content">
-        <!-- Box pro stažení CV -->
-        <h1>Poslední pracovní zkušenosti</h1>
-        <div class="cv-box">
-            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV">Kliknutím si můžete stáhnout můj životopis k vytisknutí.</a>
+        <div class="experience-header">
+            <h1>Poslední pracovní zkušenosti</h1>
+            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV" class="cv-box">Stáhnout CV</a>
         </div>
-        <h2><img src="static/logo2.png" alt="Air Bank logo">Air Bank a.s.</h2>
-        <h2>Specialista servisního centra – senior</h2>
-        <p><strong>říjen 2024 až současnost</strong></p>
-        <ul>
-            <li>S přechodem do pozice seniora jsem získala širší možnosti poskytovat klientům nejen kvalitní, ale i komplexní podporu, ať už prostřednictvím telefonické, nebo písemné komunikace. 💬</li>
-            <li>Každý den se zaměřuji na to, abych klientům nabídla to nejlepší řešení – nejen pro bankovní produkty, ale i pro bezpečnost jejich účtů a financí.</li>
-            <li>Nejde jen o to, co je znát na první pohled – je pro mě důležité vidět i širší souvislosti, které mohou ovlivnit život klientů i mimo banku.</li>
-            <li>Moje práce je založena na přesnosti i empatii – vždy se ujistím, že klienti dostanou správné a včasné informace a že jejich finance budou v bezpečí. 💚</li>
-            <li>Specializuji se na řešení všech dotazů ohledně půjček – ať už v Air Bank, nebo na Zonky.</li>
-        </ul>
 
-        <h2>Specialista servisního centra</h2>
-        <p><strong>červenec 2023 až září 2024</strong></p>
-        <ul>📞 "Co pro Vás mohu udělat?"
-            <li>.... Aneb už od začátku jsem byla první hlas, který klient uslyšel, když potřeboval pomoc, podporu nebo radu. Moje cesta začala na sluchátku, kde jsem se učila o kvalitní péči o klienty a jak jim poskytovat komplexní, rychlou, ale přitom lidskou podporu.</li>
-            <li>Každý den jsem komunikovala s klienty a pomáhala jim najít řešení pro jejich bankovní záležitosti.</li>
-            <li>Byla jsem jejich „prvním kontaktem“, ujistila se, že jejich požadavky byly vyřízeny správně nebo předány do šikovných rukou kolegů, a že jejich zkušenosti s bankovními službami byly co nejhladší. 😊</li>
-        </ul>
+        <div class="company">
+            <img src="static/logo2.png" alt="Air Bank logo">
+            <h2>Air Bank a.s.</h2>
+        </div>
 
-    </div>
+        <div class="position">
+            <h2>Specialista servisního centra – senior</h2>
+            <p class="date"><strong>říjen 2024 až současnost</strong></p>
+            <ul>
+                <li>S přechodem do pozice seniora jsem získala širší možnosti poskytovat klientům nejen kvalitní, ale i komplexní podporu, ať už prostřednictvím telefonické, nebo písemné komunikace. 💬</li>
+                <li>Každý den se zaměřuji na to, abych klientům nabídla to nejlepší řešení – nejen pro bankovní produkty, ale i pro bezpečnost jejich účtů a financí.</li>
+                <li>Moje práce je založena na přesnosti i empatii – vždy se ujistím, že klienti dostanou správné a včasné informace a že jejich finance budou v bezpečí. 💚</li>
+            </ul>
+        </div>
 
-    <!-- Sekce "Kontakt" -->
-    <div id="contact" class="section-content">
-        <h1>Jak se se mnou spojit?</h1>
-        <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
-        <ul>
-            <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
-            <li><strong>Na telefonu</strong> (+420) 728 883 022</li>
-            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a></li>
-            <li><strong>GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a></li>
-        </ul>
-
-        <h3>Co oceňuji:</h3>
-        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na spolupráci, kde bych pro Vás byla přínosem na pozici testera nebo junior developera</strong>. Sice se mám ještě hodně co učit, ale jsem přesvědčená, že je dnes často znamenitější mindset než skillset.</p>
-
-        <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
+        <div class="position">
+            <h2>Specialista servisního centra</h2>
+            <p class="date"><strong>červenec 2023 až září 2024</strong></p>
+            <ul>
+                <li>📞 "Co pro Vás mohu udělat?"</li>
+                <li>Komunikace s klienty a pomoc s bankovními záležitostmi.</li>
+                <li>Byla jsem jejich prvním kontaktem a zajišťovala hladký průběh.</li>
+            </ul>
+        </div>
     </div>
 
     <!-- Funkce pro zobrazení/skrytí sekcí -->
@@ -296,25 +212,8 @@
         function toggleSection(sectionId) {
             const sections = document.querySelectorAll(".section-content");
             sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = section.style.display === "block" ? "none" : "block";
-                } else {
-                    section.style.display = "none";
-                }
+                section.style.display = section.id === sectionId ? "block" : "none";
             });
-        }
-
-        // Funkce pro přepínání jazyků
-        function showAbout(lang) {
-            const aboutCz = document.getElementById('about-cz');
-            const aboutEn = document.getElementById('about-en');
-            if (lang === 'cz') {
-                aboutCz.style.display = 'block';
-                aboutEn.style.display = 'none';
-            } else {
-                aboutCz.style.display = 'none';
-                aboutEn.style.display = 'block';
-            }
         }
     </script>
 
