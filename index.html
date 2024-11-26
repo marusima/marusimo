@@ -7,165 +7,159 @@
     <title>Marie Šimovcová</title>
     <style>
         /* Základní styl pro stránku */
-        /* Základní styl pro stránku */
-    body {
-        font-family: "Comic Sans MS", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #d5e8c6; /* Jemný béžovo-zelený odstín */
-        color: #333;
-    }
+        body {
+            font-family: "Comic Sans MS", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d5e8c6; /* Jemný béžovo-zelený odstín */
+            color: #333;
+        }
 
-    /* Styl pro hlavičku */
-    header {
-        background-color: #657b54; /* Khaki zelená */
-        color: white;
-        text-align: center;
-        padding: 15px;
-        border-radius: 10px;
-        margin: 20px auto;
-        width: 70%;
-        font-family: "Garamond", serif;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
+        /* Styl pro hlavičku */
+        header {
+            background-color: #657b54; /* Khaki zelená */
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 70%;
+            font-family: "Garamond", serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
 
-    h1 {
-        margin: 0;
-        font-size: 1.7em; /* Zvýšená velikost nadpisu pro lepší čitelnost */
-        font-family: "Garamond", serif;
-    }
+        h1 {
+            margin: 0;
+            font-size: 1.7em; /* Zvýšená velikost nadpisu pro lepší čitelnost */
+            font-family: "Garamond", serif;
+        }
 
-    p {
-        font-size: 1.2rem;
-        margin: 10px 0;
-    }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
 
-    /* Styl pro tlačítka */
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin: 20px 0;
-    }
+        /* Styl pro tlačítka */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
 
-    .button {
-        background-color: #7d9669; /* Tmavší khaki zelená */
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        min-width: 120px;
-        text-align: center;
-        font-size: 1.3rem;
-        cursor: pointer;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-        font-family: "Garamond", sans-serif;
-    }
+        .button {
+            background-color: #7d9669; /* Tmavší khaki zelená */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            min-width: 120px;
+            text-align: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-family: "Garamond", sans-serif;
+        }
 
-    /* Efekt při najetí myší */
-    .button:hover {
-        background-color: #657b54;
-    }
+        /* Efekt při najetí myší */
+        .button:hover {
+            background-color: #657b54;
+        }
 
-    /* Aktivní tlačítko, které bude svítit */
-    .button.active {
-        background-color: #4d5b37; /* Tmavší zelená pro aktivní stav */
-        transform: scale(1.1); /* Mírně zvětšit pro efekt */
-    }
+        /* Aktivní tlačítko, které bude svítit */
+        .button.active {
+            background-color: #4d5b37; /* Tmavší zelená pro aktivní stav */
+            transform: scale(1.1); /* Mírně zvětšit pro efekt */
+        }
 
+        /* Styl pro sekce */
+        .section-content {
+            background-color: #ffffff; /* Světlejší zelená pro sekce */
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            line-height: 1.8;
+            text-align: justify;
+            display: none;
+            box-sizing: border-box;
+        }
 
+        /* Styl pro nadpis sekce */
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
+        /* Styl pro zaměstnavatele a logo */
+        .company {
+            background-color: #d7e4c5; /* Jemný odstín */
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Styl pro sekce */
-    .section-content {
-        background-color: #ffffff; /* Světlejší zelená pro sekce */
-        padding: 20px;
-        margin: 20px auto;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 70%;
-        line-height: 1.8;
-        text-align: justify;
-        display: none;
-        box-sizing: border-box;
-    }
+        .company img {
+            height: 4em;
+            width: auto;
+        }
 
-    /* Styl pro nadpis sekce */
-    .experience-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        .company h2 {
+            margin: 0;
+            font-size: 1.6rem; /* Zvýšení velikosti písma názvu zaměstnavatele */
+            color: #3f4f2f; /* Tmavší odstín khaki */
+            font-family: "Garamond", serif;
+        }
 
+        .section-content .date {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #555;
+        }
 
-    /* Styl pro zaměstnavatele a logo */
-    .company {
-        background-color: #d7e4c5; /* Jemný odstín */
-        padding: 10px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        /* Styl pro pozice */
+        .position {
+            margin-top: 10px;
+        }
 
-    .company img {
-        height: 4em;
-        width: auto;
-    }
+        .position h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: #445744; /* Tmavší zelená */
+            font-family: "Garamond", serif;
+        }
 
-    .company h2 {
-        margin: 0;
-        font-size: 1.6rem; /* Zvýšení velikosti písma názvu zaměstnavatele */
-        color: #3f4f2f; /* Tmavší odstín khaki */
-        font-family: "Garamond", serif;
-    }
+        /* Sekce "O mně" */
+        #about {
+            display: none; /* Skryto na začátku */
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+            width: 70%; /* Stejná šířka jako ostatní sekce */
+            margin: 20px auto; /* Zarovnáno na střed */
+        }
 
-    .section-content .date {
-        font-style: italic;
-        font-size: 0.9rem;
-        color: #555;
-    }
+        /* Styly pro text */
+        .about-text {
+            flex: 1;
+            line-height: 1.6;
+            text-align: justify;
+        }
 
-    /* Styl pro pozice */
-    .position {
-        margin-top: 10px;
-    }
+        /* Styly pro text */
+        .about-text p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
 
-    .position h2 {
-        font-size: 1.4rem;
-        margin-bottom: 8px;
-        color: #445744; /* Tmavší zelená */
-        font-family: "Garamond", serif;
-    }
-
-    /* Sekce "O mně" */
-    #about {
-        display: none; /* Skryto na začátku */
-        flex-wrap: wrap;
-        gap: 20px;
-        align-items: flex-start;
-        width: 70%; /* Stejná šířka jako ostatní sekce */
-        margin: 20px auto; /* Zarovnáno na střed */
-    }
-    /* Styly pro text */
-    .about-text {
-        flex: 1;
-        line-height: 1.6;
-        text-align: justify;
-    }
-
-    /* Styly pro text */
-    .about-text p {
-        font-size: 1rem;
-        margin: 10px 0;
-    }
-
-
-
-    /* Styl pro uvítací text */
-    #welcome-text {
+        /* Styl pro uvítací text */
+        #welcome-text {
             text-align: center;
             padding: 20px;
             background-color: #f0f8e8;
@@ -174,48 +168,49 @@
             width: 70%;
             margin: 20px auto;
         }
-    
-    /* Styl pro tlačítka přepínání jazyků */
-    .language-button {
-        background-color: #748a64; /* Tmavší zelená pro jazyková tlačítka */
-        color: white;
-        border: none;
-        padding: 8px 16px; /* Menší padding než hlavní tlačítka */
-        border-radius: 20px;
-        font-size: 0.9rem; /* Trochu menší písmo než hlavní tlačítka */
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        font-family: "Garamond", sans-serif;
-        float: right; /* Zarovnání doprava v rámci sekce */
-        margin-right: 10px; /* Tento margin přidá mezery mezi tlačítka */
-}
-    /* Změna barvy při hoveru */
-    .language-button:hover {
-        background-color: #657b54; /* Světlejší zelená při hoveru */
-        transform: scale(1.05); /* Trochu zvětšení při hoveru */
-    }
 
-    /* Styl pro tlačítko CV */
-    .cv-box {
-        background-color: #748a64; /* Tmavší zelená pro tlačítko CV */
-        padding: 8px 16px; /* Menší padding než hlavní tlačítka */
-        border-radius: 20px;
-        font-weight: bold;
-        text-decoration: none;
-        color: white;
-        font-size: 0.9rem;
-        transition: background-color 0.3s ease, color 0.2s ease;
-        margin-top: 15px;
-        margin-bottom: 15px;
+        /* Styl pro tlačítka přepínání jazyků */
+        .language-button {
+            background-color: #748a64; /* Tmavší zelená pro jazyková tlačítka */
+            color: white;
+            border: none;
+            padding: 8px 16px; /* Menší padding než hlavní tlačítka */
+            border-radius: 20px;
+            font-size: 0.9rem; /* Trochu menší písmo než hlavní tlačítka */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: "Garamond", sans-serif;
+            float: right; /* Zarovnání doprava v rámci sekce */
+            margin-right: 10px; /* Tento margin přidá mezery mezi tlačítka */
+        }
 
-        font-family: "Garamond", sans-serif;
-    }
+        /* Změna barvy při hoveru */
+        .language-button:hover {
+            background-color: #657b54; /* Světlejší zelená při hoveru */
+            transform: scale(1.05); /* Trochu zvětšení při hoveru */
+        }
 
-    /* Změna barvy při hoveru */
-    .cv-box:hover {
-        background-color: #657b54; /* Tmavší odstín při hoveru */
-        color: white;
-    }
+        /* Styl pro tlačítko CV */
+        .cv-box {
+            background-color: #748a64; /* Tmavší zelená pro tlačítko CV */
+            padding: 8px 16px; /* Menší padding než hlavní tlačítka */
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, color 0.2s ease;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+            font-family: "Garamond", sans-serif;
+        }
+
+        /* Změna barvy při hoveru */
+        .cv-box:hover {
+            background-color: #657b54; /* Tmavší odstín při hoveru */
+            color: white;
+        }
     </style>
 </head>
 
