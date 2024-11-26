@@ -1,2 +1,2 @@
-# ms-readme
-About me.
+Ahoj.
+Co tu najdes?
