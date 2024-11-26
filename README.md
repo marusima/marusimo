@@ -1,2 +1,0 @@
-Ahoj.
-Co tu najdes?
