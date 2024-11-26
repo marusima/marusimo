@@ -79,31 +79,47 @@
             box-sizing: border-box;
         }
 
-        /* Jednotné texty v sekcích */
-        .section-content p,
-        .section-content ul {
-            font-size: 1rem;
-        }
-
-        /* Zvýraznění zaměstnavatele a pozice */
-        .section-content h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #3f4f2f; /* Tmavší odstín khaki pro Air Bank */
+                /* Styl pro nadpis sekce */
+                .experience-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        /* Obrázek logo vedle názvu zaměstnavatele */
-        .section-content h2 img {
-            height: 3em; /* Výška obrázku 3x výška řádku */
-            margin-right: 10px;
+        .cv-box {
+            background-color: #d5e0ba; /* Jemný pastelový odstín */
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #3e4e2e; /* Tmavší zelená pro odkaz */
         }
 
-        .section-content h2 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            color: #445744; /* Tmavší zelená */
+        .cv-box:hover {
+            background-color: #8faf5e;
+            color: white;
+        }
+
+        /* Styl pro Air Bank a logo */
+        .company {
+            background-color: #d7e4c5; /* Jemný odstín */
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .company img {
+            height: 3em;
+            width: auto;
+        }
+
+        .company h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: #3f4f2f; /* Tmavší odstín khaki */
             font-family: "Garamond", serif;
         }
 
@@ -111,6 +127,18 @@
             font-style: italic;
             font-size: 0.9rem;
             color: #555;
+        }
+
+        /* Styl pro pozice */
+        .position {
+            margin-top: 5px;
+        }
+
+        .position h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #445744; /* Tmavší zelená */
+            font-family: "Garamond", serif;
         }
 
         /* Styl pro stažení CV */
