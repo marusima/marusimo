@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marie Šimovcová</title>
     <style>
-        /* Základní styl pro stránku */
+/* Základní styl pro stránku */
         body {
             font-family: "Comic Sans MS", sans-serif;
             margin: 0;
@@ -20,15 +20,14 @@
         header {
             background-color: #657b54; /* Khaki zelená */
             color: white;
-            text-align: center;
+            text-align: left; /* Zarovnání textu vlevo */
             padding: 15px;
             border-radius: 10px;
-            margin: 20px auto;
-            width: 770;
+            margin: 20px 0; /* Bez auto pro centrování */
+            width: 800px; /* Fixní šířka pro hlavičku */
             font-family: "Garamond", serif;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             font-size: 1.3rem;
-
         }
 
         h1 {
@@ -45,7 +44,7 @@
         /* Styl pro tlačítka */
         .button-container {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Zarovnání tlačítek vlevo */
             gap: 20px;
             margin: 20px 0;
         }
@@ -76,16 +75,15 @@
         }
 
         /* Styl pro sekce */
-        /* Styl pro sekce */
         .section-content {
             background-color: #ffffff; /* Původní bílá barva */
             padding: 20px;
-            margin: 20px auto;
+            margin: 20px 0; /* Bez auto pro centrování */
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 800px; /* Pevná šířka pro sekce */
+            width: 800px; /* Fixní šířka pro sekce */
             line-height: 1.8;
-            text-align: left;
+            text-align: justify; /* Zarovnání textu do bloku */
             display: none;
             box-sizing: border-box;
             font-size: 1rem; /* Základní velikost písma pro všechny texty v sekci */
@@ -142,13 +140,13 @@
 
         /* Styl pro uvítací text */
         #welcome-text {
-            text-align: center;
+            text-align: left; /* Zarovnání textu vlevo */
             padding: 20px;
             background-color: #f0f8e8;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            margin: 20px auto;
+            width: 800px; /* Fixní šířka */
+            margin: 20px 0; /* Bez auto pro centrování */
             font-size: 1rem;
         }
 
@@ -163,7 +161,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             font-family: "Garamond", sans-serif;
-            float: right; /* Zarovnání doprava v rámci sekce */
+            float: left; /* Zarovnání doleva */
             margin-right: 10px; /* Tento margin přidá mezery mezi tlačítka */
         }
 
@@ -194,6 +192,7 @@
             background-color: #657b54; /* Tmavší odstín při hoveru */
             color: white;
         }
+
     </style>
 </head>
 
