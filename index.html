@@ -20,15 +20,15 @@
             background-color: #7e735f; /* Tmavší hnědá pro kakao */
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             margin: 20px;
         }
 
         h1 {
             margin: 0;
-            font-size: 3rem;
-            font-family: "Garamond", serif; /* Změna fontu pro jméno */
+            font-size: 2.5rem; /* Menší font pro hlavičku */
+            font-family: "Garamond", serif;
         }
 
         p {
@@ -42,10 +42,10 @@
             background-color: #a78c56; /* Tón hnědé pro tlačítka */
             color: white;
             border: none;
-            padding: 15px;
-            width: 60%; /* Užší šířka tlačítek */
+            padding: 10px;
+            width: 40%; /* Užší tlačítka */
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1rem; /* Mírně menší text na tlačítkách */
             cursor: pointer;
             border-radius: 25px;
             margin: 15px auto; /* Zarovnání na střed */
@@ -71,14 +71,15 @@
             box-sizing: border-box;
         }
 
-        footer {
-            background-color: #7e735f;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 10px;
-            margin: 0 20px;
+        /* Menší nadpisy v sekcích */
+        .section-content h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .section-content h2 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
 
         /* Pro větší responsivnost */
@@ -89,8 +90,8 @@
 
             .button {
                 font-size: 1rem;
-                padding: 10px;
-                width: 80%; /* Širší tlačítka pro menší zařízení */
+                padding: 8px;
+                width: 70%; /* Širší tlačítka pro menší zařízení */
             }
         }
     </style>
@@ -148,13 +149,12 @@
         function toggleSection(sectionId) {
             var section = document.getElementById(sectionId);
             if (section.style.display === "none" || section.style.display === "") {
-                section.style.display = "block";  // Zobrazí sekci
+                section.style.display = "block";
             } else {
-                section.style.display = "none";  // Skryje sekci
+                section.style.display = "none";
             }
         }
     </script>
-
 
 </body>
 
