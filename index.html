@@ -52,7 +52,7 @@
         background-color: #7d9669; /* Tmavší khaki zelená */
         color: white;
         border: none;
-        padding: 10px 20px; /* Zvýšené polstrování pro lepší vzhled */
+        padding: 10px 20px;
         min-width: 120px;
         text-align: center;
         font-size: 1.3rem;
@@ -62,13 +62,18 @@
         font-family: "Garamond", sans-serif;
     }
 
+    /* Efekt při najetí myší */
     .button:hover {
-        background-color: #657b54; /* Světlejší zelená při hoveru */
+        background-color: #657b54;
     }
 
-    .active {
-        background-color: #657b54; /* Tmavší zelená barva pro aktivní tlačítko */
+    /* Aktivní tlačítko, které bude svítit */
+    .button.active {
+        background-color: #4d5b37; /* Tmavší zelená pro aktivní stav */
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Svícení efekt */
+        transform: scale(1.1); /* Mírně zvětšit pro efekt */
     }
+
 
 
 
@@ -361,33 +366,26 @@
                 section.style.display = section.id === sectionId ? "block" : "none";
             });
 
-            // Change class for active buttons
+            // Změna třídy pro aktivní tlačítko
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(button => {
                 if (button.id === 'btn-' + sectionId) {
-                    button.classList.add('active'); // Add .active class for the open button
+                    button.classList.add('active'); // Přidání třídy .active pro otevřené tlačítko
                 } else {
-                    button.classList.remove('active'); // Remove .active class for others
+                    button.classList.remove('active'); // Odebrání třídy .active pro ostatní
                 }
             });
 
-            // Hide the welcome text when a section is opened
+            // Skrytí úvodního textu při otevření sekce
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
                 welcomeText.style.display = 'none';
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const welcomeText = document.getElementById('welcome-text');
-            if (welcomeText) {
-                welcomeText.style.display = 'block'; // Ensure welcome text is shown on initial load
-            }
-        });
     </script>
 
 
-    
 
 </body>
 
