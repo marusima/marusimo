@@ -67,9 +67,10 @@
         background-color: rgb(109, 139, 111); /* Světlejší zelená při hoveru */
     }
 
-    .button.active {
-        background-color: #586b4a; /* Tmavší zelená pro aktivní sekci */
+    .active {
+    background-color: #586b4a; /* Tmavší zelená barva pro aktivní tlačítko */
     }
+
 
     /* Styl pro sekce */
     .section-content {
@@ -345,13 +346,23 @@
             sections.forEach(section => {
                 section.style.display = section.id === sectionId ? "block" : "none";
             });
-            
+
+            // Změna třídy pro tlačítka
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                if (button.id === 'btn-' + sectionId) {
+                    button.classList.add('active'); // Přidej třídu .active pro otevřené tlačítko
+                } else {
+                    button.classList.remove('active'); // Odeber třídu .active pro ostatní tlačítka
+                }
+            });
+
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
                 welcomeText.style.display = 'none';
             }
         }
-    
+
         document.addEventListener('DOMContentLoaded', () => {
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
@@ -359,6 +370,7 @@
             }
         });
     </script>
+
     
 
 </body>
