@@ -95,9 +95,9 @@
         }
 
         /* Obrázek logo vedle názvu zaměstnavatele */
-        .section-content h1 img {
-            height: 2em; /* Výška obrázku 3x výška řádku */
-            margin-right: 20px;
+        .section-content h2 img {
+            height: 3em; /* Výška obrázku 3x výška řádku */
+            margin-right: 10px;
         }
 
         .section-content h2 {
@@ -210,13 +210,21 @@
     <div id="about" class="section-content">
         <div class="about-container">
             <h1>O mně</h1>
-            <div class="about-text">
+            <div id="about-cz" class="about-text">
                 <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým ne vždy zná hranic. 🧠💬</p> 
                 <p>Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
                 
                 <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
                 
                 <p>Věřím, že změna oboru mi poskytne příležitost kombinovat mé dosavadní zkušenosti v práci s lidmi s nově nabytými dovednostmi v technologiích a programování. Jsem připravena na novou výzvu, která mě posune a umožní mi neustále se rozvíjet. 💚 Také mám v plánu dál pracovat na tvorbě webových stránek, což je další oblast, která mě nadchla – a i proto teď vidíte tuto stránku. 🎯</p>
+            </div>
+
+            <div id="about-en" class="about-text" style="display: none;">
+                <p>I am a psychology student, currently focused on writing my thesis. However, my passion for helping people has always pushed me to explore beyond the limits of my field. 🧠💬 For the past year, I've been honing my skills in customer support and banking, offering clients guidance on their financial matters and ensuring their security. Yet, I have long felt the pull of something bigger—something that challenges me further. 💼</p>
+                
+                <p>In my free time, I've turned to software development. 💻 I began learning Python and Java, and I'm gradually immersing myself in the world of coding and web development. Each project I tackle, I do with great attention to detail and the drive to produce high-quality work. 🔍 The more I learn, the more I realize that this is my true calling. 🚀</p>
+                
+                <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You can find my personal web portfolio here: <a href="https://marusima.github.io/marusimo/" target="_blank">check it out here</a>. 🎯</p>
             </div>
 
             <!-- Tlačítka pro přepínání jazyků -->
@@ -226,8 +234,6 @@
             </div>
         </div>
     </div>
-
-
 
     <!-- Sekce "Moje výtvory" -->
     <div id="projects" class="section-content">
@@ -295,6 +301,19 @@
                     section.style.display = "none";
                 }
             });
+        }
+
+        // Funkce pro přepínání jazyků
+        function showAbout(lang) {
+            const aboutCz = document.getElementById('about-cz');
+            const aboutEn = document.getElementById('about-en');
+            if (lang === 'cz') {
+                aboutCz.style.display = 'block';
+                aboutEn.style.display = 'none';
+            } else {
+                aboutCz.style.display = 'none';
+                aboutEn.style.display = 'block';
+            }
         }
     </script>
 
