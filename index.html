@@ -90,94 +90,25 @@
             width: 70%;  /* Pevná šířka */
             line-height: 1.8;
             text-align: justify;
-            height: 0;  /* Sekce jsou na začátku skryté */
-            opacity: 0;  /* Skryté sekce */
+            display: none; /* Skryté sekce na začátku */
+            opacity: 0; /* Skryté sekce */
             overflow: hidden;
+            height: auto; /* Výška se přizpůsobí obsahu */
             transition: opacity 0.3s ease, height 0.3s ease;
         }
 
-        /* Pokud je sekce otevřená */
+        /* Když sekce bude otevřená */
         .section-content.open {
-            height: auto;  /* Výška se přizpůsobí obsahu */
+            display: block;
             opacity: 1;
         }
 
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Styl pro zaměstnavatele a logo */
-        .company {
-            background-color: #d7e4c5;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .company img {
-            height: 4em;
-            width: auto;
-        }
-
-        .company h2 {
-            margin: 0;
-            font-size: 1.6rem;
-            color: #3f4f2f;
-            font-family: "Garamond", serif;
-        }
-
-        .section-content .date {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Styl pro pozice */
-        .position {
-            margin-top: 10px;
-        }
-
-        .position h2 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            color: #445744;
-            font-family: "Garamond", serif;
-        }
-
-        /* Sekce "O mně" */
-        #about {
-            display: none;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-            width: 70%;
-            margin: 20px auto;
-        }
-
-        /* Styly pro text */
-        .about-text {
-            flex: 1;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        .about-text p {
-            font-size: 1rem; /* Zajištění stejné velikosti písma */
-            margin: 10px 0;
-        }
-
-        /* Styl pro tlačítka přepínání jazyků a tlačítko CV */
-        .button, .language-button, .cv-box {
+        /* Styl pro tlačítka pro změnu jazyků a stažení CV */
+        .language-button, .cv-box {
             background-color: #748a64;
             color: white;
             border: none;
-            padding: 10px 20px; /* Stejné velikosti pro všechna tlačítka */
+            padding: 10px 20px;
             border-radius: 25px;
             font-size: 1.3rem;
             cursor: pointer;
@@ -187,21 +118,76 @@
             text-align: center;
         }
 
-        /* Změna barvy při hoveru pro všechna tlačítka */
-        .button:hover, .language-button:hover, .cv-box:hover {
+        /* Změna barvy při hoveru */
+        .language-button:hover, .cv-box:hover {
             background-color: #657b54;
-            transform: scale(1.05); /* Trochu zvětšení při hoveru */
+            transform: scale(1.05);
         }
 
         .cv-box {
             font-weight: bold;
             text-decoration: none;
         }
+
+        /* Zajištění stejného formátování pro všechny sekce */
+        .section-content p {
+            font-size: 1rem; /* Zajištění stejné velikosti písma */
+            margin: 10px 0;
+        }
+
     </style>
 </head>
 
+<body>
+    <!-- Úvodní sekce -->
+    <div id="welcome-text">
+        <h1>Vítejte na mé stránce!</h1>
+        <p>Ráda bych se vám představila a nabídla informace o mých zkušenostech, dovednostech a projektech.</p>
+        <div class="button-container">
+            <button class="button" onclick="toggleSection('about')">O mně</button>
+            <button class="button" onclick="toggleSection('experience')">Zkušenosti</button>
+            <button class="button" onclick="toggleSection('contact')">Kontakt</button>
+        </div>
+    </div>
 
+    <!-- Sekce "O mně" -->
+    <div id="about" class="section-content">
+        <h2>O mně</h2>
+        <p>Jsem studentka psychologie a ráda se učím nové věci. Mám zkušenosti s testováním a vývojem softwaru a jsem také vášnivá o přírodní vědy.</p>
+    </div>
 
+    <!-- Sekce "Zkušenosti" -->
+    <div id="experience" class="section-content">
+        <h2>Zkušenosti</h2>
+        <p>Pracovala jsem jako asistentka v HR a současně jsem i specialistka v bankovní službě.</p>
+    </div>
+
+    <!-- Sekce "Kontakt" -->
+    <div id="contact" class="section-content">
+        <h2>Kontakt</h2>
+        <p>Pokud máte zájem o spolupráci nebo dotazy, můžete mě kontaktovat na emailu: marie.s@exemplemail.com.</p>
+    </div>
+
+    <!-- Tlačítka pro změnu jazyka a stažení CV -->
+    <div class="button-container">
+        <button class="language-button">Čeština</button>
+        <a href="CV.pdf" class="cv-box">Stáhnout CV</a>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            // Skrytí všech sekcí
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(function (section) {
+                section.classList.remove('open');
+            });
+
+            // Zobrazení vybrané sekce
+            const sectionToShow = document.getElementById(sectionId);
+            sectionToShow.classList.add('open');
+        }
+    </script>
+</body>
 
 
 
