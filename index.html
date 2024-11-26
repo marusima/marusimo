@@ -171,6 +171,17 @@
         }
     
      /* Styl pro tlačítka přepínání jazyků */
+     .language-buttons {
+    display: flex;
+    justify-content: flex-end;  /* Zarovná tlačítka na pravý okraj */
+    gap: 10px; /* Vzdálenost mezi tlačítky */
+    width: 100%; /* Tlačítka zabírají celou šířku kontejneru */
+    position: absolute;  /* Umožní umístit tlačítka absolutně */
+    top: 30px;  /* Pozice tlačítek nad nadpisem */
+    right: 0;  /* Zarovná tlačítka k pravému okraji */
+    margin: 0;  /* Odstraní okraje */
+    }   
+
     .language-button {
         background-color: #677b58; /* Tmavší zelená pro jazyková tlačítka */
         color: white;
@@ -189,15 +200,16 @@
         transform: scale(1.05); /* Trochu zvětšení při hoveru */
     }
 
+
     /* Styl pro tlačítko CV */
     .cv-box {
         background-color: #677b58; /* Tmavší zelená pro tlačítko CV */
-        padding: 10px 18px;
+        padding: 5px 15px;
         border-radius: 25px;
         font-weight: bold;
         text-decoration: none;
         color: white;
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         transition: background-color 0.3s ease, color 0.3s ease;
         display: inline-block;
         margin-top: 15px;
