@@ -299,7 +299,7 @@
                 }
             });
         }
-
+    
         // Funkce pro přepínání jazyků
         function showAbout(lang) {
             const aboutCz = document.getElementById('about-cz');
@@ -312,12 +312,13 @@
                 aboutEn.style.display = 'block';
             }
         }
-
-        // Výchozí nastavení při načtení stránky
+    
+        // Nastavení výchozího jazyka při načtení stránky
         document.addEventListener('DOMContentLoaded', () => {
-            showAbout('cz'); // Nastav češtinu jako výchozí jazyk
+            showAbout('cz'); // Čeština jako výchozí jazyk
         });
     </script>
+    
 
 </body>
 
