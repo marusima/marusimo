@@ -153,9 +153,10 @@
         /* Sekce "O mně" */
         #about {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
             align-items: flex-start;
+            justify-content: flex-start;
+            gap: 20px;
+            flex-wrap: wrap; /* Umožní fotce a textu se přizpůsobit */
         }
 
         /* Fotografie - umístění vpravo nahoře */
@@ -167,6 +168,7 @@
             object-fit: cover; /* Aby obrázek vyplnil celou plochu */
             margin-top: 20px;
             margin-right: 20px; /* Vytvoří mezeru mezi fotkou a textem */
+            float: right; /* Fotka se bude "vznášet" napravo od textu */
         }
 
         /* Text vedle obrázku */
@@ -181,6 +183,7 @@
             flex: 1;
             line-height: 1.6;
             text-align: justify;
+            overflow: hidden; /* Aby text nešel přes obrázek */
         }
 
         /* Styly pro text */
@@ -212,11 +215,9 @@
     <div id="about" class="section-content">
         <div class="about-container">
             <!-- Fotografie vpravo nahoře -->
-            <h1>O mně</h1>
             <img src="static/foto.jpg" alt="Marie Šimovcová" class="photo"> <!-- Fotografie -->
             <div class="about-text">
-                <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým ne vždy zná hranic. 🧠💬</p> 
-                <p>Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
+                <p>Jsem studentka psychologie, která se právě soustředí na psaní závěrečné práce, ale její vášeň pro pomoc druhým nezná hranic. 🧠💬 Vždy mě fascinovalo, jak dokázat pochopit potřeby lidí a nacházet řešení, která pomohou zlepšit jejich životy. Když se ale podívám zpět na svou dosavadní kariéru, uvědomuji si, že už dlouho toužím po větší výzvě. Tím, že se už více než rok věnuji poradenství a klientské podpoře v oblasti bankovnictví, jsem získala cenné zkušenosti v komunikaci, analýze problémů a řešení různých situací. 💼</p>
                         
                 <p>Ve svém volném čase se ale věnuji něčemu, co mě fascinuje ještě víc – programování. 💻 Začala jsem se učit Python, Javu a postupně se nořím do světa softwarového vývoje. Při práci na různých projektech se zaměřuji na detail, kvalitní a efektivní kódování, které má smysl. 🔍 Moje nadšení pro IT roste každým dnem a přechod do této oblasti mi dává smysl – vím, že mohu využít své analytické schopnosti i komunikativní dovednosti na nových, zajímavých projektech. 🚀</p>
                         
@@ -230,17 +231,13 @@
         <h1>Moje výtvory</h1>
         <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
         <div class="projects">
-            <p>Co například jednoduchá hra v Pythonu? </p>
+            <p>Co například jednoduchá hra v Pythonu? <a href="#">/a></p>
             <p></a></p>
         </div>
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
     <div id="experience" class="section-content">
-        <!-- Box pro stažení CV -->
-        <div class="cv-box">
-            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV">Kliknutím si můžete stáhnout můj životopis k vytisknutí.</a>
-        </div>
         <h1>Air Bank a.s.</h1>
         <h2>Specialista servisního centra – senior</h2>
         <p><strong>říjen 2024 až současnost</strong></p>
@@ -260,12 +257,15 @@
             <li>Byla jsem jejich „prvním kontaktem“, ujistila se, že jejich požadavky byly vyřízeny správně nebo předány do šikovných rukou kolegů, a že jejich zkušenosti s bankovními službami byly co nejhladší. 😊</li>
         </ul>
 
-        
+        <!-- Box pro stažení CV -->
+        <div class="cv-box">
+            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV">Kliknutím si můžete stáhnout můj životopis k vytisknutí.</a>
+        </div>
     </div>
 
     <!-- Sekce "Kontakt" -->
     <div id="contact" class="section-content">
-        <h1>Jak se se mnou spojit?</h1>
+        <h2>Jak se se mnou spojit?</h2>
         <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
         <ul>
             <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
@@ -275,7 +275,7 @@
         </ul>
 
         <h3>Co oceňuji:</h3>
-        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na spolupráci, kde bych pro Vás byla přínosem na pozici testera nebo junior developera</strong>. Sice se mám ještě hodně co učit, ale jsem přesvědčená, že je dnes často znamenitější mindset než skillset.</p>
+        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na nabídky na pozici testera nebo junior developera</strong>.</p>
 
         <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
     </div>
