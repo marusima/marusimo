@@ -6,40 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marie Šimovcová</title>
     <style>
-        /* Základní styl pro stránku */
+        /* Globální styl */
         body {
-            font-family: "Comic Sans MS", sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f0; /* Jemný béžovo-zelený odstín */
+            background-color: #f5f5f0;
             color: #333;
         }
 
-        /* Styl pro hlavičku */
+        /* Hlavička */
         header {
-            background-color: #6e883c; /* Khaki zelená */
+            background-color: #6e883c;
             color: white;
             text-align: center;
             padding: 15px;
             border-radius: 10px;
             margin: 20px auto;
             width: 70%;
-            font-family: "Garamond", serif;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        h1 {
+        header h1 {
             margin: 0;
-            font-size: 1.8em;
-            font-family: "Garamond", serif;
+            font-size: 2em;
         }
 
-        p {
-            font-size: 1.4rem;
-            margin: 10px 0;
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
         }
 
-        /* Styl pro tlačítka */
+        /* Tlačítka */
         .button-container {
             display: flex;
             justify-content: center;
@@ -48,174 +46,98 @@
         }
 
         .button {
-            background-color: #92b974; /* Tmavší khaki zelená */
+            background-color: #92b974;
             color: white;
             border: none;
-            padding: 5px 20px;
+            padding: 10px 20px;
             min-width: 120px;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             border-radius: 25px;
-            transition: all 0.3s ease;
-            font-family: "Garamond", sans-serif;
+            transition: background-color 0.3s ease;
         }
 
         .button:hover {
-            background-color: #8faf5e; /* Světlejší zelená při hoveru */
+            background-color: #8faf5e;
         }
 
         .button.active {
-            background-color: #7c8f6d; /* Tmavší zelená pro aktivní sekci */
+            background-color: #7c8f6d;
         }
 
-        /* Styl pro sekce */
+        /* Sekce */
         .section-content {
-            background-color: #e8eddf; /* Světlejší zelená pro sekce */
+            display: none;
+            background-color: #e8eddf;
             padding: 20px;
             margin: 20px auto;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 70%;
-            line-height: 1.8;
-            text-align: justify;
-            display: none;
             box-sizing: border-box;
+            line-height: 1.8;
         }
 
-        /* Styl pro nadpis sekce */
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .section-content h2 {
+            color: #445744;
         }
 
-        .cv-box {
-            background-color: #d5e0ba; /* Jemný pastelový odstín */
-            padding: 5px 15px;
-            border-radius: 25px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #779661; /* Tmavší zelená pro odkaz */
-            font-size: 0,5ram;
-        }
-
-        .cv-box:hover {
-            background-color: #7a9b49;
-            color: white;
-        }
-
-        /* Styl pro Air Bank a logo */
-        .company {
-            background-color: #d7e4c5; /* Jemný odstín */
-            padding: 6px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .company img {
-            height: 4em;
-            width: auto;
-        }
-
-        .company h2 {
-            margin: 0;
-            font-size: 1.5rem; /* Zvýšení velikosti písma názvu zaměstnavatele */
-            color: #3f4f2f; /* Tmavší odstín khaki */
-            font-family: "Garamond", serif;
-        }
-
-        .section-content .date {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Styl pro pozice */
-        .position {
-            margin-top: 5px;
-        }
-
-        .position h2 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            color: #445744; /* Tmavší zelená */
-            font-family: "Garamond", serif;
-        }
-
-        /* Styl pro sekci "Moje výtvory" */
-        .projects {
-            background-color: #e0e6c0;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* Sekce "O mně" */
-        #about {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        /* Styly pro text */
-        .about-text {
-            flex: 1;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        /* Styly pro text */
-        .about-text p {
-            font-size: 1.0rem;
-            margin: 10px 0;
-        }
-
-        /* Tlačítka pro přepínání jazyků */
+        /* Tlačítka jazyků */
         .language-buttons {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
-            margin-top: -10px;
         }
 
-        /* Styl pro tlačítka Česky/English */
         .language-buttons .button {
-            background-color: #d5e0ba; /* Jemný pastelový odstín */
+            background-color: #d5e0ba;
+            color: #779661;
+            font-size: 0.9rem;
             padding: 5px 15px;
             border-radius: 25px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #779661; /* Tmavší zelená pro odkaz */
-            font-size: 0.9rem;
         }
 
         .language-buttons .button:hover {
             background-color: #7a9b49;
             color: white;
         }
+
+        /* Kontaktní informace */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        ul li a {
+            color: #445744;
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Hlavička stránky -->
+    <!-- Hlavička -->
     <header>
         <h1>Marie Šimovcová</h1>
         <p>Studentka psychologie | Aspirující testerka | Specialistka na sluchátku v bance</p>
     </header>
 
-    <!-- Tlačítka vedle sebe -->
+    <!-- Tlačítka sekcí -->
     <div class="button-container">
-        <button class="button" id="btn-about" onclick="toggleSection('about')">O mně</button>
-        <button class="button" id="btn-experience" onclick="toggleSection('experience')">Moje zkušenosti</button>
-        <button class="button" id="btn-contact" onclick="toggleSection('contact')">Kontakt</button>
-        <button class="button" id="btn-projects" onclick="toggleSection('projects')">Moje výtvory</button>
+        <button class="button" data-section="about">O mně</button>
+        <button class="button" data-section="experience">Moje zkušenosti</button>
+        <button class="button" data-section="projects">Moje výtvory</button>
+        <button class="button" data-section="contact">Kontakt</button>
     </div>
 
     <!-- Sekce "O mně" -->
@@ -238,12 +160,6 @@
             <p>In my free time, I've turned to software development. 💻 I began learning Python and Java, and I'm gradually immersing myself in the world of coding and web development. Each project I tackle, I do with great attention to detail and the drive to produce high-quality work. 🔍 The more I learn, the more I realize that this is my true calling. 🚀</p>
             
             <p>This career shift feels natural to me. I believe that combining my background in psychology and my passion for technology and problem-solving will lead to even more fulfilling opportunities. 💚 I’m excited to bring my skills to roles in IT testing or development. You are looking at my personal web right here. 🎯</p>        </div>
-    </div>
-
-    <!-- Sekce "Moje výtvory" -->
-    <div id="projects" class="section-content">
-        <h1>Moje výtvory</h1>
-        <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
@@ -279,58 +195,57 @@
         </div>
     </div>
 
-    <!-- Funkce pro zobrazení/skrytí sekcí -->
-    <script>
-        function toggleSection(sectionId) {
-            const sections = document.querySelectorAll(".section-content");
-            sections.forEach(section => {
-                section.style.display = section.id === sectionId ? "block" : "none";
-            });
-        }
-    </script>
-
-    <!-- Sekce "Kontakt" -->
-    <div id="contact" class="section-content">
-        <h1>Jak se se mnou spojit?</h1>
-        <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
-        <ul>
-            <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
-            <li><strong>Na telefonu</strong> (+420) 728 883 022</li>
-            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a></li>
-            <li><strong>GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a></li>
-        </ul>
-
-        <h3>Co oceňuji:</h3>
-        <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na spolupráci, kde bych pro Vás byla přínosem na pozici testera nebo junior developera</strong>. Sice se mám ještě hodně co učit, ale jsem přesvědčená, že je dnes často znamenitější mindset než skillset.</p>
-
-        <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
+    <!-- Sekce "Moje výtvory" -->
+    <div id="projects" class="section-content">
+        <h1>Moje výtvory</h1>
+        <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
     </div>
 
-    <!-- Funkce pro zobrazení/skrytí sekcí -->
-    <script>
-        function toggleSection(sectionId) {
-            const sections = document.querySelectorAll(".section-content");
-            sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = section.style.display === "block" ? "none" : "block";
-                } else {
-                    section.style.display = "none";
-                }
-            });
-        }
+<!-- Sekce "Kontakt" -->
+<div id="contact" class="section-content">
+    <h1>Jak se se mnou spojit?</h1>
+    <p>Ráda se s Vámi uslyším nebo si můžeme více povědět klidně ve zprávách! Kontaktovat mě můžete těmito cestami:</p>
+    <ul>
+        <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a></li>
+        <li><strong>Na telefonu</strong> (+420) 728 883 022</li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a></li>
+    </ul>
 
-        // Funkce pro přepínání jazyků
-        function showAbout(lang) {
-            const aboutCz = document.getElementById('about-cz');
-            const aboutEn = document.getElementById('about-en');
-            if (lang === 'cz') {
-                aboutCz.style.display = 'block';
-                aboutEn.style.display = 'none';
-            } else {
-                aboutCz.style.display = 'none';
-                aboutEn.style.display = 'block';
-            }
-        }
+    <h3>Co oceňuji:</h3>
+    <p>Aktuálně mě zajímá rozvoj v oblasti testování softwaru či vývoje aplikací. <strong>Ráda se s Vámi mrknu na spolupráci, kde bych pro Vás byla přínosem na pozici testera nebo junior developera</strong>. Sice se mám ještě hodně co učit, ale jsem přesvědčená, že je dnes často znamenitější mindset než skillset.</p>
+
+    <p>Pokud máte konkrétní nabídky nebo chcete diskutovat o možnostech spolupráce, neváhejte mě kontaktovat – těším se na nové výzvy! 💼</p>
+</div>
+
+    <!-- Skripty -->
+    <script>
+        const buttons = document.querySelectorAll('.button-container .button');
+        const sections = document.querySelectorAll('.section-content');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.getAttribute('data-section');
+
+                // Aktivace tlačítka
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Zobrazení správné sekce
+                sections.forEach(section => {
+                    section.style.display = section.id === sectionId ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Přepínání jazyků
+        document.querySelectorAll('.language-buttons .button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                document.getElementById('about-cz').style.display = lang === 'cz' ? 'block' : 'none';
+                document.getElementById('about-en').style.display = lang === 'en' ? 'block' : 'none';
+            });
+        });
     </script>
 
 </body>
