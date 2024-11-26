@@ -90,6 +90,14 @@
             font-size: 1.8rem;
             margin-bottom: 10px;
             color: #3f4f2f; /* Tmavší odstín khaki pro Air Bank */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Obrázek logo vedle názvu zaměstnavatele */
+        .section-content h1 img {
+            height: 3em; /* Výška obrázku 3x výška řádku */
+            margin-right: 10px;
         }
 
         .section-content h2 {
@@ -185,7 +193,7 @@
 
     <!-- Hlavička stránky -->
     <header>
-        <h1>Marie Šimovcová</h1>
+        <h1><img src="static/logo.png" alt="Air Bank logo">Air Bank a.s.</h1>
         <p>Studentka psychologie | Aspirující testerka | Specialistka na sluchátku</p>
     </header>
 
@@ -218,11 +226,16 @@
         <p>V této sekci bych chtěla vytvořit prostor, kde budu přidávat moje výtvory. 🌐</p>
         <div class="projects">
             <p>Co například jednoduchá hra v Pythonu? </p>
+            <p></a></p>
         </div>
     </div>
 
     <!-- Sekce "Moje zkušenosti" -->
     <div id="experience" class="section-content">
+        <!-- Box pro stažení CV -->
+        <div class="cv-box">
+            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV">Kliknutím si můžete stáhnout můj životopis k vytisknutí.</a>
+        </div>
         <h1>Air Bank a.s.</h1>
         <h2>Specialista servisního centra – senior</h2>
         <p><strong>říjen 2024 až současnost</strong></p>
@@ -242,10 +255,6 @@
             <li>Byla jsem jejich „prvním kontaktem“, ujistila se, že jejich požadavky byly vyřízeny správně nebo předány do šikovných rukou kolegů, a že jejich zkušenosti s bankovními službami byly co nejhladší. 😊</li>
         </ul>
 
-        <!-- Box pro stažení CV -->
-        <div class="cv-box">
-            <a href="static/Marie Šimovcová en.pdf" download="Marie_Šimovcová_CV">Kliknutím si můžete stáhnout můj životopis k vytisknutí.</a>
-        </div>
     </div>
 
     <!-- Sekce "Kontakt" -->
