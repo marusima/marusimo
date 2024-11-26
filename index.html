@@ -309,30 +309,20 @@
         function toggleSection(sectionId) {
             const sections = document.querySelectorAll(".section-content");
             sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = section.style.display === "block" ? "none" : "block";
-                } else {
-                    section.style.display = "none";
-                }
+                section.style.display = section.id === sectionId ? "block" : "none";
             });
-        }
-    
-        // Funkce pro přepínání jazyků
-        function showAbout(lang) {
-            const aboutCz = document.getElementById('about-cz');
-            const aboutEn = document.getElementById('about-en');
-            if (lang === 'cz') {
-                aboutCz.style.display = 'block';
-                aboutEn.style.display = 'none';
-            } else {
-                aboutCz.style.display = 'none';
-                aboutEn.style.display = 'block';
+            
+            const welcomeText = document.getElementById('welcome-text');
+            if (welcomeText) {
+                welcomeText.style.display = 'none';
             }
         }
     
-        // Nastavení výchozího jazyka při načtení stránky
         document.addEventListener('DOMContentLoaded', () => {
-            showAbout('cz'); // Čeština jako výchozí jazyk
+            const welcomeText = document.getElementById('welcome-text');
+            if (welcomeText) {
+                welcomeText.style.display = 'block'; // Uvítací text je viditelný
+            }
         });
     </script>
     
