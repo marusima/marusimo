@@ -27,7 +27,7 @@
         width: 70%;
         font-family: "Garamond", serif;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     h1 {
@@ -170,18 +170,7 @@
             margin: 20px auto;
         }
     
-     /* Styl pro tlačítka přepínání jazyků */
-     .language-buttons {
-    display: flex;
-    justify-content: flex-end;  /* Zarovná tlačítka na pravý okraj */
-    gap: 10px; /* Vzdálenost mezi tlačítky */
-    width: 100%; /* Tlačítka zabírají celou šířku kontejneru */
-    position: absolute;  /* Umožní umístit tlačítka absolutně */
-    top: 30px;  /* Pozice tlačítek nad nadpisem */
-    right: 0;  /* Zarovná tlačítka k pravému okraji */
-    margin: 0;  /* Odstraní okraje */
-    }   
-
+    /* Styl pro tlačítka přepínání jazyků */
     .language-button {
         background-color: #677b58; /* Tmavší zelená pro jazyková tlačítka */
         color: white;
@@ -192,14 +181,15 @@
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease;
         font-family: "Garamond", sans-serif;
+        float: right; /* Zarovnání doprava v rámci sekce */
     }
+
 
     /* Změna barvy při hoveru */
     .language-button:hover {
         background-color: rgb(109, 139, 111); /* Světlejší zelená při hoveru */
         transform: scale(1.05); /* Trochu zvětšení při hoveru */
     }
-
 
     /* Styl pro tlačítko CV */
     .cv-box {
