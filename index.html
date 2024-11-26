@@ -70,7 +70,6 @@
     /* Aktivní tlačítko, které bude svítit */
     .button.active {
         background-color: #4d5b37; /* Tmavší zelená pro aktivní stav */
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Svícení efekt */
         transform: scale(1.1); /* Mírně zvětšit pro efekt */
     }
 
@@ -183,7 +182,7 @@
         border: none;
         padding: 8px 16px; /* Menší padding než hlavní tlačítka */
         border-radius: 20px;
-        font-size: 1rem; /* Trochu menší písmo než hlavní tlačítka */
+        font-size: 0.9rem; /* Trochu menší písmo než hlavní tlačítka */
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease;
         font-family: "Garamond", sans-serif;
@@ -204,9 +203,11 @@
         font-weight: bold;
         text-decoration: none;
         color: white;
-        font-size: 1rem;
+        font-size: 0.9rem;
         transition: background-color 0.3s ease, color 0.2s ease;
         margin-top: 15px;
+        margin-bottom: 15px;
+
         font-family: "Garamond", sans-serif;
     }
 
@@ -362,35 +363,33 @@
     <script>
         function toggleSection(sectionId) {
             const sections = document.querySelectorAll(".section-content");
-            let sectionVisible = false;
-
-            // Skrýt všechny sekce
             sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = "block";
-                    sectionVisible = true;
-                } else {
-                    section.style.display = "none";
-                }
+                section.style.display = section.id === sectionId ? "block" : "none";
             });
 
-            // Změnit aktivní tlačítka
+            // Change class for active buttons
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(button => {
                 if (button.id === 'btn-' + sectionId) {
-                    button.classList.add('active');
+                    button.classList.add('active'); // Add .active class for the open button
                 } else {
-                    button.classList.remove('active');
+                    button.classList.remove('active'); // Remove .active class for others
                 }
             });
 
-            // Zobrazit nebo skrýt uvítací text podle toho, jestli je nějaká sekce otevřena
+            // Hide the welcome text when a section is opened
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
-                welcomeText.style.display = sectionVisible ? 'none' : 'block';
+                welcomeText.style.display = 'none';
             }
         }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const welcomeText = document.getElementById('welcome-text');
+            if (welcomeText) {
+                welcomeText.style.display = 'block'; // Ensure welcome text is shown on initial load
+            }
+        });
     </script>
 
 
