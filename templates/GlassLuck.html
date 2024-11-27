@@ -80,12 +80,6 @@
       justify-content: center;
       align-items: center;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-      transition: transform 0.2s, box-shadow 0.3s;
-    }
-
-    .ball:hover {
-      transform: scale(1.2) rotate(15deg);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
     }
 
     /* Držák kuliček vpravo od koule, pevná výška a šířka */
@@ -210,8 +204,8 @@
         const ball = document.createElement("div");
         ball.className = "ball";
         ball.textContent = i;
-        ball.style.left = `${Math.random() * 260}px`;
-        ball.style.top = `${Math.random() * 260}px`;
+        ball.style.left = ${Math.random() * 260}px;
+        ball.style.top = ${Math.random() * 260}px;
         sphere.appendChild(ball);
         availableBalls.push(ball);
       }
@@ -256,9 +250,9 @@
       );
 
       if (commonDigit) {
-        resultDiv.textContent = "🎉 Hurá, vyhráváš! 🎉";
+        resultDiv.textContent = 🎉 Hurá, vyhráváš! 🎉;
       } else {
-        resultDiv.textContent = "Bohužel, ještě jednou?";
+        resultDiv.textContent = Bohužel, ještě jednou?;
       }
     }
   </script>
