@@ -25,13 +25,13 @@
     /* Koule štěstí */
     .sphere {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 320px;
+      height: 320px;
       margin: 20px auto;
-      background: radial-gradient(circle at 50% 50%, #ffffff, #e0e0e0, #999);
-      border: 5px solid #bfbfbf;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
+      border: 5px solid rgba(255, 255, 255, 0.5);
       border-radius: 50%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) inset, 0 15px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -41,21 +41,21 @@
     /* 3D kuličky */
     .ball {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background: radial-gradient(circle at 30% 30%, #ffdd00, #f39c12);
       border-radius: 50%;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       color: white;
       font-weight: bold;
+      font-size: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: bounce 3s infinite ease-in-out;
+      animation: float 3s infinite ease-in-out;
     }
 
-    /* Losovací animace */
-    @keyframes bounce {
+    @keyframes float {
       0%, 100% {
         transform: translateY(0);
       }
@@ -75,11 +75,12 @@
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
       margin-top: 20px;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.3s;
     }
 
     .button:hover {
       transform: scale(1.1);
+      background: #e67e22;
     }
 
     /* Výsledek */
@@ -89,14 +90,14 @@
       font-weight: bold;
     }
 
-    /* Vypadávání kuliček */
+    /* Animace vypadnutí */
     .falling {
-      animation: fall 1s ease-out forwards;
+      animation: fall 1.5s ease-out forwards;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(0deg);
       }
       100% {
         transform: translateY(400px) rotate(360deg);
@@ -143,16 +144,16 @@
       // Čísla losovaných kuliček
       const drawnNumbers = drawnBalls.map((ball) => parseInt(ball.textContent));
 
-      // Zkontroluj, jestli mají stejnou cifru
-      const allDigits = drawnNumbers.join("").split("");
-      const hasMatchingDigit = allDigits.some(
-        (digit, _, arr) => arr.filter((d) => d === digit).length > 1
+      // Zkontroluj, jestli všechny obsahují stejnou cifru
+      const digits = drawnNumbers.map(String).flatMap((num) => [...num]);
+      const commonDigit = digits.find(
+        (digit) => digits.filter((d) => d === digit).length === 3
       );
 
       // Výsledek
       resultDiv.textContent = `Losovaná čísla: ${drawnNumbers.join(", ")}`;
-      if (hasMatchingDigit) {
-        resultDiv.textContent += " 🎉 Vyhrál jsi! Máš štěstí v životě! 🎉";
+      if (commonDigit) {
+        resultDiv.textContent += ` 🎉 Vyhrál jsi! Cifra ${commonDigit} přinesla štěstí! 🎉`;
       } else {
         resultDiv.textContent += " Bohužel jsi tentokrát nevyhrál.";
       }
