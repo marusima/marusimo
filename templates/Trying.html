@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loterie štěstí</title>
+  <title>3D Loterie Štěstí</title>
   <style>
     body {
       margin: 0;
@@ -13,45 +13,49 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: radial-gradient(circle, #f7f0ff, #dabfff, #9f7aea);
-      color: #333;
+      background: linear-gradient(to bottom, #1e3c72, #2a5298);
+      color: white;
+      overflow: hidden;
     }
 
     .container {
       text-align: center;
     }
 
-    .ball-container {
+    /* Koule štěstí */
+    .sphere {
       position: relative;
       width: 300px;
       height: 300px;
       margin: 20px auto;
-      background: #ffffff;
-      border: 5px solid #f39c12;
+      background: radial-gradient(circle at 50% 50%, #ffffff, #e0e0e0, #999);
+      border: 5px solid #bfbfbf;
       border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) inset, 0 15px 30px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
+      overflow: hidden;
     }
 
+    /* 3D kuličky */
     .ball {
+      position: absolute;
       width: 40px;
       height: 40px;
-      margin: 5px;
-      background: #3498db;
+      background: radial-gradient(circle at 30% 30%, #ffdd00, #f39c12);
       border-radius: 50%;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
       color: white;
+      font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
-      animation: float 3s ease-in-out infinite;
+      animation: bounce 3s infinite ease-in-out;
     }
 
-    @keyframes float {
+    /* Losovací animace */
+    @keyframes bounce {
       0%, 100% {
         transform: translateY(0);
       }
@@ -60,6 +64,7 @@
       }
     }
 
+    /* Tlačítko */
     .button {
       background: #f39c12;
       color: white;
@@ -69,6 +74,7 @@
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 20px;
       transition: transform 0.2s;
     }
 
@@ -76,61 +82,89 @@
       transform: scale(1.1);
     }
 
+    /* Výsledek */
     .result {
       margin-top: 20px;
       font-size: 18px;
       font-weight: bold;
     }
+
+    /* Vypadávání kuliček */
+    .falling {
+      animation: fall 1s ease-out forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(400px) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="ball-container" id="ballContainer">
-      <!-- Kuličky budou generovány skriptem -->
+    <div class="sphere" id="sphere">
+      <!-- Kuličky se generují pomocí JS -->
     </div>
     <button class="button" id="drawButton">Losovat štěstí</button>
     <div class="result" id="result"></div>
   </div>
 
   <script>
-    // Generování čísel na kuličkách
-    const ballContainer = document.getElementById("ballContainer");
+    // Generování kuliček
+    const sphere = document.getElementById("sphere");
     for (let i = 1; i <= 30; i++) {
       const ball = document.createElement("div");
       ball.className = "ball";
       ball.textContent = i;
-      ballContainer.appendChild(ball);
+      sphere.appendChild(ball);
     }
 
     const drawButton = document.getElementById("drawButton");
     const resultDiv = document.getElementById("result");
 
-    // Funkce pro losování
+    // Funkce losování
     drawButton.addEventListener("click", () => {
-      const balls = Array.from({ length: 30 }, (_, i) => i + 1);
+      const balls = Array.from(document.querySelectorAll(".ball"));
       const drawnBalls = [];
 
-      // Losuj 3 náhodná čísla
+      // Vyber 3 náhodné kuličky
       while (drawnBalls.length < 3) {
         const randomIndex = Math.floor(Math.random() * balls.length);
-        drawnBalls.push(balls.splice(randomIndex, 1)[0]);
+        const ball = balls.splice(randomIndex, 1)[0];
+        drawnBalls.push(ball);
+        ball.classList.add("falling"); // Animace vypadnutí
       }
 
-      // Zobraz losovaná čísla
-      resultDiv.textContent = `Losovaná čísla: ${drawnBalls.join(", ")}`;
+      // Čísla losovaných kuliček
+      const drawnNumbers = drawnBalls.map((ball) => parseInt(ball.textContent));
 
       // Zkontroluj, jestli mají stejnou cifru
-      const allDigits = drawnBalls.join("").split("");
+      const allDigits = drawnNumbers.join("").split("");
       const hasMatchingDigit = allDigits.some(
         (digit, _, arr) => arr.filter((d) => d === digit).length > 1
       );
 
       // Výsledek
+      resultDiv.textContent = `Losovaná čísla: ${drawnNumbers.join(", ")}`;
       if (hasMatchingDigit) {
         resultDiv.textContent += " 🎉 Vyhrál jsi! Máš štěstí v životě! 🎉";
       } else {
         resultDiv.textContent += " Bohužel jsi tentokrát nevyhrál.";
       }
+
+      // Po 2 sekundách obnov kouli
+      setTimeout(() => {
+        drawnBalls.forEach((ball) => {
+          ball.classList.remove("falling");
+          ball.style.transform = "none";
+          sphere.appendChild(ball);
+        });
+      }, 2000);
     });
   </script>
 </body>
