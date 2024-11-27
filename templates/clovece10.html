@@ -110,30 +110,28 @@
         }
 
         /* Styl pro cílové políčko (konec) */
+        /* Styl pro cílové políčko (konec) */
         .finish {
-            background-color: #c8ffa1; /* Stejné pozadí jako u ostatních políček */
+            background-color: #a9d08e; /* Stejné pozadí jako u ostatních políček */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative; /* Aby bylo možné umístit vlajku nad políčko */
             border-radius: 10px;
-            overflow: visible; /* Umožní zobrazení vlajky nad políčkem */
         }
 
         /* Styl pro vlajku */
-            .flag {
-                position: absolute;
-                top: -50px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100px;  /* Zvýšení šířky pro testování */
-                height: auto;
-                background-image: url('static/finishflag.png');
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
-
-
+        .flag {
+            position: absolute; /* Absolutní pozicování */
+            top: -50px; /* Umístí vlajku 50px nad cílové políčko */
+            left: 50%; /* Horizontálně ji zarovnáme na střed */
+            transform: translateX(-50%); /* Zarovnání na střed */
+            width: 50px; /* Nastavte šířku vlajky */
+            height: auto; /* Zachová proporce obrázku */
+            background-image: url('static/novavlajka.png'); /* Použití nového obrázku */
+            background-size: contain; /* Přizpůsobí velikost obrázku */
+            background-repeat: no-repeat; /* Zamezí opakování obrázku */
+        }
 
 
     </style>
@@ -156,9 +154,10 @@
             <div class="cell" id="cell-8"></div>
             <div class="cell" id="cell-9"></div>
             <div class="cell finish" id="cell-10">
-                <div class="finish" id="cell-10">
-                    <img class="flag" src="static/finishflag.png" alt="Finish Flag" />
-                </div>            </div> <!-- Cílové políčko -->
+                <div class="cell finish" id="cell-10">
+                    <div class="flag"></div> <!-- Nová vlajka -->
+                </div>
+                
         </div>
 
         <button id="rollButton">🎲 Hoď kostkou. 🎲</button>
