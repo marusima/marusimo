@@ -76,7 +76,7 @@
             background-color: #8aa476;
         }
 
-        /* Aktivní tlačítko, které bude svítit */
+        /* Aktivní tlačítko */
         .button.active {
             background-color: #657b54; /* Tmavší zelená pro aktivní stav */
             transform: scale(1.1); /* Mírně zvětšit pro efekt */
@@ -126,29 +126,32 @@
 
 
         .company h2 {
-            margin: 0;
-            font-size: 1.5rem; /* Zvýšení velikosti písma názvu zaměstnavatele */
-            color: #3f4f2f; /* Tmavší odstín khaki */
-            font-family: "Garamond", serif;
+            margin: 0; /* Odstraní výchozí mezery kolem nadpisu */
+            font-size: 1.5rem; /* Nastaví velikost písma nadpisu na 1.5násobek základní velikosti */
+            color: #3f4f2f; /* Tmavší odstín zelené barvy pro název firmy */
+            font-family: "Garamond", serif; /* Nastaví písmo na Garamond nebo podobné serifové písmo */
         }
 
+        /* Styl pro datum */
         .section-content .date {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #555;
+            font-style: italic; /* Nastaví text na kurzívu */
+            font-size: 0.9rem; /* Zmenší velikost písma na 0.9rem */
+            color: #555; /* Nastaví tmavší šedou barvu pro datum */
         }
+
 
         /* Styl pro pozice */
         .position {
             margin-top: 10px;
         }
-
+        /* Styl pro nazev pozice */
         .position h2 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: #445744; /* Tmavší zelená */
-            font-family: "Garamond", serif;
+            font-size: 1.3rem; /* Nastaví velikost písma na 1.3násobek základní velikosti */
+            margin-bottom: 8px; /* Přidá mezeru pod nadpis */
+            color: #445744; /* Nastaví tmavší zelenou barvu pro název pozice */
+            font-family: "Garamond", serif; /* Použije písmo Garamond */
         }
+
 
         /* Styl pro uvítací text */
         #welcome-text {
