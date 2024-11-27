@@ -166,7 +166,7 @@
 
             // Informace o směru a počtu kroků
             const directionText = direction === 1 ? 'doprava' : 'doleva';
-            movementInfoDiv.textContent = `Tak, teď jsme se posunuli ${directionText} o ${steps} kroky. Snad už tam brzy budeme.`;
+            movementInfoDiv.textContent = `Tak, teď jsme se posunuli ${directionText} o ${steps} kroky.`;
 
             // Změna emotikonu v závislosti na směru
             if (direction === 1) {
@@ -177,13 +177,13 @@
 
             // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
-                resultDiv.textContent = 'Super, dorazili jsme do školy! Pojďme se učit.';
+                resultDiv.textContent = 'Super, dorazila jsem do školy! Zkusím se jít učit.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
-                resultDiv.textContent = 'Super, dorazili jsme do práce! Pojďme vydělávat peníze.';
+                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat aspoň nějaký kačky.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
-                resultDiv.textContent = 'Jsi na cestě, ale ještě pokračuj.';
+                resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
             }
         });
 
