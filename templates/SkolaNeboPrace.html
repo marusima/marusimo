@@ -6,31 +6,42 @@
     <title>Cesta mezi školou a prací</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', sans-serif; /* Moderní písmo Comic Sans */
+            font-family: 'Poppins', sans-serif; /* Moderní, čisté písmo */
             text-align: center;
-            background-color: #6c6cb1;
+            background: linear-gradient(135deg, #f3f4f8, #e0e6f1); /* Jemný gradient pro pozadí */
             margin: 0;
             padding: 0;
             font-size: 1.2rem;
         }
 
         .game-container {
-            margin-top: 50px;
+            margin-top: 80px; /* Zvětšení mezery nahoře pro lepší vzhled */
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px; /* Zaoblené rohy pro moderní vzhled */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Jemný stín pro box */
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s ease-in-out; /* Plynulý pohyb pro hover */
+        }
+
+        .game-container:hover {
+            transform: translateY(-5px); /* Efekt plynulého pohybu při hoveru */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #4A90E2; /* Hezká modrá pro nadpis */
+            margin-bottom: 30px; /* Mezery pod nadpisem */
         }
 
         .board-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* Zvýšení mezery pod herním polem */
         }
 
         .board {
@@ -43,22 +54,22 @@
         }
 
         .cell {
-            width: 50px;  /* Menší velikost políček */
-            height: 5px;
-            background-color: #adadad;
-            border-radius: 10px;
+            width: 60px; /* O něco větší políčka */
+            height: 60px;
+            background-color: #a9d08e; /* Hezčí zelená pro políčka */
+            border-radius: 15px; /* Zaoblené rohy */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 30px; /* Větší font pro postavu */
+            font-size: 40px; /* Větší písmo pro postavu */
             color: white;
-            margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            margin-top: 40px; /* Tato hodnota posune celé pole níž */
-
+            margin: 0 15px; /* Větší mezery mezi políčky */
+            margin-top: 40px; /* Posunutí políček níž */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stín pro políčka */
         }
 
         .player {
-            font-size: 40px; /* Zvýšení velikosti hráče */
+            font-size: 50px; /* Velká postava pro lepší viditelnost */
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -67,38 +78,39 @@
         .result {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-top: 20px;
-            color: #3b3b3b;
+            margin-top: 30px;
+            color: #333333; /* Tmavě šedá pro text výsledku */
         }
 
         button {
-            margin-top: 20px;
-            padding: 10px 30px;
-            font-size: 18px;
+            margin-top: 30px;
+            padding: 12px 40px;
+            font-size: 1.2rem;
             cursor: pointer;
-            background-color: #69986b;
+            background-color: #4A90E2; /* Moderní modrá pro tlačítko */
             color: white;
             border: none;
-            border-radius: 10px;
-            font-family: 'Comic Sans MS', sans-serif;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease-in-out;
+            border-radius: 30px; /* Zaoblené rohy pro tlačítko */
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Jemný stín pro tlačítko */
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #78997a;
-            transform: translateY(-2px);
+            background-color: #357ABD; /* Tmavší modrá při hoveru */
+            transform: translateY(-2px); /* Plynulý efekt pohybu při hoveru */
         }
 
         .school-icon, .work-icon {
-            font-size: 80px;
-            margin: 0 20px;
+            font-size: 80px; /* Velké ikony pro školu a práci */
+            margin: 0 30px;
         }
 
         .movement-info {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #555;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-style: italic; /* Kurzíva pro zvýraznění informace */
         }
 
     </style>
@@ -126,7 +138,7 @@
                 <div class="cell" id="cell-8"></div>
                 <div class="cell" id="cell-9"></div>
             </div>
-            <div class="work-icon">🏢</div> <!-- Práce -->
+            <div class="work-icon">🏬</div> <!-- Práce -->
         </div>
 
         <button id="moveButton">Udělej tolik kroků, kolik dokážeš, na nějakou stranu.</button>
