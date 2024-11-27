@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesta mezi školou a prací.</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background-color: #d9caca;
+            margin: 20;
+            padding: 2;
+            font-size: 1.1rem;
+        }
+
+        .game-container {
+            margin-top: 120px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            margin: 10px 0; /* Menší mezera mezi odstavci */
+        }
+
+        ul {
+            padding-left: 20px; /* Malé odsazení pro seznam */
+            margin: 5px 0; /* Menší mezera mezi seznamy */
+        }
+
+        li {
+            margin-bottom: 3px; /* Snížení mezery mezi položkami seznamu */
+        }
+
+        .board-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: -50px;
+        }
+
+        .board {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            margin: 100px 5;
+            position: relative;
+        }
+
+        .cell {
+            width: 50px;  /* Menší velikost políček */
+            height: 5px;  /* Zvětšení výšky pro správnou velikost */
+            background-color: #adadad;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;  /* Zarovnání na spodní okraj */
+            font-size: 35px; /* Větší font pro postavu */
+            color: white;
+            margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
+            position: relative; /* Umožní pozicování */
+        }
+
+        .player {
+            font-size: 40px; /* Zvýšení velikosti hráče */
+            position: absolute; /* Zajišťuje, že panáček bude "sedět" na dně */
+            bottom: 0;  /* Umístí panáčka na spodní okraj buňky */
+        }
+
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 25px;
+            color: #3b3b3b;
+        }
+
+        button {
+            margin-top: 35px;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #967f51;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #bea471;
+            transform: translateY(-2px);
+        }
+
+        .school-icon, .work-icon {  /* Tečka před work-icon */
+            font-size: 80px;
+            margin: 0 20px;
+            position: relative;  /* Nastaví pozici pro použití top */
+            top: -45px;  /* Posune ikonu školy a práce o 10px nahoru */
+        }
+
+        .movement-info {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Cesta mezi školou a prací.</h1>
+        <p>Dobré ráno... No, jako přiznám se. Probuzená, ale ještě opilá. 🥴</p> 
+        <ul>A že já ani nevím, kde jsem to včera usnula. 🥴🍾</ul>
+        <ul>No, ať už jsem kde jsem...</ul>
+        <p>Zkusím jít dnes do školy nebo do práce. Pomozte mi. Snad někam dorazím.</p>
+
+        <!-- Vstup pro zadání počtu políček -->
+        <p>Zadejte číslo mezi 8 a 20 pro počet políček (chodníku):</p>
+        <input type="number" id="stepsInput" min="8" max="20" value="10">
+        <button id="startButton">Začít hru</button>
+
+        <div class="board-container">
+            <div class="school-icon">🏫</div> <!-- Škola -->
+            <div class="board" id="board"></div>
+            <div class="work-icon">🏬</div> <!-- Práce -->
+        </div>
+
+        <button id="moveButton" style="display: none;">Udělej tolik kroků, kolik dokážeš, na stranu, na kterou to zvládneš.</button>
+        <div class="result" id="result"></div>
+        <div class="movement-info" id="movement-info"></div>
+    </div>
+
+    <script>
+        let playerPosition;
+        let cells = [];
+        const player = document.createElement('div');
+        player.classList.add('player');
+        player.textContent = '🧍‍♀️';  // Emotikon startující postavy
+        const moveButton = document.getElementById('moveButton');
+        const resultDiv = document.getElementById('result');
+        const movementInfoDiv = document.getElementById('movement-info');
+        const startButton = document.getElementById('startButton');
+        const stepsInput = document.getElementById('stepsInput');
+        const boardContainer = document.getElementById('board');
+
+        startButton.addEventListener('click', function() {
+            const steps = parseInt(stepsInput.value);
+            if (steps < 8 || steps > 20) {
+                alert('Zadejte číslo mezi 8 a 20.');
+                return;
+            }
+
+            createBoard(steps);
+            playerPosition = Math.floor(Math.random() * steps); // Počáteční pozice
+            cells[playerPosition].appendChild(player); // Umístění na náhodnou pozici
+
+            moveButton.style.display = 'inline'; // Zobrazí tlačítko pro pohyb
+        });
+
+        moveButton.addEventListener('click', function() {
+            // Generování náhodného počtu kroků mezi 1 a 4
+            const steps = Math.floor(Math.random() * 2) + 2;  // Vygeneruje číslo mezi 2 a 4
+            const direction = Math.random() > 0.5 ? 1 : -1; // 1 pro doprava, -1 pro doleva
+
+            // Výpočet nové pozice
+            const newPosition = playerPosition + (steps * direction);
+
+            // Zajištění, že hráč nezmizí mimo herní plochu
+            if (newPosition < 0) {
+                playerPosition = 0;
+            } else if (newPosition >= cells.length) {
+                playerPosition = cells.length - 1;
+            } else {
+                playerPosition = newPosition;
+            }
+            
+            updateBoard();
+
+            // Informace o směru a počtu kroků
+            const directionText = direction === 1 ? 'doprava' : 'doleva';
+            movementInfoDiv.textContent = `Díky za pomoc, posunula jsem se ${directionText} o ${steps} kroky.`;
+
+            // Změna emotikonu v závislosti na směru
+            if (direction === 1) {
+                player.textContent = '🚶‍♀️‍➡️'; // Pohyb doprava
+            } else {
+                player.textContent = '🚶‍♀️'; // Pohyb doleva
+            }
+
+            // Kontrola, zda dosáhl cíle
+            if (playerPosition === 0) {
+                resultDiv.textContent = 'Super, dorazila jsem do školy! Zkusím se jít učit.';
+                moveButton.style.display = 'none'; // Skrytí tlačítka po dosažení cíle
+            } else if (playerPosition === cells.length - 1) {
+                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat nějaký kačky.';
+                moveButton.style.display = 'none'; // Skrytí tlačítka po dosažení cíle
+            } else {
+                resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
+            }
+        });
+
+        // Funkce pro vytvoření herního pole na základě zadaného počtu políček
+        function createBoard(steps) {
+            boardContainer.innerHTML = ''; // Vyčistíme staré políčka
+            cells = [];
+            for (let i = 0; i < steps; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cells.push(cell);
+                boardContainer.appendChild(cell);
+            }
+        }
+
+        // Funkce pro aktualizaci pozice hráče
+        function updateBoard() {
+            cells.forEach((cell, index) => {
+                cell.innerHTML = ''; // Vyčistíme obsah
+                if (index === playerPosition) {
+                    cell.appendChild(player); // Umístíme hráče na novou pozici
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
