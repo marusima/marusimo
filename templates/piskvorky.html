@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxusní Piškvorky</title>
+    <title>Kde dnes budu?</title>
     <style>
         * {
             margin: 0;
@@ -20,68 +20,36 @@
             min-height: 100vh;
             color: #fff;
             flex-direction: column;
-            overflow: hidden;
+            text-align: center;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 120px);
-            grid-template-rows: repeat(3, 120px);
-            gap: 10px;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-        }
-
-        .cell {
-            width: 120px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f2f2f2;
-            border: 2px solid #444;
-            font-size: 48px;
-            color: #333;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-in-out, background-color 0.3s ease;
-        }
-
-        .cell:hover {
-            background-color: #e0e0e0;
-            transform: scale(1.1);
-        }
-
-        .cell:active {
-            background-color: #ddd;
-            transform: scale(1.05);
-        }
-
-        .cell.x {
-            color: #ff4d4d;
-        }
-
-        .cell.o {
-            color: #4d94ff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .message {
             font-size: 1.5rem;
             margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        button {
+        .board {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            padding: 20px;
+            background-color: #fff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .button {
             padding: 15px 25px;
             font-size: 1.2rem;
-            background-color: #ff4d4d;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 10px;
@@ -90,86 +58,61 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        button:hover {
-            background-color: #ff3333;
-            transform: translateY(-5px);
+        .button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
         }
 
-        button:active {
+        .button:active {
             transform: translateY(0);
         }
+
     </style>
 </head>
 <body>
 
-    <h1>Luxusní Piškvorky</h1>
-    <div class="message" id="message">Hráč X začíná!</div>
-    <div class="board" id="board"></div>
-    <button onclick="restartGame()">Nová hra</button>
+    <h1>Kde dnes budu?</h1>
+    <div class="message" id="message">Jsi uprostřed cesty mezi školou a prací. Kam jít dál?</div>
+    <div class="board">
+        <p id="position">Jsi na začátku. (Cíl: Škola nebo Práce)</p>
+        <button class="button" id="moveButton">Někam se už prosím posuň</button>
+    </div>
 
     <script>
-        let currentPlayer = 'X';
-        let gameBoard = ['', '', '', '', '', '', '', '', ''];
-        const boardElement = document.getElementById('board');
+        let position = 0; // Počáteční pozice (střed mezi školou a prací)
+        const maxSteps = 100; // Maximální počet kroků do školy nebo práce
+        const school = 0; // Cíl: škola
+        const work = 1; // Cíl: práce
+        const boardElement = document.getElementById('position');
         const messageElement = document.getElementById('message');
+        const moveButton = document.getElementById('moveButton');
 
-        function createBoard() {
-            boardElement.innerHTML = '';
-            gameBoard.forEach((cell, index) => {
-                const cellElement = document.createElement('div');
-                cellElement.classList.add('cell');
-                if (cell === 'X') {
-                    cellElement.classList.add('x');
-                } else if (cell === 'O') {
-                    cellElement.classList.add('o');
-                }
-                cellElement.textContent = cell;
-                cellElement.onclick = () => makeMove(index);
-                boardElement.appendChild(cellElement);
-            });
-        }
+        // Funkce pro posun
+        moveButton.addEventListener('click', () => {
+            // Určím náhodně, kolik kroků se panáček posune a na kterou stranu
+            const steps = Math.floor(Math.random() * 10) + 1; // Krok mezi 1 a 10
+            const direction = Math.random() > 0.5 ? 1 : -1; // 1 je doprava (práce), -1 je doleva (škola)
 
-        function makeMove(index) {
-            if (gameBoard[index] !== '') return;
+            position += steps * direction;
 
-            gameBoard[index] = currentPlayer;
-            createBoard();
-            checkWinner();
-
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            messageElement.textContent = `Hráč ${currentPlayer}'s tah!`;
-        }
-
-        function checkWinner() {
-            const winningCombinations = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontální
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertikální
-                [0, 4, 8], [2, 4, 6]             // Diagonály
-            ];
-
-            for (let combination of winningCombinations) {
-                const [a, b, c] = combination;
-                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                    messageElement.textContent = `Hráč ${gameBoard[a]} vyhrál! 🎉`;
-                    setTimeout(() => alert(`Hráč ${gameBoard[a]} vyhrál! 🎉`), 100);
-                    return;
-                }
+            // Zkontrolujeme, zda panáček dorazil do cíle nebo zabloudil
+            if (position === school) {
+                messageElement.textContent = "Super! Jsi ve škole! Pojďme se učit a vzdělávat!";
+                moveButton.disabled = true; // Zakáže tlačítko po dokončení
+                return;
+            } else if (position === work) {
+                messageElement.textContent = "Super! Jsi v práci! Pojďme vydělávat peníze!";
+                moveButton.disabled = true; // Zakáže tlačítko po dokončení
+                return;
+            } else if (Math.abs(position) > maxSteps) {
+                messageElement.textContent = "Zabloudil jsi! Zkus to znovu!";
+                position = 0; // Restartuje pozici
             }
 
-            if (!gameBoard.includes('')) {
-                messageElement.textContent = 'Remíza! 🤝';
-                setTimeout(() => alert('Remíza! 🤝'), 100);
-            }
-        }
+            // U aktualizace pozice
+            boardElement.textContent = `Jsi na pozici: ${position}. Cíl: Škola nebo Práce`;
 
-        function restartGame() {
-            gameBoard = ['', '', '', '', '', '', '', '', ''];
-            currentPlayer = 'X';
-            messageElement.textContent = `Hráč ${currentPlayer} začíná!`;
-            createBoard();
-        }
-
-        createBoard();
+        });
     </script>
 
 </body>
