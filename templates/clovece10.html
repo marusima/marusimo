@@ -186,9 +186,16 @@
             }
 
             // Uklidíme pozice a umístíme panáčka na správné políčko
-            cells.forEach(cell => cell.innerHTML = '');  // Vymažeme předchozí pozice
-            cells[playerPosition].appendChild(player);  // Umístíme panáčka na nové políčko
+            cells.forEach((cell, index) => {
+                if (index !== 9) {  // Nevymažeme cílové políčko
+                    cell.innerHTML = '';  // Vymažeme obsah políčka
+                }
+            });
+
+            // Umístíme panáčka na nové políčko
+            cells[playerPosition].appendChild(player);
         });
+
     </script>
 
 </body>
