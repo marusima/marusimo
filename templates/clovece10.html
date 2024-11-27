@@ -162,51 +162,48 @@
     </div>
 
     <script>
-        let playerPosition = 0; // Počáteční pozice panáčka
-        const cells = document.querySelectorAll('.cell'); // Pole pro herní políčka
+        let playerPosition = 0; 
+        const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '🏃‍♂️‍➡️';  // Emotikon panáčka
-        cells[0].appendChild(player); // Panáček začne na prvním políčku
+        player.textContent = '🏃‍♀️‍➡️'; 
+        cells[0].appendChild(player); 
 
         const rollButton = document.getElementById('rollButton');
         const resultDiv = document.getElementById('result');
         const diceContainer = document.getElementById('diceContainer');
         const diceNumber = document.getElementById('diceNumber');
 
-        // Funkce pro hod kostkou
         rollButton.addEventListener('click', function() {
-            // Pokud je panáček už v cíli, zobrazí zprávu a neprovádí hod
             if (playerPosition === 9) {
                 resultDiv.textContent = 'Jsi už v cíli! 🎉 Kam dál bys chtěl jít?';
-                return; // Neprovádí žádné další akce
+                return;
             }
 
-            // Generování hodu kostkou (1-6)
             const roll = Math.floor(Math.random() * 6) + 1;
-
-            // Zobrazení hodu kostkou v krásném designu
             diceNumber.textContent = roll;
 
-            // Přesun panáčka o hod kostky, pokud je to možné
             if (playerPosition + roll <= 9) {
-                playerPosition += roll;  // Posun panáčka
+                playerPosition += roll;
             }
 
-            // Pokud by panáček měl přejít za poslední políčko (desáté), zůstane na místě
             if (playerPosition > 9) {
                 playerPosition = 9;
             }
 
-            // Uklidíme pozice a umístíme panáčka na správné políčko
             cells.forEach((cell, index) => {
-                if (index !== 9) {  // Nevymažeme cílové políčko
-                    cell.innerHTML = '';  // Vymažeme obsah políčka
+                if (index !== 9) {
+                    cell.innerHTML = '';
                 }
             });
 
-            // Umístíme panáčka na nové políčko
             cells[playerPosition].appendChild(player);
+
+            // Animace pohybu
+            player.style.transform = `translate(-50%, -50%) scale(1.2)`;
+            setTimeout(() => {
+                player.style.transform = `translate(-50%, -50%)`;
+            }, 300);
         });
 
     </script>
