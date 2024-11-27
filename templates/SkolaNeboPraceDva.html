@@ -28,16 +28,16 @@
         }
 
         p {
-            margin: 10px 0; /* Menší mezera mezi odstavci */
+            margin: 10px 0;
         }
 
         ul {
-            padding-left: 20px; /* Malé odsazení pro seznam */
-            margin: 5px 0; /* Menší mezera mezi seznamy */
+            padding-left: 20px;
+            margin: 5px 0;
         }
 
         li {
-            margin-bottom: 3px; /* Snížení mezery mezi položkami seznamu */
+            margin-bottom: 3px;
         }
 
         .board-container {
@@ -48,7 +48,7 @@
 
         .board {
             display: flex;
-            justify-content: space-around;  /* Vytvoří větší mezery mezi ikonami a okraji */
+            justify-content: space-around;
             align-items: center;
             width: 100%;
             margin: 100px 5;
@@ -56,23 +56,23 @@
         }
 
         .cell {
-            width: 40px;  /* Menší velikost políček */
-            height: 5px;  /* Zvětšení výšky pro správnou velikost */
+            width: 40px;
+            height: 5px;
             background-color: #adadad;
             border-radius: 10px;
             display: flex;
             justify-content: center;
-            align-items: flex-end;  /* Zarovnání na spodní okraj */
-            font-size: 35px; /* Větší font pro postavu */
+            align-items: flex-end;
+            font-size: 35px;
             color: white;
-            margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            position: relative; /* Umožní pozicování */
+            margin: 0 10px;
+            position: relative;
         }
 
         .player {
-            font-size: 40px; /* Zvýšení velikosti hráče */
-            position: absolute; /* Zajišťuje, že panáček bude "sedět" na dně */
-            bottom: 0;  /* Umístí panáčka na spodní okraj buňky */
+            font-size: 40px;
+            position: absolute;
+            bottom: 0;
         }
 
         .result {
@@ -101,11 +101,11 @@
             transform: translateY(-2px);
         }
 
-        .school-icon, .work-icon {  /* Tečka před work-icon */
+        .school-icon, .work-icon {
             font-size: 80px;
             margin: 0 20px;
-            position: relative;  /* Nastaví pozici pro použití top */
-            top: -45px;  /* Posune ikonu školy a práce o 10px nahoru */
+            position: relative;
+            top: -45px;
         }
 
         .movement-info {
@@ -126,7 +126,7 @@
         <p>Zkusím jít dnes do školy nebo do práce. Pomozte mi. Snad někam dorazím.</p>
 
         <!-- Vstup pro zadání počtu políček -->
-        <p>Kolik kachliček chodníku mě čeká?</p>
+        <p id="stepsText">Kolik kachliček chodníku mě čeká?</p>
         <input type="number" id="stepsInput" min="8" max="20" value="10">
         <button id="startButton">Jdeme!</button>
 
@@ -156,6 +156,7 @@
         const stepsInput = document.getElementById('stepsInput');
         const boardContainer = document.getElementById('board');
         const newGameButton = document.getElementById('newGameButton');
+        const stepsText = document.getElementById('stepsText');
 
         startButton.addEventListener('click', function() {
             const steps = parseInt(stepsInput.value);
@@ -169,6 +170,7 @@
             cells[playerPosition].appendChild(player); // Umístění na náhodnou pozici
 
             // Skrytí úvodních prvků
+            stepsText.style.display = 'none'; // Skrytí textu "Kolik kachliček mě čeká?"
             startButton.style.display = 'none';
             stepsInput.style.display = 'none';
 
