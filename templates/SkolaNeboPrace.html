@@ -112,7 +112,7 @@
         const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '🚶';  // Emotikon človíčka
+        player.textContent = '🧍‍♀️';  // Emotikon startující postavy
         cells[playerPosition].appendChild(player); // Umístění na začátek
 
         const moveButton = document.getElementById('moveButton');
@@ -137,13 +137,22 @@
             playerPosition = newPosition;
             updateBoard();
 
+            // Změna emotikonu v závislosti na směru
+            if (direction === 1) {
+                player.textContent = '🚶‍♀️‍➡️'; // Pohyb doprava
+            } else {
+                player.textContent = '🚶‍♀️'; // Pohyb doleva
+            }
+
             // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
                 resultDiv.textContent = 'Super, dorazil(a) jsi do školy! Pojďme se učit.';
+                moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
                 resultDiv.textContent = 'Super, dorazil(a) jsi do práce! Pojďme vydělávat peníze.';
+                moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
-                resultDiv.textContent = `Jsi na pozici ${playerPosition}.`;
+                resultDiv.textContent = 'Jsi na cestě, ale ještě pokračuj.';
             }
         });
 
