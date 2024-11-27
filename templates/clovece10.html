@@ -111,6 +111,7 @@
         }
 
         /* Styl pro cílové políčko (konec) */
+        /* Styl pro cílové políčko (konec) */
         .finish {
             background-color: #a9d08e; /* Stejné pozadí jako u ostatních políček */
             display: flex;
@@ -122,15 +123,15 @@
 
         /* Styl pro vlajku */
         .flag {
-            position: absolute;
-            top: -50px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: auto;
+            position: absolute; /* Absolutní pozicování */
+            top: -50px; /* Umístí vlajku 50px nad cílové políčko */
+            left: 50%; /* Horizontálně ji zarovnáme na střed */
+            transform: translateX(-50%); /* Zarovnání na střed */
+            width: 50px; /* Nastavte šířku vlajky */
+            height: auto; /* Zachová proporce obrázku */
             background-image: url('static/finishflag.png');
-            background-size: contain;
-            background-repeat: no-repeat;
+            background-size: contain; /* Přizpůsobí velikost obrázku */
+            background-repeat: no-repeat; /* Zamezí opakování obrázku */
         }
 
 
