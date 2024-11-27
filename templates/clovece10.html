@@ -9,26 +9,28 @@
         body {
             font-family: "Garamond", serif;
             text-align: center;
-            background: linear-gradient(to bottom, #a6bc90, #a6bc90); /* Barevné pozadí */
+            background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* Luxusní pozadí s přechodem */
             margin: 0;
             padding: 0;
             font-size: 1.2rem;
+            color: #fff;
         }
 
         /* Hlavní styl pro herní okno */
         .game-container {
             background-color: #fff;
             width: 80%;
-            max-width: 800px;
-            min-height: 400px;  /* Zajištění, že výška boxu bude stále stejná */
+            max-width: 900px;
+            min-height: 500px;
             margin: 50px auto;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            border: 5px solid #2193b0;
         }
 
         /* Styly pro herní desku */
@@ -36,64 +38,70 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            width: 100%; /* Zajištění, že herní deska bude mít šířku boxu */
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100%;
         }
 
         .cell {
-            width: 60px;
-            height: 60px;
-            background-color: #a9d08e; /* Zelenkavé políčko */
-            border: 2px solid #69986b;
+            width: 70px;
+            height: 70px;
+            background-color: #8cbe9e;
+            border: 3px solid #3b6b38;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
+            border-radius: 15px;
             position: relative;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .cell:hover {
+            background-color: #b1d8a7; /* Efekt pro zvyrazneni bunek */
         }
 
         /* Styl pro panáčka */
         .player {
-            font-size: 40px; /* Velikost emotikonu */
+            font-size: 40px;
             position: absolute;
-            top: 50%; /* Vertikálně na střed */
-            left: 50%; /* Horizontálně na střed */
-            transform: translate(-50%, -50%); /* Upravíme pozici pro dokonalé centrování */
-            pointer-events: none; /* Zamezí interakci s emotikonem, aby nebránil kliknutí */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: transform 0.3s ease-out; /* Efekt pohybu panáčka */
         }
 
         /* Styl pro tlačítko */
         button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 18px;
+            margin-top: 30px;
+            padding: 15px 35px;
+            font-size: 20px;
             cursor: pointer;
-            background-color: #69986b;
+            background-color: #2193b0;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 20px;
             font-family: "Garamond", serif;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease-in-out, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #78997a;
-            transform: translateY(-2px); /* Mírný efekt zvedání tlačítka při najetí myší */
+            background-color: #3b6b38;
+            transform: translateY(-4px); /* Zvedání tlačítka pro efekt */
         }
 
         .result {
-            font-size: 20px; /* Změna velikosti textu */
-            margin-top: 5px;
-            font-weight: bold; /* Můžete přidat i tučné písmo */
+            font-size: 22px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2193b0;
         }
 
-
-        /* Styl pro obrázek kostky (pro moderní design) */
+        /* Styl pro kostku */
         .dice {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             margin-top: 20px;
             display: inline-block;
             background-color: #fff;
@@ -101,36 +109,36 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 35px;
             font-weight: bold;
             color: #3b3b3b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .dice span {
-            font-size: 40px;
+            font-size: 45px;
         }
 
-        /* Styl pro cílové políčko (konec) */
+        /* Styl pro cílové políčko (finish) */
         .finish {
-            background-color: #baed95; /* Stejné pozadí jako u ostatních políček */
+            background-color: #ffd700; /* Zlaté pozadí pro cíl */
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px; /* Stejný rádius jako u ostatních políček */
-            position: relative; /* Umožňuje umístit vlajku nad políčko */
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* Zlaté záření */
         }
 
-        /* Styl pro emotikon vlajky */
+        /* Styl pro vlajku */
         .flag {
-            position: absolute; /* Absolutní pozicování */
-            top: -30px; /* Umístí vlajku 30px nad cílové políčko */
-            left: 50%; /* Horizontálně ji zarovnáme na střed */
-            transform: translateX(-50%); /* Zarovnání na střed */
-            font-size: 40px; /* Velikost vlajky */
-            z-index: 10; /* Zajistí, že vlajka bude nad pozadím políčka */
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 45px;
+            z-index: 10;
         }
-
-
     </style>
 </head>
 <body>
@@ -140,7 +148,6 @@
         <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se panáček pohybuje po své cestě. 🎲</p>
 
         <div class="board">
-            <!-- Vytvoření 10 políček pro herní desku, poslední políčko bude označené jako cíl -->
             <div class="cell" id="cell-1"></div>
             <div class="cell" id="cell-2"></div>
             <div class="cell" id="cell-3"></div>
@@ -152,61 +159,58 @@
             <div class="cell" id="cell-9"></div>
             <div class="cell finish" id="cell-10">
                 <div class="flag">🏳️</div>  <!-- Emotikon vlajky -->
-            </div>        </div>
+            </div>
+        </div>
 
         <button id="rollButton">🎲 Hoď kostkou. 🎲</button>
         <div class="result" id="result"></div>
 
-        <!-- Místo pro zobrazení kostky -->
         <div id="diceContainer" class="dice"><span id="diceNumber">🎲</span></div>
     </div>
 
     <script>
-        let playerPosition = 0; // Počáteční pozice panáčka
-        const cells = document.querySelectorAll('.cell'); // Pole pro herní políčka
+        let playerPosition = 0; 
+        const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '🏃‍♂️‍➡️';  // Emotikon panáčka
-        cells[0].appendChild(player); // Panáček začne na prvním políčku
+        player.textContent = '🏃‍♀️‍➡️➡️'; 
+        cells[0].appendChild(player); 
 
         const rollButton = document.getElementById('rollButton');
         const resultDiv = document.getElementById('result');
         const diceContainer = document.getElementById('diceContainer');
         const diceNumber = document.getElementById('diceNumber');
 
-        // Funkce pro hod kostkou
         rollButton.addEventListener('click', function() {
-            // Pokud je panáček už v cíli, zobrazí zprávu a neprovádí hod
             if (playerPosition === 9) {
                 resultDiv.textContent = 'Jsi už v cíli! 🎉 Kam dál bys chtěl jít?';
-                return; // Neprovádí žádné další akce
+                return;
             }
 
-            // Generování hodu kostkou (1-6)
             const roll = Math.floor(Math.random() * 6) + 1;
-
-            // Zobrazení hodu kostkou v krásném designu
             diceNumber.textContent = roll;
 
-            // Přesun panáčka o hod kostky, pokud je to možné
             if (playerPosition + roll <= 9) {
-                playerPosition += roll;  // Posun panáčka
+                playerPosition += roll;
             }
 
-            // Pokud by panáček měl přejít za poslední políčko (desáté), zůstane na místě
             if (playerPosition > 9) {
                 playerPosition = 9;
             }
 
-            // Uklidíme pozice a umístíme panáčka na správné políčko
             cells.forEach((cell, index) => {
-                if (index !== 9) {  // Nevymažeme cílové políčko
-                    cell.innerHTML = '';  // Vymažeme obsah políčka
+                if (index !== 9) {
+                    cell.innerHTML = '';
                 }
             });
 
-            // Umístíme panáčka na nové políčko
             cells[playerPosition].appendChild(player);
+
+            // Animace pohybu
+            player.style.transform = `translate(-50%, -50%) scale(1.2)`;
+            setTimeout(() => {
+                player.style.transform = `translate(-50%, -50%)`;
+            }, 300);
         });
 
     </script>
