@@ -171,7 +171,7 @@
             const roll = Math.floor(Math.random() * 6) + 1;
 
             // Zobrazení hodu kostkou v krásném designu
-            diceNumber.textContent = `Teď jsi hodil ${roll}.`;
+            diceNumber.textContent = roll;
 
             // Přesun panáčka o hod kostky, pokud je to možné
             if (playerPosition + roll <= 9) {
