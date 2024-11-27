@@ -121,18 +121,17 @@
         }
 
         /* Styl pro vlajku */
-        .flag {
-            position: absolute; /* Absolutní pozicování */
-            top: -60px; /* Umístí vlajku 60px nad cílové políčko */
-            left: 50%; /* Horizontálně ji zarovnáme na střed */
-            transform: translateX(-50%); /* Zarovnání na střed */
-            width: 50px; /* Nastavte šířku vlajky */
-            height: auto; /* Zachová proporce obrázku */
-            background-image: url('static/finishflag.png');
-            background-size: contain; /* Přizpůsobí velikost obrázku */
-            background-repeat: no-repeat; /* Zamezí opakování obrázku */
-            z-index: 5; /* Ujistí se, že vlajka bude nad ostatními prvky */
-        }
+            .flag {
+                position: absolute;
+                top: -50px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;  /* Zvýšení šířky pro testování */
+                height: auto;
+                background-image: url('static/finishflag.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
 
 
 
