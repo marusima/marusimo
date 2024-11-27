@@ -48,9 +48,9 @@
 
         /* Styl pro panáčka */
         .player {
-            width: 35px;
-            height: 35px;
-            background-color: #ff5733;
+            width: 30px;
+            height: 30px;
+            background-color: #a77b72;
             border-radius: 50%;
             position: absolute;
         }
@@ -159,9 +159,6 @@
             setTimeout(function() {
                 const roll = Math.floor(Math.random() * 6) + 1; // Generování hodu (1-6)
                 resultDiv.textContent = `Hodili jste: ${roll}`;
-
-                // Zobrazíme obrázek kostky
-                diceContainer.innerHTML = `<img class="dice" src="images/dice-${roll}.png" alt="Hod kostkou">`;
 
                 // Přesun panáčka o hod kostky, pokud je to možné
                 if (playerPosition + roll <= 9) {
