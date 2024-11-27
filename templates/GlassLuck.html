@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magická Loterie</title>
+  <title>Magická loterie</title>
   <style>
     /* Základní styl pro tělo stránky */
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Comic Sans MS', sans-serif;
       background: linear-gradient(to bottom, #b2dfdb, #fbe9e7); /* Barevné pozadí */
       color: #2e7d32;
       display: flex;
@@ -28,8 +28,7 @@
     .sphere-container {
       position: relative;
       width: 350px;
-      height: 350px; /* Opravená velikost koule */
-      margin-right: 20px; /* Přidání mezery mezi kouli a držák */
+      height: 450px;
     }
 
     .base {
@@ -63,16 +62,51 @@
       left: 50%;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(0, 128, 0, 0.2)); /* Skleněná koule s gradientem */
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(0, 128, 0, 0.2));
       border-radius: 50%;
       transform: translateX(-50%);
-      border: 5px solid rgba(255, 255, 255, 0.7); /* Okraje koule */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Stín pro kouli */
-      overflow: hidden; /* Zajištění, že kuličky zůstanou uvnitř koule */
+      border: 5px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: glassReflection 3s ease-in-out infinite alternate;
+    }
+
+    /* Přidání animace pro realistické zrcadlení světla na kouli */
+    @keyframes glassReflection {
+      0% {
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.3), 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      100% {
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.8), 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .ball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #ffcc80, #ff7043);
+      border-radius: 50%;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      transform: scale(1.2);
+      transition: transform 0.3s ease-out;
+    }
+
+    .ball:hover {
+      transform: scale(1.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     }
 
     /* 3D kuličky pro držák */
     .holder-container {
+      margin-left: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -169,7 +203,7 @@
 <body>
   <div class="container">
     <div class="sphere-container">
-      <div class="sphere" id="sphere"></div> <!-- Skleněná koule -->
+      <div class="sphere" id="sphere"></div>
       <div class="stand"></div>
       <div class="base"></div>
     </div>
@@ -209,11 +243,10 @@
         const ball = document.createElement("div");
         ball.className = "ball";
         ball.textContent = i;  // Přiřadí číslo kuličce
-        ball.style.position = "absolute"; // Umožní kuličkám být uvnitř koule
-        ball.style.left = `${Math.random() * 80 + 50}%`;
-        ball.style.top = `${Math.random() * 80 + 10}%`;
-        sphere.appendChild(ball);
-        availableBalls.push(ball);
+        ball.style.left = `${Math.random() * 260}px`;  // Náhodné umístění kuličky v kouli
+        ball.style.top = `${Math.random() * 260}px`;  // Náhodné umístění kuličky v kouli
+        sphere.appendChild(ball);  // Přidá kuličku do koule
+        availableBalls.push(ball);  // Přidá kuličku do pole kuliček pro pozdější použití
       }
     }
 
