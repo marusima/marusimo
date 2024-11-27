@@ -42,8 +42,33 @@
             color: #333;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 800px;
             width: 100%;
+        }
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #a9d08e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: transform 0.5s ease;
+        }
+
+        .player {
+            font-size: 28px;
+            transition: transform 0.5s ease;
+        }
+
+        .school, .work {
+            font-size: 40px;
+            padding: 0 10px;
         }
 
         .button {
@@ -73,16 +98,36 @@
 
     <h1>Kde dnes budu?</h1>
     <div class="message" id="message">Jsi uprostřed cesty mezi školou a prací. Kam jít dál?</div>
+
+    <div class="board">
+        <div class="school">🏫</div> <!-- Škola -->
+        
+        <!-- Cesta s 10 políčky -->
+        <div class="cell" id="cell-1"></div>
+        <div class="cell" id="cell-2"></div>
+        <div class="cell" id="cell-3"></div>
+        <div class="cell" id="cell-4"></div>
+        <div class="cell" id="cell-5"></div>
+        <div class="cell" id="cell-6"></div>
+        <div class="cell" id="cell-7"></div>
+        <div class="cell" id="cell-8"></div>
+        <div class="cell" id="cell-9"></div>
+        <div class="cell" id="cell-10"></div>
+
+        <div class="work">💼</div> <!-- Práce -->
+    </div>
+
     <div class="board">
         <p id="position">Jsi na začátku. (Cíl: Škola nebo Práce)</p>
         <button class="button" id="moveButton">Někam se už prosím posuň</button>
     </div>
 
     <script>
-        let position = 0; // Počáteční pozice (střed mezi školou a prací)
-        const maxSteps = 100; // Maximální počet kroků do školy nebo práce
+        let position = 5; // Počáteční pozice (střed cesty mezi školou a prací)
+        const maxSteps = 100; // Maximální počet kroků
         const school = 0; // Cíl: škola
-        const work = 1; // Cíl: práce
+        const work = 10; // Cíl: práce
+        const cells = document.querySelectorAll('.cell');
         const boardElement = document.getElementById('position');
         const messageElement = document.getElementById('message');
         const moveButton = document.getElementById('moveButton');
@@ -90,7 +135,7 @@
         // Funkce pro posun
         moveButton.addEventListener('click', () => {
             // Určím náhodně, kolik kroků se panáček posune a na kterou stranu
-            const steps = Math.floor(Math.random() * 10) + 1; // Krok mezi 1 a 10
+            const steps = Math.floor(Math.random() * 3) + 1; // Krok mezi 1 a 3
             const direction = Math.random() > 0.5 ? 1 : -1; // 1 je doprava (práce), -1 je doleva (škola)
 
             position += steps * direction;
@@ -106,12 +151,19 @@
                 return;
             } else if (Math.abs(position) > maxSteps) {
                 messageElement.textContent = "Zabloudil jsi! Zkus to znovu!";
-                position = 0; // Restartuje pozici
+                position = 5; // Restartuje pozici
             }
 
             // U aktualizace pozice
-            boardElement.textContent = `Jsi na pozici: ${position}. Cíl: Škola nebo Práce`;
+            cells.forEach((cell, index) => {
+                if (index === position - 1) {
+                    cell.innerHTML = '<div class="player">👣</div>'; // Panáček na aktuálním políčku
+                } else {
+                    cell.innerHTML = ''; // Smazání předchozí pozice panáčka
+                }
+            });
 
+            boardElement.textContent = `Jsi na pozici: ${position}. Cíl: Škola nebo Práce`;
         });
     </script>
 
