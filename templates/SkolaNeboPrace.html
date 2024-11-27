@@ -6,7 +6,7 @@
     <title>Cesta mezi školou a prací</title>
     <style>
         body {
-            font-family: 'Dancing Script', sans-serif; 
+            font-family: 'Comic Sans MS', sans-serif; /* Moderní písmo Comic Sans */
             text-align: center;
             background-color: #f4f4f9;
             margin: 0;
@@ -16,7 +16,7 @@
 
         .game-container {
             margin-top: 50px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             background-color: #ffffff;
@@ -35,7 +35,7 @@
 
         .board {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
             width: 100%;
             margin: 20px 0;
@@ -43,19 +43,19 @@
         }
 
         .cell {
-            width: 40px;
-            height: 60px;
+            width: 50px;  /* Menší velikost políček */
+            height: 50px;
             background-color: #a9d08e;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            font-size: 30px; /* Větší font pro postavu */
             color: white;
         }
 
         .player {
-            font-size: 30px;
+            font-size: 40px; /* Zvýšení velikosti hráče */
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -77,7 +77,7 @@
             color: white;
             border: none;
             border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Comic Sans MS', sans-serif;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease-in-out;
         }
@@ -90,6 +90,12 @@
         .school-icon, .work-icon {
             font-size: 60px;
             margin: 0 20px;
+        }
+
+        .movement-info {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
         }
 
     </style>
@@ -120,6 +126,7 @@
 
         <button id="moveButton">Udělej tolik kroků, kolik dokážeš, na nějakou stranu.</button>
         <div class="result" id="result"></div>
+        <div class="movement-info" id="movement-info"></div>
     </div>
 
     <script>
@@ -132,6 +139,7 @@
 
         const moveButton = document.getElementById('moveButton');
         const resultDiv = document.getElementById('result');
+        const movementInfoDiv = document.getElementById('movement-info');
 
         moveButton.addEventListener('click', function() {
             // Generování náhodného počtu kroků mezi 1 a 4
@@ -142,15 +150,19 @@
             const newPosition = playerPosition + (steps * direction);
 
             // Zajištění, že hráč nezmizí mimo herní plochu
-            if (newPosition < 0 || newPosition > 9) {
-                resultDiv.textContent = 'Zabloudil(a) jsi! Zkus to znovu.';
-                playerPosition = Math.floor(Math.random() * 10); // Resetování na náhodné místo
-                updateBoard();
-                return;
+            if (newPosition < 0) {
+                playerPosition = 0;
+            } else if (newPosition > 9) {
+                playerPosition = 9;
+            } else {
+                playerPosition = newPosition;
             }
-
-            playerPosition = newPosition;
+            
             updateBoard();
+
+            // Informace o směru a počtu kroků
+            const directionText = direction === 1 ? 'doprava' : 'doleva';
+            movementInfoDiv.textContent = `Tak, teď jsme se posunuli ${directionText} o ${steps} kroky. Snad už tam brzy budeme.`;
 
             // Změna emotikonu v závislosti na směru
             if (direction === 1) {
