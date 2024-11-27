@@ -100,7 +100,7 @@
             transform: translateY(-2px);
         }
 
-        .home-icon, .medical-icon {  /* Tečka před work-icon */
+        .city-icon, .forest-icon {  /* Tečka před work-icon */
             font-size: 80px;
             margin: 0 20px;
             position: relative;  /* Nastaví pozici pro použití top */
@@ -118,14 +118,16 @@
 <body>
 
     <div class="game-container">
-        <h1>Cesta mezi domovem a lékařem.</h1>
-        <p>Dobré ráno... No, včera jsem se vydala stanovat, ale dnes je mi zle. 🥴</p> 
-        <ul>Už ani nevím, kde se zrovna nacházím a můj mobil je vybitý.</ul>
-        <ul>No, ať už jsem kde jsem...</ul>
-        <p>Musím se dostat domů do tepla nebo k lékaři. Pomozte mi. Snad někam dorazím.</p>
+        <h1>Cesta mezi tichým lesem a městem.</h1>
+        <p>Ráno se probudím na neznámém místě. Vzduch je čerstvý a chladný, ale kolem je úplné ticho. Kde jsem? Jak jsem se sem dostala? Jediné, co vím, je, že musím pokračovat. Moje nohy mě vedou, ale cesta je stále mlhavá.</p> 
+        <ul>Mám před sebou dvě možnosti. Můžu jít směrem k horám, kde je prý malý, ale kouzelný les, který slibuje klid a ticho, ale také tajemství a neznámo. 🌲🌿 Možná najdu nějaký úkryt, místo, kde se ukryji a naberu síly.</ul>
+        <ul>Nebo mám na výběr směr k městu, které je daleko, ale slibuje životní energii, nové zážitky a lidi, kteří se můžou stát mými přáteli. 🏙️ Na druhou stranu, město může být rušné a plné chaosu.</ul>
+        <p>Ale co, když jdu špatně? Co když mě cesta zavede někam, kam nechci? Co když se ztratím?</p>
+        <p>S každým krokem si začínám uvědomovat, že jediným skutečným směrem, kterým se musím vydat, je ten, který si vyberu. Ať už se dostanu do tichého lesa, nebo to bude městská džungle – je to můj příběh, který teď začíná.</p>
+        
 
         <div class="board-container">
-            <div class="home-icon">🏡</div> <!-- Škola -->
+            <div class="city-icon">🏙</div> <!-- Škola -->
             <div class="board">
                 <div class="cell" id="cell-0"></div>
                 <div class="cell" id="cell-1"></div>
@@ -138,7 +140,7 @@
                 <div class="cell" id="cell-8"></div>
                 <div class="cell" id="cell-9"></div>
             </div>
-            <div class="medical-icon">🏥</div> <!-- Práce -->
+            <div class="forest-icon">🌄</div> <!-- Práce -->
         </div>
 
         <button id="moveButton">Ujdi tolik kilometrů, kolik dokážeš, na stranu, na kterou si myslíš, že je to ten správný směr.</button>
@@ -190,14 +192,15 @@
 
             // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
-                resultDiv.textContent = 'Dorazila jsem úspěšně domů. Jdu si dát čaj a spát.';
+                resultDiv.textContent = 'Dorazila jsem do tichého lesa. Hledám útočiště a klid, kde se zregeneruji.'; 
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
-                resultDiv.textContent = 'Dorazila jsem zrovna k lékáři. Jdu si sednout do čekárny, snad mě vyšetří.';
+                resultDiv.textContent = 'Dorazila jsem do městské džungle. Hledám nové příležitosti a energii mezi lidmi.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
-                resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
+                resultDiv.textContent = 'Jsem na cestě, ale ještě musím pokračovat. Který směr zvolím teď?';
             }
+
         });
 
         // Funkce pro aktualizaci pozice hráče
