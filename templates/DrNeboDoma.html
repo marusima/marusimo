@@ -28,16 +28,16 @@
         }
 
         p {
-            margin: 10px 0;
+            margin: 10px 0; /* Menší mezera mezi odstavci */
         }
 
         ul {
-            padding-left: 20px;
-            margin: 5px 0;
+            padding-left: 20px; /* Malé odsazení pro seznam */
+            margin: 5px 0; /* Menší mezera mezi seznamy */
         }
 
         li {
-            margin-bottom: 3px;
+            margin-bottom: 3px; /* Snížení mezery mezi položkami seznamu */
         }
 
         .board-container {
@@ -55,33 +55,23 @@
         }
 
         .cell {
-            width: 50px;
-            height: 50px; /* Zvětšení výšky pro správnou velikost */
-            background-color: #9e7d55; /* Hnědá barva pro hlínu */
-            background-image: url('https://www.transparenttextures.com/patterns/wood-surface.png'); /* Textura hlíny (nebo jiný obrázek) */
-            background-size: cover;
+            width: 50px;  /* Menší velikost políček */
+            height: 5px;  /* Zvětšení výšky pro správnou velikost */
+            background-color: #adadad;
             border-radius: 10px;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            font-size: 35px;
+            align-items: flex-end;  /* Zarovnání na spodní okraj */
+            font-size: 35px; /* Větší font pro postavu */
             color: white;
-            margin: 0 10px;
-            position: relative;
+            margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
+            position: relative; /* Umožní pozicování */
         }
 
         .player {
-            font-size: 40px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        .tent {
-            font-size: 35px;
-            position: absolute;
-            bottom: 0;
-            left: 45px; /* Posunout stan vedle postavy */
+            font-size: 40px; /* Zvýšení velikosti hráče */
+            position: absolute; /* Zajišťuje, že panáček bude "sedět" na dně */
+            bottom: 0;  /* Umístí panáčka na spodní okraj buňky */
         }
 
         .result {
@@ -110,11 +100,11 @@
             transform: translateY(-2px);
         }
 
-        .home-icon, .medical-icon {
+        .home-icon, .medical-icon {  /* Tečka před work-icon */
             font-size: 80px;
             margin: 0 20px;
-            position: relative;
-            top: -45px;
+            position: relative;  /* Nastaví pozici pro použití top */
+            top: -45px;  /* Posune ikonu školy a práce o 10px nahoru */
         }
 
         .movement-info {
@@ -122,6 +112,7 @@
             color: #555;
             margin-top: 10px;
         }
+
     </style>
 </head>
 <body>
@@ -156,29 +147,26 @@
     </div>
 
     <script>
-        let playerPosition = Math.floor(Math.random() * 6) + 2;
+        let playerPosition = Math.floor(Math.random() * 6) + 2; // Počáteční pozice mezi 2. a 7. políčkem (1 až 8, indexy 2 až 7)
         const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '(🧍)';  // Emotikon startující postavy
-
-        const tent = document.createElement('div');
-        tent.classList.add('tent');
-        tent.textContent = '⛺️'; // Emotikon stanu
-
-        cells[playerPosition].appendChild(player);
-        cells[playerPosition].appendChild(tent); // Umístíme stan vedle panáčka
+        player.textContent = '⛺️';  // Emotikon startující postavy
+        cells[playerPosition].appendChild(player); // Umístění na náhodnou pozici
 
         const moveButton = document.getElementById('moveButton');
         const resultDiv = document.getElementById('result');
         const movementInfoDiv = document.getElementById('movement-info');
 
         moveButton.addEventListener('click', function() {
-            const steps = Math.floor(Math.random() * 2) + 2;
-            const direction = Math.random() > 0.5 ? 1 : -1;
+            // Generování náhodného počtu kroků mezi 1 a 4
+            const steps = Math.floor(Math.random() * 2) + 2;  // Vygeneruje číslo mezi 2 a 4
+            const direction = Math.random() > 0.5 ? 1 : -1; // 1 pro doprava, -1 pro doleva
 
+            // Výpočet nové pozice
             const newPosition = playerPosition + (steps * direction);
 
+            // Zajištění, že hráč nezmizí mimo herní plochu
             if (newPosition < 0) {
                 playerPosition = 0;
             } else if (newPosition > 9) {
@@ -186,35 +174,38 @@
             } else {
                 playerPosition = newPosition;
             }
-
+            
             updateBoard();
 
+            // Informace o směru a počtu kroků
             const directionText = direction === 1 ? 'severně' : 'jižně';
             movementInfoDiv.textContent = `Díky za pomoc, ušla jsem ${directionText} ${steps} kilometry.`;
 
+            // Změna emotikonu v závislosti na směru
             if (direction === 1) {
-                player.textContent = '🚶‍♀️‍➡️';
+                player.textContent = '🚶‍♀️‍➡️'; // Pohyb severně
             } else {
-                player.textContent = '🚶‍♀️';
+                player.textContent = '🚶‍♀️'; // Pohyb jižně
             }
 
+            // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
                 resultDiv.textContent = 'Dorazila jsem úspěšně domů. Jdu si dát čaj a spát.';
-                moveButton.remove();
+                moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
                 resultDiv.textContent = 'Dorazila jsem zrovna k lékáři. Jdu si sednout do čekárny, snad mě vyšetří.';
-                moveButton.remove();
+                moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
                 resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
             }
         });
 
+        // Funkce pro aktualizaci pozice hráče
         function updateBoard() {
             cells.forEach((cell, index) => {
-                cell.innerHTML = '';
+                cell.innerHTML = ''; // Vyčistíme obsah
                 if (index === playerPosition) {
-                    cell.appendChild(player);
-                    cell.appendChild(tent); // Při každém pohybu zajišťujeme, že stan je opět vedle postavy
+                    cell.appendChild(player); // Umístíme hráče na novou pozici
                 }
             });
         }
