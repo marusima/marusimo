@@ -100,10 +100,11 @@
             transform: translateY(-2px);
         }
 
-        .school-icon {
+        .school-icon, .work-icon {  /* Tečka před work-icon */
             font-size: 80px;
             margin: 0 20px;
-            top: -10px;  /* Posune ikonu školy o 10px nahoru */
+            position: relative;  /* Nastaví pozici pro použití top */
+            top: -10px;  /* Posune ikonu školy a práce o 10px nahoru */
         }
 
         .movement-info {
