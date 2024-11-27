@@ -100,7 +100,7 @@
             transform: translateY(-2px);
         }
 
-        .school-icon, .work-icon {  /* Tečka před work-icon */
+        .home-icon, .medical-icon {  /* Tečka před work-icon */
             font-size: 80px;
             margin: 0 20px;
             position: relative;  /* Nastaví pozici pro použití top */
@@ -118,14 +118,14 @@
 <body>
 
     <div class="game-container">
-        <h1>Cesta mezi školou a prací.</h1>
-        <p>Dobré ráno... No, jako přiznám se. Probuzená, ale ještě opilá. 🥴</p> 
-        <ul>A že já ani nevím, kde jsem to včera usnula. 🥴🍾</ul>
+        <h1>Cesta mezi domovem a lékařem.</h1>
+        <p>Dobré ráno... No, včera jsem se vydala stanovat, ale dnes je mi zle. 🥴</p> 
+        <ul>Už ani nevím, kde se zrovna nacházím a můj mobil je vybitý.</ul>
         <ul>No, ať už jsem kde jsem...</ul>
-        <p>Zkusím jít dnes do školy nebo do práce. Pomozte mi. Snad někam dorazím.</p>
+        <p>Musím se dostat domů do tepla nebo k lékaři. Pomozte mi. Snad někam dorazím.</p>
 
         <div class="board-container">
-            <div class="school-icon">🏫</div> <!-- Škola -->
+            <div class="home-icon">🏡</div> <!-- Škola -->
             <div class="board">
                 <div class="cell" id="cell-0"></div>
                 <div class="cell" id="cell-1"></div>
@@ -138,7 +138,7 @@
                 <div class="cell" id="cell-8"></div>
                 <div class="cell" id="cell-9"></div>
             </div>
-            <div class="work-icon">🏬</div> <!-- Práce -->
+            <div class="medical-icon">🏥</div> <!-- Práce -->
         </div>
 
         <button id="moveButton">Udělej tolik kroků, kolik dokážeš, na stranu, na kterou to zvládneš.</button>
@@ -151,7 +151,7 @@
         const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '🧍‍♀️';  // Emotikon startující postavy
+        player.textContent = '🧍⛺️';  // Emotikon startující postavy
         cells[playerPosition].appendChild(player); // Umístění na náhodnou pozici
 
         const moveButton = document.getElementById('moveButton');
@@ -178,22 +178,22 @@
             updateBoard();
 
             // Informace o směru a počtu kroků
-            const directionText = direction === 1 ? 'doprava' : 'doleva';
-            movementInfoDiv.textContent = `Díky za pomoc, posunula jsem se ${directionText} o ${steps} kroky.`;
+            const directionText = direction === 1 ? 'severně' : 'jižně';
+            movementInfoDiv.textContent = `Díky za pomoc, ušla jsem ${directionText} ${steps} kilometry.`;
 
             // Změna emotikonu v závislosti na směru
             if (direction === 1) {
-                player.textContent = '🚶‍♀️‍➡️'; // Pohyb doprava
+                player.textContent = '🚶‍♀️‍➡️'; // Pohyb severně
             } else {
-                player.textContent = '🚶‍♀️'; // Pohyb doleva
+                player.textContent = '🚶‍♀️'; // Pohyb jižně
             }
 
             // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
-                resultDiv.textContent = 'Super, dorazila jsem do školy! Zkusím se jít učit.';
+                resultDiv.textContent = 'Dorazila jsem úspěšně domů. Jdu si dát čaj a spát.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
-                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat nějaký kačky.';
+                resultDiv.textContent = 'Dorazila jsem zrovna k lékáři. Jdu si sednout do čekárny, snad mě vyěetří.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
                 resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
