@@ -267,10 +267,17 @@
       if (!ball) return;
 
       drawnNumbers.push(parseInt(ball.textContent));  // Přidá číslo kuličky do seznamu vylosovaných
+
+      // Vytvoření nové kuličky pro držák
       const drawnBall = document.createElement("div");
       drawnBall.className = "ball";  // Nová kulička pro držák
       drawnBall.textContent = ball.textContent;  // Přiřadí číslo
       holder.appendChild(drawnBall);  // Přidá ji do držáku
+
+      // Nastavení pozice pro novou kuličku, aby se nezakrývaly
+      const numberOfBalls = holder.children.length;
+      const angle = (360 / 3) * (numberOfBalls - 1); // Vytvoří různé úhly pro pozice
+      drawnBall.style.transform = `rotate(${angle}deg) translate(120px)`; // Nastavení transformace pro novou pozici
 
       ball.remove();  // Odstraní kuličku z koule
 
@@ -281,6 +288,7 @@
         checkWin();
       }
     });
+
 
 
     // Funkce pro kontrolu výhry
