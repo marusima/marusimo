@@ -3,168 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kde dnes budu?</title>
+    <title>Hra - Cesta mezi školou a prací</title>
     <style>
-        * {
+        body {
+            font-family: 'Dancing Script', cursive; /* Cursive font for a nicer look */
+            text-align: center;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-size: 1.2rem;
         }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        .game-container {
+            margin-top: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #fff;
             flex-direction: column;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .message {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            align-items: center;
         }
 
         .board {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            padding: 20px;
-            background-color: #fff;
-            color: #333;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            max-width: 800px;
+            align-items: center;
             width: 100%;
+            margin: 20px 0;
         }
 
         .cell {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             background-color: #a9d08e;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
-            font-size: 18px;
-            transition: transform 0.5s ease;
+            font-size: 20px;
+            color: white;
         }
 
         .player {
-            font-size: 28px;
-            transition: transform 0.5s ease;
+            font-size: 30px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .school, .work {
-            font-size: 40px;
-            padding: 0 10px;
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #3b3b3b;
         }
 
-        .button {
-            padding: 15px 25px;
-            font-size: 1.2rem;
-            background-color: #4CAF50;
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #69986b;
             color: white;
             border: none;
             border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Dancing Script', cursive;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
         }
 
-        .button:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: #78997a;
             transform: translateY(-2px);
         }
 
-        .button:active {
-            transform: translateY(0);
-        }
-
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <h1>Kde dnes budu?</h1>
-    <div class="message" id="message">Jsi uprostřed cesty mezi školou a prací. Kam jít dál?</div>
+    <div class="game-container">
+        <h1>Hra - Cesta mezi školou a prací</h1>
+        <p>Pomoz človíčkovi rozhodnout se, kam má jít. Klikněte na tlačítko pro pohyb!</p>
 
-    <div class="board">
-        <div class="school">🏫</div> <!-- Škola -->
-        
-        <!-- Cesta s 10 políčky -->
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-2"></div>
-        <div class="cell" id="cell-3"></div>
-        <div class="cell" id="cell-4"></div>
-        <div class="cell" id="cell-5"></div>
-        <div class="cell" id="cell-6"></div>
-        <div class="cell" id="cell-7"></div>
-        <div class="cell" id="cell-8"></div>
-        <div class="cell" id="cell-9"></div>
-        <div class="cell" id="cell-10"></div>
+        <div class="board">
+            <div class="cell">🏫</div> <!-- Škola -->
+            <div class="cell" id="cell-1"></div>
+            <div class="cell" id="cell-2"></div>
+            <div class="cell" id="cell-3"></div>
+            <div class="cell" id="cell-4"></div>
+            <div class="cell" id="cell-5"></div>
+            <div class="cell" id="cell-6"></div>
+            <div class="cell" id="cell-7"></div>
+            <div class="cell" id="cell-8"></div>
+            <div class="cell" id="cell-9"></div>
+            <div class="cell finish">💼</div> <!-- Práce -->
+        </div>
 
-        <div class="work">💼</div> <!-- Práce -->
-    </div>
-
-    <div class="board">
-        <p id="position">Jsi na začátku. (Cíl: Škola nebo Práce)</p>
-        <button class="button" id="moveButton">Někam se už prosím posuň</button>
+        <button id="moveButton">Někám se už prosím posuň</button>
+        <div class="result" id="result"></div>
     </div>
 
     <script>
-        let position = 5; // Počáteční pozice (střed cesty mezi školou a prací)
-        const maxSteps = 100; // Maximální počet kroků
-        const school = 0; // Cíl: škola
-        const work = 10; // Cíl: práce
+        let playerPosition = 5; // Počáteční pozice uprostřed
         const cells = document.querySelectorAll('.cell');
-        const boardElement = document.getElementById('position');
-        const messageElement = document.getElementById('message');
+        const player = document.createElement('div');
+        player.classList.add('player');
+        player.textContent = '🚶';  // Emotikon človíčka
+        cells[playerPosition].appendChild(player); // Umístění na začátek
+
         const moveButton = document.getElementById('moveButton');
+        const resultDiv = document.getElementById('result');
 
-        // Funkce pro posun
-        moveButton.addEventListener('click', () => {
-            // Určím náhodně, kolik kroků se panáček posune a na kterou stranu
-            const steps = Math.floor(Math.random() * 3) + 1; // Krok mezi 1 a 3
-            const direction = Math.random() > 0.5 ? 1 : -1; // 1 je doprava (práce), -1 je doleva (škola)
+        moveButton.addEventListener('click', function() {
+            // Generování náhodného počtu kroků mezi 1 a 4
+            const steps = Math.floor(Math.random() * 4) + 1;
+            const direction = Math.random() > 0.5 ? 1 : -1; // 1 pro doprava, -1 pro doleva
 
-            position += steps * direction;
+            // Výpočet nové pozice
+            const newPosition = playerPosition + (steps * direction);
 
-            // Zkontrolujeme, zda panáček dorazil do cíle nebo zabloudil
-            if (position === school) {
-                messageElement.textContent = "Super! Jsi ve škole! Pojďme se učit a vzdělávat!";
-                moveButton.disabled = true; // Zakáže tlačítko po dokončení
+            // Zajištění, že hráč nezmizí mimo herní plochu
+            if (newPosition < 0 || newPosition > 9) {
+                resultDiv.textContent = 'Zabloudil(a) jsi! Zkus to znovu.';
+                playerPosition = 5; // Resetování na střed
+                updateBoard();
                 return;
-            } else if (position === work) {
-                messageElement.textContent = "Super! Jsi v práci! Pojďme vydělávat peníze!";
-                moveButton.disabled = true; // Zakáže tlačítko po dokončení
-                return;
-            } else if (Math.abs(position) > maxSteps) {
-                messageElement.textContent = "Zabloudil jsi! Zkus to znovu!";
-                position = 5; // Restartuje pozici
             }
 
-            // U aktualizace pozice
+            playerPosition = newPosition;
+            updateBoard();
+
+            // Kontrola, zda dosáhl cíle
+            if (playerPosition === 0) {
+                resultDiv.textContent = 'Super, dorazil(a) jsi do školy! Pojďme se učit.';
+            } else if (playerPosition === 9) {
+                resultDiv.textContent = 'Super, dorazil(a) jsi do práce! Pojďme vydělávat peníze.';
+            } else {
+                resultDiv.textContent = `Jsi na pozici ${playerPosition}.`;
+            }
+        });
+
+        // Funkce pro aktualizaci pozice hráče
+        function updateBoard() {
             cells.forEach((cell, index) => {
-                if (index === position - 1) {
-                    cell.innerHTML = '<div class="player">👣</div>'; // Panáček na aktuálním políčku
-                } else {
-                    cell.innerHTML = ''; // Smazání předchozí pozice panáčka
+                cell.innerHTML = ''; // Vyčistíme obsah
+                if (index === playerPosition) {
+                    cell.appendChild(player); // Umístíme hráče na novou pozici
                 }
             });
-
-            boardElement.textContent = `Jsi na pozici: ${position}. Cíl: Škola nebo Práce`;
-        });
+        }
     </script>
 
 </body>
