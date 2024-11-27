@@ -64,6 +64,17 @@
       border: 5px solid rgba(255, 255, 255, 0.7);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       overflow: hidden;
+      animation: glassReflection 3s ease-in-out infinite alternate;
+    }
+
+    /* Přidání animace pro realistické zrcadlení světla na kouli */
+    @keyframes glassReflection {
+      0% {
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.3), 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      100% {
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.8), 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
     }
 
     .ball {
@@ -80,17 +91,24 @@
       justify-content: center;
       align-items: center;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      transform: scale(1.2);
+      transition: transform 0.3s ease-out;
     }
 
-    /* Držák kuliček vpravo od koule, pevná výška a šířka */
+    .ball:hover {
+      transform: scale(1.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Držák kuliček vpravo od koule */
     .holder-container {
-      margin-left: 20px; /* Vzdálenost od koule */
+      margin-left: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
-      height: 320px; /* Výška držáku zůstává konstantní */
+      height: 320px;
     }
 
     .holder {
@@ -104,21 +122,7 @@
       align-items: center;
       gap: 10px;
       overflow: hidden;
-    }
-
-    .drawn-ball {
-      width: 40px;
-      height: 40px;
-      background: radial-gradient(circle at 30% 30%, #ffcc80, #ff7043);
-      border-radius: 50%;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      animation: bounceIn 0.5s ease-out;
     }
 
     .result {
@@ -126,7 +130,7 @@
       font-weight: bold;
       text-align: center;
       margin-top: 10px;
-      min-height: 20px; /* Aby text zůstal na místě a neovlivnil výšku */
+      min-height: 20px;
     }
 
     .button {
@@ -138,9 +142,9 @@
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      width: 200px; /* Šířka tlačítka bude pevná */
+      width: 200px;
       transition: transform 0.2s, background 0.3s;
-      margin-top: 20px; /* Pevná vzdálenost mezi tlačítkem a ostatními elementy */
+      margin-top: 20px;
     }
 
     .button:hover {
@@ -148,7 +152,19 @@
       background: #388e3c;
     }
 
-    /* Reakce na menší obrazovky - design zůstává v pořádku */
+    /* Přidání animace pro kouli */
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Reakce na menší obrazovky */
     @media (max-width: 768px) {
       body {
         flex-direction: column;
@@ -171,7 +187,6 @@
     </div>
   </div>
 
-  <!-- Držák kuliček, výsledek a tlačítka vpravo od koule -->
   <div class="holder-container">
     <div class="holder" id="holder"></div>
     <div class="result" id="result"></div>
@@ -189,17 +204,15 @@
     let drawnNumbers = [];
     let availableBalls = [];
 
-    // Funkce pro inicializaci hry (resetování)
     function initializeGame() {
-      sphere.innerHTML = ""; // Vymazání skleněné koule
-      holder.innerHTML = ""; // Vymazání držáku
-      resultDiv.textContent = ""; // Vymazání výsledku
-      drawButton.style.display = "inline-block"; // Zobrazení tlačítka pro vylosování
-      retryButton.style.display = "none"; // Skrytí tlačítka pro nový pokus
-      drawnNumbers = []; // Resetování vybraných čísel
-      availableBalls = []; // Resetování seznamu dostupných kuliček
+      sphere.innerHTML = "";
+      holder.innerHTML = "";
+      resultDiv.textContent = "";
+      drawButton.style.display = "inline-block";
+      retryButton.style.display = "none";
+      drawnNumbers = [];
+      availableBalls = [];
 
-      // Vytvoření kuliček v kouli
       for (let i = 1; i <= 30; i++) {
         const ball = document.createElement("div");
         ball.className = "ball";
@@ -213,36 +226,31 @@
 
     initializeGame();
 
-    // Akce po kliknutí na tlačítko pro vylosování
     drawButton.addEventListener("click", () => {
-      if (drawnNumbers.length >= 3) return; // Pokud byly vylosovány 3 kuličky, nic se nestane
+      if (drawnNumbers.length >= 3) return;
 
-      const randomIndex = Math.floor(Math.random() * availableBalls.length); // Náhodný výběr kuličky
+      const randomIndex = Math.floor(Math.random() * availableBalls.length);
       const ball = availableBalls.splice(randomIndex, 1)[0];
 
-      if (!ball) return; // Pokud není kulička, nic se nestane
+      if (!ball) return;
 
-      drawnNumbers.push(parseInt(ball.textContent)); // Přidání čísla kuličky
+      drawnNumbers.push(parseInt(ball.textContent));
       const drawnBall = document.createElement("div");
       drawnBall.className = "drawn-ball";
       drawnBall.textContent = ball.textContent;
+      holder.appendChild(drawnBall);
 
-      holder.appendChild(drawnBall); // Přidání kuličky do držáku
+      ball.remove();
 
-      ball.remove(); // Odstranění kuličky z koule
-
-      // Pokud byly vylosovány 3 kuličky
       if (drawnNumbers.length === 3) {
-        drawButton.style.display = "none"; // Skrytí tlačítka pro vylosování
-        retryButton.style.display = "inline-block"; // Zobrazení tlačítka pro nový pokus
-        checkWin(); // Kontrola výhry
+        drawButton.style.display = "none";
+        retryButton.style.display = "inline-block";
+        checkWin();
       }
     });
 
-    // Funkce pro nový pokus
     retryButton.addEventListener("click", initializeGame);
 
-    // Funkce pro kontrolu výhry
     function checkWin() {
       const digits = drawnNumbers.map(String).flatMap((num) => [...num]);
       const commonDigit = digits.find(
