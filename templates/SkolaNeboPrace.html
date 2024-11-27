@@ -54,7 +54,7 @@
             font-size: 30px; /* Větší font pro postavu */
             color: white;
             margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            margin-top: 60px; /* Tato hodnota posune celé pole níž */
+            margin-top: 20px; /* Tato hodnota posune celé pole níž */
 
         }
 
@@ -94,8 +94,9 @@
         .school-icon, .work-icon {
             font-size: 80px;
             margin: 0 20px;
-            position: relative;  /* Umožní ti posunout ikonu */
-            top: 5px;           /* Posune ikony o 10px dolů, uprav tuto hodnotu podle potřeby */
+            position: absolute; /* Umožní umístit ikony na přesně stanovenou pozici */
+            top: 50%;            /* Vycentruje ikony vertikálně */
+            transform: translateY(-50%); /* Zajistí, že budou přesně na středu */
         }
 
         .movement-info {
