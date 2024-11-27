@@ -121,12 +121,19 @@
         }
 
         /* Styl pro vlajku */
+     /* Styl pro vlajku */
         .flag {
             position: absolute; /* Absolutní pozicování */
-            top: -35px; /* Umístí vlajku 35px nad cílové políčko */
+            top: -50px; /* Umístí vlajku 50px nad cílové políčko */
+            left: 50%; /* Horizontálně ji zarovnáme na střed */
+            transform: translateX(-50%); /* Zarovnání na střed */
             width: 50px; /* Nastavte šířku vlajky */
             height: auto; /* Zachová proporce obrázku */
+            background-image: url('static/finishflag.png');
+            background-size: contain; /* Přizpůsobí velikost obrázku */
+            background-repeat: no-repeat; /* Zamezí opakování obrázku */
         }
+
 
 
     </style>
@@ -149,7 +156,7 @@
             <div class="cell" id="cell-8"></div>
             <div class="cell" id="cell-9"></div>
             <div class="cell finish" id="cell-10">
-                <img src="static/finishflag.png" alt="Vlajka" class="flag">
+                <div class="flag"></div> <!-- Vlajka nad posledním políčkem -->
             </div> <!-- Cílové políčko -->
         </div>
 
