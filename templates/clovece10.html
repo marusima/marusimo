@@ -5,75 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hra - Člověče, nezlob se</title>
     <style>
-        /* Styly pro hru */
+        /* Globální styl pro tělo stránky */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background: linear-gradient(to bottom, #6fa3ef, #4b78a7); /* Barevné pozadí */
+            margin: 0;
+            padding: 0;
         }
+
+        /* Hlavní styl pro herní okno */
+        .game-container {
+            background-color: #fff;
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styly pro herní desku */
         .board {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
+
         .cell {
-            width: 50px;
-            height: 50px;
-            margin: 5px;
-            background-color: #d3d3d3;
-            border: 2px solid #000;
+            width: 60px;
+            height: 60px;
+            background-color: #a9d08e; /* Zelenkavé políčko */
+            border: 2px solid #7d9d53;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 10px;
+            position: relative;
         }
+
+        /* Styl pro panáčka */
         .player {
-            width: 30px;
-            height: 30px;
-            background-color: red;
+            width: 35px;
+            height: 35px;
+            background-color: #ff5733;
             border-radius: 50%;
+            position: absolute;
         }
+
+        /* Styl pro tlačítko */
         button {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #ff8c00;
             color: white;
             border: none;
             border-radius: 5px;
-            font-family: "Garamond", serif; /* Použije písmo Garamond */
+            font-family: "Garamond", serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-        }
         button:hover {
-            background-color: #45a049;
+            background-color: #f75d00;
         }
+
+        /* Výsledky pro hod kostkou */
         .result {
             font-size: 20px;
             margin-top: 10px;
+        }
+
+        /* Animace pro kostku */
+        .dice-animation {
+            animation: roll 1s infinite;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+        }
+
+        @keyframes roll {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(90deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            75% {
+                transform: rotate(270deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Styl pro obrázek kostky */
+        .dice {
+            width: 60px;
+            height: 60px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Takové jednodušší člověče, nezlob se.</h1>
-    <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se panáček pohybuje po své cestě.</p>
+    <div class="game-container">
+        <h1>Takové jednodušší člověče, nezlob se.</h1>
+        <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se panáček pohybuje po své cestě. 🎲</p>
 
-    <div class="board">
-        <!-- Vytvoření 10 políček pro herní desku -->
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-2"></div>
-        <div class="cell" id="cell-3"></div>
-        <div class="cell" id="cell-4"></div>
-        <div class="cell" id="cell-5"></div>
-        <div class="cell" id="cell-6"></div>
-        <div class="cell" id="cell-7"></div>
-        <div class="cell" id="cell-8"></div>
-        <div class="cell" id="cell-9"></div>
-        <div class="cell" id="cell-10"></div>
+        <div class="board">
+            <!-- Vytvoření 10 políček pro herní desku -->
+            <div class="cell" id="cell-1"></div>
+            <div class="cell" id="cell-2"></div>
+            <div class="cell" id="cell-3"></div>
+            <div class="cell" id="cell-4"></div>
+            <div class="cell" id="cell-5"></div>
+            <div class="cell" id="cell-6"></div>
+            <div class="cell" id="cell-7"></div>
+            <div class="cell" id="cell-8"></div>
+            <div class="cell" id="cell-9"></div>
+            <div class="cell" id="cell-10"></div>
+        </div>
+
+        <button id="rollButton">🎲 Hoď kostkou 🎲</button>
+        <div class="result" id="result"></div>
+
+        <!-- Místo pro zobrazení kostky -->
+        <div id="diceContainer"></div>
     </div>
-
-    <button id="rollButton">🎲 Hoď, prosím, kostkou.🎲</button>
-    <div class="result" id="result"></div>
 
     <script>
         let playerPosition = 0; // Počáteční pozice panáčka
@@ -84,25 +149,34 @@
 
         const rollButton = document.getElementById('rollButton');
         const resultDiv = document.getElementById('result');
+        const diceContainer = document.getElementById('diceContainer');
 
         // Funkce pro hod kostkou
         rollButton.addEventListener('click', function() {
-            const roll = Math.floor(Math.random() * 6) + 1; // Generování hodu (1-6)
-            resultDiv.textContent = `Hodili jste: ${roll}`;
-            
-            // Přesun panáčka o hod kostky, pokud je to možné
-            if (playerPosition + roll <= 9) { 
-                playerPosition += roll; // Posun panáčka
-            }
-            
-            // Pokud by panáček měl přejít za poslední políčko (desáté), zůstane na místě
-            if (playerPosition > 9) {
-                playerPosition = 9;
-            }
+            // Animace kutálející se kostky
+            diceContainer.innerHTML = `<div class="dice-animation"></div>`;
 
-            // Uklidíme pozice a umístíme panáčka na správné políčko
-            cells.forEach(cell => cell.innerHTML = '');
-            cells[playerPosition].appendChild(player);
+            setTimeout(function() {
+                const roll = Math.floor(Math.random() * 6) + 1; // Generování hodu (1-6)
+                resultDiv.textContent = `Hodili jste: ${roll}`;
+
+                // Zobrazíme obrázek kostky
+                diceContainer.innerHTML = `<img class="dice" src="images/dice-${roll}.png" alt="Hod kostkou">`;
+
+                // Přesun panáčka o hod kostky, pokud je to možné
+                if (playerPosition + roll <= 9) {
+                    playerPosition += roll; // Posun panáčka
+                }
+
+                // Pokud by panáček měl přejít za poslední políčko (desáté), zůstane na místě
+                if (playerPosition > 9) {
+                    playerPosition = 9;
+                }
+
+                // Uklidíme pozice a umístíme panáčka na správné políčko
+                cells.forEach(cell => cell.innerHTML = '');
+                cells[playerPosition].appendChild(player);
+            }, 1000); // Počkáme 1 sekundu než se dokončí animace
         });
     </script>
 
