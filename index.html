@@ -108,20 +108,22 @@
 
         /* Styl pro zaměstnavatele a logo */
         .company {
-            background-color: #d7e4c5; /* Jemný odstín */
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: left;
-            gap: 14px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #d7e4c5; /* Jemný odstín zelené */
+            padding: 10px; /* Vnitřní odsazení kolem obsahu */
+            border-radius: 8px; /* Zaoblení rohů */
+            margin-bottom: 10px; /* Spodní mezera mezi jednotlivými firmami */
+            display: flex; /* Flexbox pro rozložení položek v řadě */
+            align-items: left; /* Vertikální zarovnání na začátek (ale v rámci flexboxu není nutné) */
+            gap: 14px; /* Mezera mezi jednotlivými položkami ve flexboxu (např. mezi logem a názvem firmy) */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Jemný stín kolem sekce */
         }
 
+
         .company img {
-            height: 4em;
-            width: auto;
+            height: 4em; /* Výška obrázku je nastavena na 4em (em je relativní jednotka, 1em je výška písma) */
+            width: auto; /* Šířka obrázku se přizpůsobí podle jeho výšky */
         }
+
 
         .company h2 {
             margin: 0;
