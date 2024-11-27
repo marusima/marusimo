@@ -19,7 +19,7 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: #efd8d8;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -54,7 +54,7 @@
             font-size: 30px; /* Větší font pro postavu */
             color: white;
             margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            margin-top: 40px; /* Tato hodnota posune celé pole níž */
+            margin-top: 60px; /* Tato hodnota posune celé pole níž */
 
         }
 
@@ -149,7 +149,7 @@
 
         moveButton.addEventListener('click', function() {
             // Generování náhodného počtu kroků mezi 1 a 4
-            const steps = Math.floor(Math.random() * 3) + 2;  // Vygeneruje číslo mezi 2 a 4
+            const steps = Math.floor(Math.random() * 2) + 2;  // Vygeneruje číslo mezi 2 a 4
             const direction = Math.random() > 0.5 ? 1 : -1; // 1 pro doprava, -1 pro doleva
 
             // Výpočet nové pozice
