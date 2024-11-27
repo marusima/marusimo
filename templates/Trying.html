@@ -45,7 +45,7 @@
       bottom: 70px;
       left: 50%;
       width: 150px;
-      height: 100px;
+      height: 110px;
       background: #d7ccc8;
       transform: translateX(-50%);
       border-radius: 10px;
@@ -82,7 +82,7 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
-    /* Nový držák kuliček vpravo od koule */
+    /* Držák kuliček vpravo od koule, pevná výška a šířka */
     .holder-container {
       margin-left: 20px; /* Vzdálenost od koule */
       display: flex;
@@ -90,6 +90,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
+      height: 320px; /* Výška držáku zůstává konstantní */
     }
 
     .holder {
@@ -102,6 +103,7 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
+      overflow: hidden;
     }
 
     .drawn-ball {
@@ -124,6 +126,7 @@
       font-weight: bold;
       text-align: center;
       margin-top: 10px;
+      min-height: 20px; /* Aby text zůstal na místě a neovlivnil výšku */
     }
 
     .button {
@@ -135,8 +138,9 @@
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      width: 200px; /* Stejná šířka pro obě tlačítka */
+      width: 200px; /* Šířka tlačítka bude pevná */
       transition: transform 0.2s, background 0.3s;
+      margin-top: 20px; /* Pevná vzdálenost mezi tlačítkem a ostatními elementy */
     }
 
     .button:hover {
@@ -218,10 +222,11 @@
 
       if (!ball) return; // Pokud není kulička, nic se nestane
 
-      drawnNumbers.push(parseInt(ball.textContent)); // Přidání čísla do seznamu vylosovaných
+      drawnNumbers.push(parseInt(ball.textContent)); // Přidání čísla kuličky
       const drawnBall = document.createElement("div");
       drawnBall.className = "drawn-ball";
       drawnBall.textContent = ball.textContent;
+
       holder.appendChild(drawnBall); // Přidání kuličky do držáku
 
       ball.remove(); // Odstranění kuličky z koule
