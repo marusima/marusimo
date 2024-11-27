@@ -19,15 +19,10 @@
             background-color: #fff;
             width: 80%;
             max-width: 800px;
-            min-height: 400px;  /* Zajištění, že výška boxu bude stále stejná */
             margin: 50px auto;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
         }
 
         /* Styly pro herní desku */
@@ -37,7 +32,6 @@
             align-items: center;
             margin-top: 20px;
             margin-bottom: 20px;
-            width: 100%; /* Zajištění, že herní deska bude mít šířku boxu */
         }
 
         .cell {
@@ -53,6 +47,7 @@
         }
 
         /* Styl pro panáčka */
+        /* Styl pro panáčka (emotikon) */
         .player {
             font-size: 35px; /* Velikost emotikonu */
             position: absolute;
@@ -62,24 +57,23 @@
             pointer-events: none; /* Zamezí interakci s emotikonem, aby nebránil kliknutí */
         }
 
+
         /* Styl pro tlačítko */
         button {
             margin-top: 20px;
             padding: 15px 30px;
             font-size: 18px;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #c5a47b;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             font-family: "Garamond", serif;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #45a049;
-            transform: translateY(-5px); /* Mírný efekt zvedání tlačítka při najetí myší */
+            background-color: #877367;
         }
 
         /* Výsledky pro hod kostkou */
@@ -88,26 +82,38 @@
             margin-top: 10px;
         }
 
-        /* Styl pro obrázek kostky (pro moderní design) */
-        .dice {
-            width: 80px;
-            height: 80px;
-            margin-top: 20px;
+        /* Animace pro kostku */
+        .dice-animation {
+            animation: roll 1s infinite;
             display: inline-block;
-            background-color: #f0e68c;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            font-weight: bold;
-            color: #3b3b3b;
+            width: 50px;
+            height: 50px;
         }
 
-        .dice span {
-            font-size: 40px;
+        @keyframes roll {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(90deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            75% {
+                transform: rotate(270deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
+        /* Styl pro obrázek kostky */
+        .dice {
+            width: 60px;
+            height: 60px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -134,7 +140,7 @@
         <div class="result" id="result"></div>
 
         <!-- Místo pro zobrazení kostky -->
-        <div id="diceContainer" class="dice"><span id="diceNumber">🎲</span></div>
+        <div id="diceContainer"></div>
     </div>
 
     <script>
@@ -142,13 +148,11 @@
         const cells = document.querySelectorAll('.cell'); // Pole pro herní políčka
         const player = document.createElement('div');
         player.classList.add('player');
-        player.textContent = '🏃‍♀️';  // Emotikon panáčka
+        player.textContent = '🏃‍♀️‍➡️';  // Emotikon panáčka
         cells[0].appendChild(player); // Panáček začne na prvním políčku
 
         const rollButton = document.getElementById('rollButton');
         const resultDiv = document.getElementById('result');
-        const diceContainer = document.getElementById('diceContainer');
-        const diceNumber = document.getElementById('diceNumber');
 
         // Funkce pro hod kostkou
         rollButton.addEventListener('click', function() {
@@ -160,9 +164,6 @@
 
             // Generování hodu kostkou (1-6)
             const roll = Math.floor(Math.random() * 6) + 1;
-
-            // Zobrazení hodu kostkou v krásném designu
-            diceNumber.textContent = roll;
 
             // Přesun panáčka o hod kostky, pokud je to možné
             if (playerPosition + roll <= 9) {
@@ -178,6 +179,7 @@
             cells.forEach(cell => cell.innerHTML = '');  // Vymažeme předchozí pozice
             cells[playerPosition].appendChild(player);  // Umístíme panáčka na nové políčko
         });
+
     </script>
 
 </body>
