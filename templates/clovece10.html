@@ -41,6 +41,8 @@
             color: white;
             border: none;
             border-radius: 5px;
+            font-family: "Garamond", serif; /* Použije písmo Garamond */
+
         }
         button:hover {
             background-color: #45a049;
@@ -53,8 +55,8 @@
 </head>
 <body>
 
-    <h1>Hra: Člověče, nezlob se!</h1>
-    <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se váš panáček pohybuje po herní desce.</p>
+    <h1>Takové jednodušší člověče, nezlob se.</h1>
+    <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se panáček pohybuje po své cestě.</p>
 
     <div class="board">
         <!-- Vytvoření 10 políček pro herní desku -->
@@ -70,7 +72,7 @@
         <div class="cell" id="cell-10"></div>
     </div>
 
-    <button id="rollButton">Hod kostkou</button>
+    <button id="rollButton">🎲 Hoď, prosím, kostkou.🎲</button>
     <div class="result" id="result"></div>
 
     <script>
