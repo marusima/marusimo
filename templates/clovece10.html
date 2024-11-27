@@ -111,15 +111,23 @@
         }
 
         /* Styl pro cílové políčko (konec) */
-        /* Styl pro cílové políčko (konec) */
         .finish {
-            background-color: #bed2b0; /* Stejné pozadí jako u ostatních políček */
+            background-color: #a9d08e; /* Stejné pozadí jako u ostatních políček */
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 6px dashed black; /* Kostkovaná čára černá a tlustá */
-            border-radius: 10px; /* Stejný rádius jako u ostatních políček */
+            position: relative; /* Aby bylo možné umístit vlajku nad políčko */
+            border-radius: 10px;
         }
+
+        /* Styl pro vlajku */
+        .flag {
+            position: absolute; /* Absolutní pozicování */
+            top: -35px; /* Umístí vlajku 35px nad cílové políčko */
+            width: 50px; /* Nastavte šířku vlajky */
+            height: auto; /* Zachová proporce obrázku */
+        }
+
 
     </style>
 </head>
@@ -130,7 +138,7 @@
         <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se panáček pohybuje po své cestě. 🎲</p>
 
         <div class="board">
-            <!-- Vytvoření 10 políček pro herní desku, poslední políčko bude označené jako cíl -->
+            <!-- Vytvoření 10 políček pro herní desku -->
             <div class="cell" id="cell-1"></div>
             <div class="cell" id="cell-2"></div>
             <div class="cell" id="cell-3"></div>
@@ -140,7 +148,9 @@
             <div class="cell" id="cell-7"></div>
             <div class="cell" id="cell-8"></div>
             <div class="cell" id="cell-9"></div>
-            <div class="cell finish" id="cell-10"></div> <!-- Cílové políčko bez emotikonu -->
+            <div class="cell finish" id="cell-10">
+                <img src="static/finish.flag.png" alt="Vlajka" class="flag">
+            </div> <!-- Cílové políčko -->
         </div>
 
         <button id="rollButton">🎲 Hoď kostkou. 🎲</button>
