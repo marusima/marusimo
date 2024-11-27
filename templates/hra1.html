@@ -3,32 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hra 1 - Moje Tvorby</title>
-    <link rel="stylesheet" href="../styles.css"> <!-- Odkaz na CSS soubor pro styling -->
+    <title>Hra - Člověče, nezlob se</title>
+    <style>
+        /* Styly pro hru */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .board {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            background-color: #d3d3d3;
+            border: 2px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .player {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Hra 1 - Zábavná výzva!</h1>
-        <nav>
-            <a href="../index.html">Zpět na hlavní stránku</a> <!-- Odkaz zpět na hlavní stránku -->
-        </nav>
-    </header>
 
-    <section>
-        <h2>Popis hry</h2>
-        <p>V této hře se naučíš něco nového! 🧩 Tvé úkoly budou zahrnovat logiku a rychlost, zkus se dostat co nejdál! 🚀</p>
-        <p>Teď se rozhodni, jakým způsobem chceš hru spustit nebo upravit kód! 🖥️</p>
+    <h1>Hra: Člověče, nezlob se!</h1>
+    <p>Klikněte na tlačítko pro hod kostkou a sledujte, jak se váš panáček pohybuje po herní desce.</p>
 
-        <!-- Zde můžeš přidat herní prvek, např. jednoduchou hru nebo interaktivní obsah -->
-        <div id="game-area">
-            <!-- Zde by mohl být kód pro hru -->
-            <p>Hra bude tady!</p>
-        </div>
-    </section>
+    <div class="board">
+        <!-- Vytvoření 10 políček pro herní desku -->
+        <div class="cell" id="cell-1"></div>
+        <div class="cell" id="cell-2"></div>
+        <div class="cell" id="cell-3"></div>
+        <div class="cell" id="cell-4"></div>
+        <div class="cell" id="cell-5"></div>
+        <div class="cell" id="cell-6"></div>
+        <div class="cell" id="cell-7"></div>
+        <div class="cell" id="cell-8"></div>
+        <div class="cell" id="cell-9"></div>
+        <div class="cell" id="cell-10"></div>
+    </div>
 
-    <footer>
-        <p>Vytvořeno jako součást mého portfolia. 😊</p>
-    </footer>
+    <button id="rollButton">Hod kostkou</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        let playerPosition = 0; // Počáteční pozice panáčka
+        const cells = document.querySelectorAll('.cell'); // Pole pro herní políčka
+        const player = document.createElement('div');
+        player.classList.add('player'); // Vytvoříme panáčka
+        cells[0].appendChild(player); // Panáček začne na prvním políčku
+
+        const rollButton = document.getElementById('rollButton');
+        const resultDiv = document.getElementById('result');
+
+        // Funkce pro hod kostkou
+        rollButton.addEventListener('click', function() {
+            const roll = Math.floor(Math.random() * 6) + 1; // Generování hodu (1-6)
+            resultDiv.textContent = `Hodili jste: ${roll}`;
+            
+            // Přesun panáčka o hod kostky, pokud je to možné
+            if (playerPosition + roll <= 9) { 
+                playerPosition += roll; // Posun panáčka
+            }
+            
+            // Pokud by panáček měl přejít za poslední políčko (desáté), zůstane na místě
+            if (playerPosition > 9) {
+                playerPosition = 9;
+            }
+
+            // Uklidíme pozice a umístíme panáčka na správné políčko
+            cells.forEach(cell => cell.innerHTML = '');
+            cells[playerPosition].appendChild(player);
+        });
+    </script>
+
 </body>
 </html>
-
