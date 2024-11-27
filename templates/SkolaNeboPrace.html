@@ -141,7 +141,7 @@
             <div class="work-icon">🏬</div> <!-- Práce -->
         </div>
 
-        <button id="moveButton">Udělej tolik kroků, kolik dokážeš, na nějakou stranu.</button>
+        <button id="moveButton">Udělej tolik kroků, kolik dokážeš, na stranu, na kterou to zvládneš.</button>
         <div class="result" id="result"></div>
         <div class="movement-info" id="movement-info"></div>
     </div>
@@ -179,7 +179,7 @@
 
             // Informace o směru a počtu kroků
             const directionText = direction === 1 ? 'doprava' : 'doleva';
-            movementInfoDiv.textContent = `Tak, teď jsme se posunuli ${directionText} o ${steps} kroky.`;
+            movementInfoDiv.textContent = `Tak, teď jsem se posunula ${directionText} o ${steps} kroky. Uf.`;
 
             // Změna emotikonu v závislosti na směru
             if (direction === 1) {
