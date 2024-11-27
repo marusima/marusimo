@@ -116,20 +116,22 @@
     }
 
     /* Držák pro kuličky, který bude obsahovat 3D kuličky s čísly */
+    /* Upravený styl pro držák kuliček */
     .holder {
       width: 190px;
-      height: 70px;
+      height: 300px;  /* Nastavená výška, aby kuličky měly místo */
       background: #81c784;
       border-radius: 10px;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap; /* Umožní kuličkám se správně uspořádat */
+      flex-direction: column;  /* Uspořádání kuliček do sloupce */
+      justify-content: flex-start;  /* Zarovnání kuliček na začátek */
+      align-items: center;  /* Vodorovné zarovnání */
+      gap: 10px;  /* Mezery mezi kuličkami */
       overflow: hidden;
-      animation: bounceIn 0.5s ease-out;  /* Aplikace animace na držák */
+      padding: 10px;  /* Přidáno odsazení pro estetičtější vzhled */
     }
+
 
 
     /* Vytvoření animace pro přidání kuliček */
