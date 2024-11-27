@@ -107,30 +107,34 @@
 
 
         /* Styl pro zaměstnavatele a logo */
-        .company {
-            background-color: #d7e4c5; /* Jemný odstín zelené */
-            padding: 10px; /* Vnitřní odsazení kolem obsahu */
+        .company {/* Styl pro zaměstnavatele a logo */
+            background-color: #d7e4c5; /* Jemný odstín */
+            padding: 5px 10px; /* Zmenšíme padding pro zúžení výšky proužku */
             border-radius: 8px; /* Zaoblení rohů */
             margin-bottom: 10px; /* Spodní mezera mezi jednotlivými firmami */
             display: flex; /* Flexbox pro rozložení položek v řadě */
-            align-items: left; /* Vertikální zarovnání na začátek (ale v rámci flexboxu není nutné) */
-            gap: 14px; /* Mezera mezi jednotlivými položkami ve flexboxu (např. mezi logem a názvem firmy) */
+            align-items: center; /* Vertikální centrování textu (logo + název firmy) */
+            gap: 14px; /* Mezera mezi jednotlivými položkami ve flexboxu */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Jemný stín kolem sekce */
+            height: 80px; /* Nastavení výšky proužku, aby nebyl příliš vysoký */
         }
 
-
+        /* Nastavení pro logo v rámci .company */
         .company img {
-            height: 4em; /* Výška obrázku je nastavena na 4em (em je relativní jednotka, 1em je výška písma) */
-            width: auto; /* Šířka obrázku se přizpůsobí podle jeho výšky */
+            height: 4em; /* Výška obrázku zůstává stejná (ale můžeš upravit podle potřeby) */
+            width: auto; /* Šířka obrázku se přizpůsobí automaticky podle výšky */
         }
 
-
+        /* Styl pro název firmy */
         .company h2 {
             margin: 0; /* Odstraní výchozí mezery kolem nadpisu */
-            font-size: 1.5rem; /* Nastaví velikost písma nadpisu na 1.5násobek základní velikosti */
-            color: #3f4f2f; /* Tmavší odstín zelené barvy pro název firmy */
+            font-size: 1.5rem; /* Zvýšení velikosti písma názvu firmy */
+            color: #3f4f2f; /* Tmavší odstín zelené */
             font-family: "Garamond", serif; /* Nastaví písmo na Garamond nebo podobné serifové písmo */
+            display: flex; /* Flexbox pro zarovnání textu */
+            align-items: center; /* Vertikální centrování textu (zarovná text na střed výšky) */
         }
+
 
         /* Styl pro datum */
         .section-content .date {
