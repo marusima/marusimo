@@ -55,7 +55,7 @@
 
         /* Styl pro panáčka */
         .player {
-            font-size: 40px; /* Velikost emotikonu */
+            font-size: 35px; /* Velikost emotikonu */
             position: absolute;
             top: 50%; /* Vertikálně na střed */
             left: 50%; /* Horizontálně na střed */
@@ -85,13 +85,13 @@
 
         /* Výsledky pro hod kostkou */
         .result {
-            font-size: 15px;
+            font-size: 10px;
             margin-top: 5px;
         }
 
         /* Styl pro obrázek kostky (pro moderní design) */
         .dice {
-            width: 60px;
+            width: 40px;
             height: 40px;
             margin-top: 20px;
             display: inline-block;
@@ -106,12 +106,15 @@
         }
 
         .dice span {
-            font-size: 30px;
+            font-size: 40px;
         }
 
         /* Styl pro cílové políčko (konec) */
         .finish {
             background-color: #f8d7da; /* Růžovější pozadí pro cílové políčko */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -168,7 +171,8 @@
             const roll = Math.floor(Math.random() * 6) + 1;
 
             // Zobrazení hodu kostkou v krásném designu
-            diceNumber.textContent = `Teď jsi hodil ${roll}.`;
+            diceNumber.textContent = roll;
+
             // Přesun panáčka o hod kostky, pokud je to možné
             if (playerPosition + roll <= 9) {
                 playerPosition += roll;  // Posun panáčka
