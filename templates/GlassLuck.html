@@ -117,8 +117,8 @@
 
     /* Držák pro kuličky, který bude obsahovat 3D kuličky s čísly */
     .holder {
-      width: 180px;
-      height: 80px;
+      width: 190px;
+      height: 70px;
       background: #81c784;
       border-radius: 10px;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -128,8 +128,9 @@
       gap: 10px;
       flex-wrap: wrap; /* Umožní kuličkám se správně uspořádat */
       overflow: hidden;
-      animation: bounceIn 0.5s ease-out;
+      animation: bounceIn 0.5s ease-out;  /* Aplikace animace na držák */
     }
+
 
     /* Vytvoření animace pro přidání kuliček */
     @keyframes bounceIn {
@@ -253,6 +254,7 @@
     initializeGame();
 
     // Funkce pro losování kuliček
+    // Funkce pro losování kuliček
     drawButton.addEventListener("click", () => {
       if (drawnNumbers.length >= 3) return;  // Zabrání losování, pokud už byly vylosovány 3 kuličky
 
@@ -277,6 +279,7 @@
         checkWin();
       }
     });
+
 
     // Funkce pro kontrolu výhry
     retryButton.addEventListener("click", initializeGame);  // Nový pokus (reset hry)
