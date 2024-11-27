@@ -45,7 +45,7 @@
       bottom: 70px;
       left: 50%;
       width: 150px;
-      height: 30px;
+      height: 120px;
       background: #d7ccc8;
       transform: translateX(-50%);
       border-radius: 10px;
@@ -175,8 +175,8 @@
       <div class="holder-container">
         <div class="holder" id="holder"></div>
       </div>
-      <button class="button" id="drawButton">Chci vylosovat kuličku</button>
-      <button class="button" id="retryButton" style="display: none;">Chci to zkusit znovu</button>
+      <button class="button" id="drawButton">Vylosuj kuličku!</button>
+      <button class="button" id="retryButton" style="display: none;">Chci to znovu.</button>
       <div class="result" id="result"></div>
     </div>
   </div>
@@ -245,9 +245,9 @@
       );
 
       if (commonDigit) {
-        resultDiv.textContent = `🎉 Hurá, vyhráváš štěstí v životě! 🎉`;
+        resultDiv.textContent = `🎉 Hurá, vyhráváš! 🎉`;
       } else {
-        resultDiv.textContent = `Bohužel, zkus to ještě jednou.`;
+        resultDiv.textContent = `Bohužel. Ještě jednou?`;
       }
     }
   </script>
