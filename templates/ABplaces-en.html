@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Between the Quiet Forest and the City.</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background-color: #d9caca;
+            margin: 20;
+            padding: 2;
+            font-size: 1.1rem;
+        }
+
+        .game-container {
+            margin-top: 120px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            margin: 10px 0; /* Smaller space between paragraphs */
+        }
+
+        ul {
+            padding-left: 20px; /* Small indentation for list */
+            margin: 5px 0; /* Smaller space between lists */
+        }
+
+        li {
+            margin-bottom: 3px; /* Reduce space between list items */
+        }
+
+        .board-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: -50px;
+        }
+        .board {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            margin: 100px 5;
+            position: relative;
+        }
+
+        .cell {
+            width: 50px;  /* Smaller cell size */
+            height: 5px;  /* Increased height for proper sizing */
+            background-color: #665b5b;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;  /* Align to the bottom */
+            font-size: 35px; /* Larger font for the player */
+            color: white;
+            margin: 0 10px; /* Adding space between cells (10px on left and right) */
+            position: relative; /* Allows positioning */
+        }
+
+        .player {
+            font-size: 40px; /* Increased player size */
+            position: absolute; /* Ensures the player "sits" at the bottom */
+            bottom: 0;  /* Places player at the bottom of the cell */
+        }
+
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 25px;
+            color: #3b3b3b;
+        }
+
+        button {
+            margin-top: 35px;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #766f5f;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #bea471;
+            transform: translateY(-2px);
+        }
+
+        .city-icon, .forest-icon {  /* Dot before work-icon */
+            font-size: 80px;
+            margin: 0 20px;
+            position: relative;  /* Sets position for use of top */
+            top: -45px;  /* Moves city and forest icons 10px upwards */
+        }
+
+        .movement-info {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Journey Between the Quiet Forest and the City.</h1>
+        <p>I wake up in an unfamiliar place. The air is fresh and cold, but everything around me is silent. Where am I? How did I get here? The only thing I know is that I must keep going. My legs are leading me, but the path is still unclear.</p> 
+        <ul>I have two options ahead of me. I can head towards the mountains, where there is said to be a small but magical forest, promising peace and quiet, but also secrets and the unknown. 🌲🌿 Perhaps I'll find a shelter, a place to regain my strength.</ul>
+        <ul>Or I can arrive at the city, which is who knows in which direction, but promises life energy, new experiences, and people who could become my friends. 🏙️ On the other hand, the city might be noisy and chaotic.</ul>
+        <p>But what if I'm going the wrong way? What if the path leads me somewhere I don't want to go? What if I get lost?</p>
+        <p>With each step, I begin to realize that the only right direction is the one I choose. I must move on. Whether I reach the quiet forest or the city jungle – it is my story that begins now.</p>
+        <p>Should I continue or remain still?</p>
+        <p>Let my motivation guide me.</p>
+
+        <div class="board-container">
+            <div class="city-icon">🌁</div> <!-- City -->
+            <div class="board">
+                <div class="cell" id="cell-0"></div>
+                <div class="cell" id="cell-1"></div>
+                <div class="cell" id="cell-2"></div>
+                <div class="cell" id="cell-3"></div>
+                <div class="cell" id="cell-4"></div>
+                <div class="cell" id="cell-5"></div>
+                <div class="cell" id="cell-6"></div>
+                <div class="cell" id="cell-7"></div>
+                <div class="cell" id="cell-8"></div>
+                <div class="cell" id="cell-9"></div>
+            </div>
+            <div class="forest-icon">🌄</div> <!-- Forest -->
+        </div>
+
+        <button id="moveButton">Walk as many kilometers as you can, in the direction you think is the right one.</button>
+        <div class="result" id="result"></div>
+        <div class="movement-info" id="movement-info"></div>
+    </div>
+
+    <script>
+        let playerPosition = Math.floor(Math.random() * 6) + 2; // Initial position between the 2nd and 7th cells (1 to 8, indices 2 to 7)
+        const cells = document.querySelectorAll('.cell');
+        const player = document.createElement('div');
+        player.classList.add('player');
+        player.textContent = '⛺️';  // Emoji for the starting character
+        cells[playerPosition].appendChild(player); // Place on a random position
+
+        const moveButton = document.getElementById('moveButton');
+        const resultDiv = document.getElementById('result');
+        const movementInfoDiv = document.getElementById('movement-info');
+
+        moveButton.addEventListener('click', function() {
+            // Generate a random number of steps between 1 and 4
+            const steps = Math.floor(Math.random() * 2) + 2;  // Generates a number between 2 and 4
+            const direction = Math.random() > 0.5 ? 1 : -1; // 1 for right, -1 for left
+
+            // Calculate new position
+            const newPosition = playerPosition + (steps * direction);
+
+            // Ensure player doesn't move off the game board
+            if (newPosition < 0) {
+                playerPosition = 0;
+            } else if (newPosition > 9) {
+                playerPosition = 9;
+            } else {
+                playerPosition = newPosition;
+            }
+            
+            updateBoard();
+
+            // Direction and number of steps information
+            const directionText = direction === 1 ? 'north' : 'south';
+            movementInfoDiv.textContent = `Thanks for the help, I walked ${directionText} ${steps} kilometers.`;
+
+            // Change emoji based on direction
+            if (direction === 1) {
+                player.textContent = '🚶‍♀️‍➡️'; // Moving north
+            } else {
+                player.textContent = '🚶‍♀️'; // Moving south
+            }
+
+            // Check if the player reached the goal
+            if (playerPosition === 0) {
+                resultDiv.textContent = 'I have reached the city jungle. I am seeking new opportunities and energy among people.'; 
+                moveButton.remove(); // Remove button after reaching goal
+            } else if (playerPosition === 9) {
+                resultDiv.textContent = 'I have reached the quiet forest. I am searching for shelter and calm to regenerate.';
+                moveButton.remove(); // Remove button after reaching goal
+            } else {
+                resultDiv.textContent = 'I am on my way, but I must continue. Which direction should I choose now?';
+            }
+
+        });
+
+        // Function to update player position
+        function updateBoard() {
+            cells.forEach((cell, index) => {
+                cell.innerHTML = ''; // Clear content
+                if (index === playerPosition) {
+                    cell.appendChild(player); // Place player at new position
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
