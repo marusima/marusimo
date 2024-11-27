@@ -28,7 +28,6 @@
       height: 450px;
     }
 
-    /* Základna a stojan skleněné koule */
     .base {
       position: absolute;
       bottom: 0;
@@ -83,16 +82,17 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
-    /* Držák pro vylosované kuličky, přemístěn nahoru */
+    /* Nový držák kuliček vpravo od koule */
     .holder-container {
-      position: absolute;
-      top: 20px; /* Fixní pozice nahoru */
-      right: 20px; /* Fixní pozice vpravo */
+      margin-left: 20px; /* Vzdálenost od koule */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
     }
 
     .holder {
-      position: relative;
-      margin: auto;
       width: 180px;
       height: 80px;
       background: #81c784;
@@ -104,7 +104,6 @@
       gap: 10px;
     }
 
-    /* Kuličky, které byly vylosovány */
     .drawn-ball {
       width: 40px;
       height: 40px;
@@ -120,14 +119,11 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
-    /* Sidebar pro tlačítka a výsledek */
-    .sidebar {
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      margin-left: 30px;
+    .result {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
     }
 
     .button {
@@ -139,7 +135,6 @@
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      margin-top: 20px;
       width: 200px; /* Stejná šířka pro obě tlačítka */
       transition: transform 0.2s, background 0.3s;
     }
@@ -147,12 +142,6 @@
     .button:hover {
       transform: scale(1.1);
       background: #388e3c;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
     }
 
     /* Reakce na menší obrazovky - design zůstává v pořádku */
@@ -176,22 +165,17 @@
       <div class="stand"></div>
       <div class="base"></div>
     </div>
-    <!-- Držák pro vylosované kuličky (fixní nahoře vpravo) -->
-    <div class="holder-container">
-      <div class="holder" id="holder"></div>
-    </div>
   </div>
 
-  <div class="sidebar">
-    <!-- Tlačítko pro vylosování kuličky a pro nový pokus -->
+  <!-- Držák kuliček, výsledek a tlačítka vpravo od koule -->
+  <div class="holder-container">
+    <div class="holder" id="holder"></div>
+    <div class="result" id="result"></div>
     <button class="button" id="drawButton">Vylosuj kuličku!</button>
     <button class="button" id="retryButton" style="display: none;">Chci nový pokus!</button>
-    <!-- Výsledek bude nad tlačítkem pro nový pokus -->
-    <div class="result" id="result"></div>
   </div>
 
   <script>
-    // Inicializace proměnných pro práci s kuličkami a tlačítky
     const sphere = document.getElementById("sphere");
     const holder = document.getElementById("holder");
     const drawButton = document.getElementById("drawButton");
