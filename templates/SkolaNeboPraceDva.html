@@ -120,8 +120,8 @@
 
     <div class="game-container">
         <h1>Cesta mezi školou a prací.</h1>
-        <p>Dobré ráno... No, jako přiznám se. Probuzená, ale ještě opilá. 🥴</p> 
-        <ul>A že já ani nevím, kde jsem to včera usnula. 🥴🍾</ul>
+        <p>Dobré ráno... Probuzená, ale ještě opilá. 🍾</p> 
+        <ul>A že já ani nevím, kde jsem to včera usnula. 🥴</ul>
         <ul>No, ať už jsem kde jsem...</ul>
         <p>Zkusím jít dnes do školy nebo do práce. Pomozte mi. Snad někam dorazím.</p>
 
@@ -161,7 +161,7 @@
         startButton.addEventListener('click', function() {
             const steps = parseInt(stepsInput.value);
             if (steps < 8 || steps > 20) {
-                alert('Zadejte číslo mezi 8 a 20.');
+                alert('Zadejte počet kachliček mezi 8 a 20.');
                 return;
             }
 
@@ -178,7 +178,7 @@
         });
 
         moveButton.addEventListener('click', function() {
-            // Generování náhodného počtu kroků mezi 1 a 4
+            // Generování náhodného počtu kroků
             const steps = Math.floor(Math.random() * 2) + 2;  // Vygeneruje číslo mezi 2 a 4
             const direction = Math.random() > 0.5 ? 1 : -1; // 1 pro doprava, -1 pro doleva
 
@@ -209,11 +209,11 @@
 
             // Kontrola, zda dosáhl cíle
             if (playerPosition === 0) {
-                resultDiv.textContent = 'Super, dorazila jsem do školy! Zkusím se jít učit.';
+                resultDiv.textContent = 'Dorazila jsem do školy! Zkusím se jít učit.';
                 moveButton.style.display = 'none'; // Skrytí tlačítka po dosažení cíle
                 newGameButton.style.display = 'inline'; // Zobrazení tlačítka pro novou hru
             } else if (playerPosition === cells.length - 1) {
-                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat nějaký kačky.';
+                resultDiv.textContent = 'Dorazila jsem do práce! Zkusím vydělat nějaký kačky.';
                 moveButton.style.display = 'none'; // Skrytí tlačítka po dosažení cíle
                 newGameButton.style.display = 'inline'; // Zobrazení tlačítka pro novou hru
             } else {
