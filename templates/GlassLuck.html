@@ -258,7 +258,7 @@
     initializeGame();
 
     // Funkce pro losování kuliček
-    //// Funkce pro losování kuliček
+    /// Funkce pro losování kuliček
     drawButton.addEventListener("click", () => {
       if (drawnNumbers.length >= 3) return;  // Zabrání losování, pokud už byly vylosovány 3 kuličky
 
@@ -275,13 +275,6 @@
       drawnBall.className = "ball";  // Nová kulička pro držák
       drawnBall.textContent = ball.textContent;  // Přiřadí číslo
       holder.appendChild(drawnBall);  // Přidá ji do držáku
-
-      // Nastavení pozice pro novou kuličku v držáku
-      const numberOfBalls = holder.children.length;
-      const positionY = numberOfBalls * 50; // Každá kulička bude o 50px výše než předchozí
-
-      drawnBall.style.position = "absolute";  // Použijeme absolutní pozicování
-      drawnBall.style.top = `${positionY}px`; // Nová pozice na ose Y
 
       ball.remove();  // Odstraní kuličku z koule
 
