@@ -45,7 +45,7 @@
       bottom: 70px;
       left: 50%;
       width: 150px;
-      height: 120px;
+      height: 90px;
       background: #d7ccc8;
       transform: translateX(-50%);
       border-radius: 10px;
@@ -91,7 +91,7 @@
       position: relative;
       margin: auto;
       width: 180px;
-      height: 80px;
+      height: 50px;
       background: #81c784;
       border-radius: 10px;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -170,15 +170,15 @@
       <div class="stand"></div>
       <div class="base"></div>
     </div>
-    <!-- Sidebar obsah přesunout do horní části -->
-    <div class="sidebar">
-      <div class="holder-container">
-        <div class="holder" id="holder"></div>
-      </div>
-      <button class="button" id="drawButton">Vylosuj kuličku!</button>
-      <button class="button" id="retryButton" style="display: none;">Chci to znovu.</button>
-      <div class="result" id="result"></div>
+    <div class="holder-container">
+      <div class="holder" id="holder"></div>
     </div>
+  </div>
+
+  <div class="sidebar">
+    <button class="button" id="drawButton">Vylosuj kuličku!</button>
+    <button class="button" id="retryButton" style="display: none;">Zkusím to znovu!</button>
+    <div class="result" id="result"></div>
   </div>
 
   <script>
@@ -247,7 +247,7 @@
       if (commonDigit) {
         resultDiv.textContent = `🎉 Hurá, vyhráváš! 🎉`;
       } else {
-        resultDiv.textContent = `Bohužel. Ještě jednou?`;
+        resultDiv.textContent = `Bohužel. Nevyšlo to.`;
       }
     }
   </script>
