@@ -6,8 +6,8 @@
     <title>Hra - Cesta mezi školou a prací</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif; /* Moderní, ne psací písmo */
-            text-align: center;
+            font-family: 'Schoolbell', arial, serif; 
+f            text-align: center;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
@@ -27,12 +27,19 @@
             align-items: center;
         }
 
+        .board-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
         .board {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
             margin: 20px 0;
+            position: relative;
         }
 
         .cell {
@@ -80,27 +87,35 @@
             transform: translateY(-2px);
         }
 
+        .school-icon, .work-icon {
+            font-size: 50px;
+            margin: 0 20px;
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="game-container">
-        <h1>Cesta mezi školou a prací</h1>
-        <p>Pojďme buď do školy, nebo do práce. Co to dnes bude?</p>
+        <h1>Hra - Cesta mezi školou a prací</h1>
+        <p>Pomoz človíčkovi rozhodnout se, kam má jít. Klikněte na tlačítko pro pohyb!</p>
 
-        <div class="board">
-            <div class="cell">🏫</div> <!-- Škola -->
-            <div class="cell" id="cell-1"></div>
-            <div class="cell" id="cell-2"></div>
-            <div class="cell" id="cell-3"></div>
-            <div class="cell" id="cell-4"></div>
-            <div class="cell" id="cell-5"></div>
-            <div class="cell" id="cell-6"></div>
-            <div class="cell" id="cell-7"></div>
-            <div class="cell" id="cell-8"></div>
-            <div class="cell" id="cell-9"></div>
-            <div class="cell finish">💼</div> <!-- Práce -->
+        <div class="board-container">
+            <div class="school-icon">🏫</div> <!-- Škola -->
+            <div class="board">
+                <div class="cell" id="cell-0"></div>
+                <div class="cell" id="cell-1"></div>
+                <div class="cell" id="cell-2"></div>
+                <div class="cell" id="cell-3"></div>
+                <div class="cell" id="cell-4"></div>
+                <div class="cell" id="cell-5"></div>
+                <div class="cell" id="cell-6"></div>
+                <div class="cell" id="cell-7"></div>
+                <div class="cell" id="cell-8"></div>
+                <div class="cell" id="cell-9"></div>
+            </div>
+            <div class="work-icon">💼</div> <!-- Práce -->
         </div>
 
         <button id="moveButton">Někám se už prosím posuň</button>
@@ -152,7 +167,7 @@
                 resultDiv.textContent = 'Super, dorazili jsme do práce! Pojďme vydělávat peníze.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
-                resultDiv.textContent = 'Jsme na cestě, ale ještě pokračujme.';
+                resultDiv.textContent = 'Jsi na cestě, ale ještě pokračuj.';
             }
         });
 
