@@ -136,7 +136,7 @@
     </div>
 
     <script>
-        let playerPosition = Math.floor(Math.random() * 8); // Počáteční pozice na náhodném políčku
+        let playerPosition = Math.floor(Math.random() * 6) + 2; // Počáteční pozice mezi 2. a 7. políčkem (1 až 8, indexy 2 až 7)
         const cells = document.querySelectorAll('.cell');
         const player = document.createElement('div');
         player.classList.add('player');
