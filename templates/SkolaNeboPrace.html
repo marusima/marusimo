@@ -50,12 +50,12 @@
             border-radius: 10px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;  /* Zarovnání na spodní okraj */
             font-size: 35px; /* Větší font pro postavu */
             color: white;
             margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            margin-top: 15px; /* Tato hodnota posune celé pole níž */
-
+            position: relative; /* Umožní pozicování */
+            top: 0; /* Zajistí zarovnání podle spodní hrany */
         }
 
         .player {
@@ -182,7 +182,7 @@
                 resultDiv.textContent = 'Super, dorazila jsem do školy! Zkusím se jít učit.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else if (playerPosition === 9) {
-                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat aspoň nějaký kačky.';
+                resultDiv.textContent = 'Super, dorazila jsem do práce! Zkusím vydělat nějaký kačky.';
                 moveButton.remove(); // Odstranění tlačítka po dosažení cíle
             } else {
                 resultDiv.textContent = 'Jsem na cestě, ale ještě musím někam pokračovat.';
