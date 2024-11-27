@@ -3,83 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piškvorky</title>
+    <title>Luxusní Piškvorky</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         h1 {
-            color: #333;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .board {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            gap: 5px;
-            margin: 20px auto;
-            max-width: 320px;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .cell {
-            width: 100px;
-            height: 100px;
-            border: 2px solid #333;
-            font-size: 36px;
+            width: 120px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #fff;
+            background-color: #f2f2f2;
+            border: 2px solid #444;
+            font-size: 48px;
+            color: #333;
+            border-radius: 10px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease;
         }
 
         .cell:hover {
-            background-color: #f0f0f0;
+            background-color: #e0e0e0;
+            transform: scale(1.1);
+        }
+
+        .cell:active {
+            background-color: #ddd;
+            transform: scale(1.05);
+        }
+
+        .cell.x {
+            color: #ff4d4d;
+        }
+
+        .cell.o {
+            color: #4d94ff;
         }
 
         .message {
-            font-size: 24px;
-            margin-top: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            background-color: #4CAF50;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            background-color: #ff4d4d;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #ff3333;
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <h1>Piškvorky</h1>
-    <div class="board" id="board"></div>
+    <h1>Luxusní Piškvorky</h1>
     <div class="message" id="message">Hráč X začíná!</div>
+    <div class="board" id="board"></div>
     <button onclick="restartGame()">Nová hra</button>
 
     <script>
         let currentPlayer = 'X';
-        let gameBoard = ['', '', '', '', '', '', '', '', '']; // 3x3 board
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
         const boardElement = document.getElementById('board');
         const messageElement = document.getElementById('message');
 
         function createBoard() {
-            boardElement.innerHTML = ''; // Vyprázdníme desku
-
+            boardElement.innerHTML = '';
             gameBoard.forEach((cell, index) => {
                 const cellElement = document.createElement('div');
                 cellElement.classList.add('cell');
+                if (cell === 'X') {
+                    cellElement.classList.add('x');
+                } else if (cell === 'O') {
+                    cellElement.classList.add('o');
+                }
                 cellElement.textContent = cell;
                 cellElement.onclick = () => makeMove(index);
                 boardElement.appendChild(cellElement);
@@ -87,13 +130,13 @@
         }
 
         function makeMove(index) {
-            if (gameBoard[index] !== '') return; // Pokud je políčko už označené, nedělej nic
+            if (gameBoard[index] !== '') return;
 
             gameBoard[index] = currentPlayer;
             createBoard();
             checkWinner();
 
-            currentPlayer = (currentPlayer === 'X') ? 'O' : 'X'; // Střídání hráčů
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
             messageElement.textContent = `Hráč ${currentPlayer}'s tah!`;
         }
 
@@ -107,13 +150,15 @@
             for (let combination of winningCombinations) {
                 const [a, b, c] = combination;
                 if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                    messageElement.textContent = `Hráč ${gameBoard[a]} vyhrál!`;
+                    messageElement.textContent = `Hráč ${gameBoard[a]} vyhrál! 🎉`;
+                    setTimeout(() => alert(`Hráč ${gameBoard[a]} vyhrál! 🎉`), 100);
                     return;
                 }
             }
 
             if (!gameBoard.includes('')) {
-                messageElement.textContent = 'Remíza!';
+                messageElement.textContent = 'Remíza! 🤝';
+                setTimeout(() => alert('Remíza! 🤝'), 100);
             }
         }
 
