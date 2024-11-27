@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hra - Člověče, nezlob se</title>
     <style>
-        /* Globální styl pro tělo stránky */
+            /* Globální styl pro tělo stránky */
         body {
             font-family: "Garamond", serif;
             text-align: center;
@@ -89,7 +89,6 @@
             font-weight: bold; /* Můžete přidat i tučné písmo */
         }
 
-
         /* Styl pro obrázek kostky (pro moderní design) */
         .dice {
             width: 40px;
@@ -111,7 +110,6 @@
         }
 
         /* Styl pro cílové políčko (konec) */
-        /* Styl pro cílové políčko (konec) */
         .finish {
             background-color: #a9d08e; /* Stejné pozadí jako u ostatních políček */
             display: flex;
@@ -119,12 +117,13 @@
             align-items: center;
             position: relative; /* Aby bylo možné umístit vlajku nad políčko */
             border-radius: 10px;
+            overflow: visible; /* Umožní zobrazení vlajky nad políčkem */
         }
 
         /* Styl pro vlajku */
         .flag {
             position: absolute; /* Absolutní pozicování */
-            top: -50px; /* Umístí vlajku 50px nad cílové políčko */
+            top: -60px; /* Umístí vlajku 60px nad cílové políčko */
             left: 50%; /* Horizontálně ji zarovnáme na střed */
             transform: translateX(-50%); /* Zarovnání na střed */
             width: 50px; /* Nastavte šířku vlajky */
@@ -132,6 +131,7 @@
             background-image: url('static/finishflag.png');
             background-size: contain; /* Přizpůsobí velikost obrázku */
             background-repeat: no-repeat; /* Zamezí opakování obrázku */
+            z-index: 5; /* Ujistí se, že vlajka bude nad ostatními prvky */
         }
 
 
