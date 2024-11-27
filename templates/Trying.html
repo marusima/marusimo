@@ -15,7 +15,6 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
-      overflow: hidden;
     }
 
     .container {
@@ -70,19 +69,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: moveBall 3s infinite ease-in-out;
-    }
-
-    @keyframes moveBall {
-      0% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(10px, -10px);
-      }
-      100% {
-        transform: translate(-10px, 10px);
-      }
     }
 
     /* Držák vylosovaných kuliček */
@@ -130,25 +116,6 @@
       font-size: 18px;
       font-weight: bold;
     }
-
-    /* Konfety */
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: randomColor;
-      animation: fall 2s infinite;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-      }
-      100% {
-        transform: translateY(400px) rotate(360deg);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -173,21 +140,35 @@
     const resultDiv = document.getElementById("result");
 
     let drawnNumbers = [];
+    let availableBalls = [];
 
     // Generování kuliček
-    for (let i = 1; i <= 30; i++) {
-      const ball = document.createElement("div");
-      ball.className = "ball";
-      ball.textContent = i;
-      ball.style.left = `${Math.random() * 260}px`;
-      ball.style.top = `${Math.random() * 260}px`;
-      sphere.appendChild(ball);
+    function initializeGame() {
+      sphere.innerHTML = "";
+      holder.innerHTML = "";
+      resultDiv.textContent = "";
+      drawButton.disabled = false;
+      drawnNumbers = [];
+      availableBalls = [];
+
+      for (let i = 1; i <= 30; i++) {
+        const ball = document.createElement("div");
+        ball.className = "ball";
+        ball.textContent = i;
+        ball.style.left = `${Math.random() * 260}px`;
+        ball.style.top = `${Math.random() * 260}px`;
+        sphere.appendChild(ball);
+        availableBalls.push(ball);
+      }
     }
 
+    initializeGame();
+
     drawButton.addEventListener("click", () => {
-      const balls = Array.from(document.querySelectorAll(".ball"));
-      const randomIndex = Math.floor(Math.random() * balls.length);
-      const ball = balls.splice(randomIndex, 1)[0];
+      if (drawnNumbers.length >= 3) return;
+
+      const randomIndex = Math.floor(Math.random() * availableBalls.length);
+      const ball = availableBalls.splice(randomIndex, 1)[0];
 
       if (!ball) return;
 
@@ -200,6 +181,7 @@
       ball.remove();
 
       if (drawnNumbers.length === 3) {
+        drawButton.disabled = true;
         checkWin();
       }
     });
@@ -211,11 +193,17 @@
       );
 
       if (commonDigit) {
-        resultDiv.textContent = `Hura, vyhravas stesti v zivote! 🎉`;
-        // Přidání konfet
+        resultDiv.textContent = `🎉 Hurá, vyhráváš štěstí v životě! 🎉`;
       } else {
         resultDiv.textContent = `Bohužel, zkus to ještě jednou.`;
       }
+
+      // Přidání tlačítka pro opakování hry
+      const retryButton = document.createElement("button");
+      retryButton.textContent = "Zkusit znovu";
+      retryButton.className = "button";
+      retryButton.addEventListener("click", initializeGame);
+      resultDiv.appendChild(retryButton);
     }
   </script>
 </body>
