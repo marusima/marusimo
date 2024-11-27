@@ -14,11 +14,12 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      flex-direction: column;
+      flex-direction: row; /* Změněno na horizontální layout */
     }
 
     .container {
       text-align: center;
+      margin-right: 20px;
     }
 
     /* Koule se stojanem */
@@ -117,6 +118,16 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
+    /* Pravá strana - text a tlačítka */
+    .sidebar {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-left: 30px;
+    }
+
     .button {
       background: #4caf50;
       color: white;
@@ -140,6 +151,19 @@
       font-size: 18px;
       font-weight: bold;
     }
+
+    /* Responzivní úpravy pro mobilní zařízení */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .container {
+        margin-right: 0;
+      }
+      .sphere-container {
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -152,6 +176,9 @@
     <div class="holder-container">
       <div class="holder" id="holder"></div>
     </div>
+  </div>
+
+  <div class="sidebar">
     <button class="button" id="drawButton">Chci vylosovat kuličku</button>
     <div class="result" id="result"></div>
   </div>
