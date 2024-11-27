@@ -49,26 +49,25 @@
         .board {
             display: flex;
             justify-content: space-evenly;
-            align-items: center;
+            align-items: flex-end;  /* Tímto zajistíš, že panáček je na spodní části buňky */
             width: 100%;
-            margin: 100px 5;
+            margin: 100px 0 0 0;  /* Posune celé herní pole dolů (zvětši první hodnotu, aby bylo níže) */
             position: relative;
         }
 
         /* Ostatní kódy zůstávají nezměněny */
 
         .cell {
-            width: 50px;  /* Menší velikost políček */
-            height: 5px;
+            width: 50px;
+            height: 50px;  /* Nastavení výšky na 50px pro větší buňky */
             background-color: #adadad;
             border-radius: 10px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;  /* Zarovná obsah na začátek (tak aby byl na spodní část buňky) */
-            font-size: 35px; /* Větší font pro postavu */
+            align-items: flex-end;  /* Tento styl se postará o to, že panáček bude na spodní části buňky */
+            font-size: 35px;
             color: white;
-            margin: 0 10px; /* Přidání mezery mezi políčky (10px na levé a pravé straně) */
-            padding-top: 20px; /* Přidání prostoru nahoře uvnitř buněk */
+            margin: 0 10px;
         }
 
         .player {
