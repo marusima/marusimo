@@ -11,14 +11,14 @@
             font-family: "Comic Sans MS", sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #d5e8c6; /* Jemný béžovo-zelený odstín */
+            background-color: #d5e8c6; 
             color: #2c372d;
             font-size: 1rem;
         }
 
         /* Styl pro hlavičku */
         header {
-            background-color: #657b54; /* Khaki zelená */
+            background-color: #657b54; 
             color: white;
             text-align: center;
             padding: 10px;
@@ -32,19 +32,19 @@
 
         h1 {
             margin: 5;
-            font-size: 1.9em; /* Zvýšená velikost nadpisu pro lepší čitelnost */
+            font-size: 1.9em; 
             font-family: "Garamond", serif;
-            color: #fafffb; /* Jemný odstín zelené pro elegantní vzhled */
+            color: #fafffb;
 
         }
 
         .motto {
             font-family: "Garamond", serif;
-            font-size: 1.4rem; /* Velikost textu */
+            font-size: 1.4rem; 
             font-style: normal; 
-            color: #ffffff; /* Jemnější barva než hlavní nadpis */
+            color: #ffffff; 
             margin: 10px 5 5; /* Malé mezery nad a pod textem */
-            text-align: center; /* Zarovnání na střed */
+            text-align: center; 
         }
         p {
             font-size: 1rem;
@@ -60,7 +60,7 @@
         }
 
         .button {
-            background-color: #7d9669; /* Tmavší khaki zelená */
+            background-color: #7d9669; 
             color: white;
             border: none;
             padding: 10px 20px;
@@ -80,77 +80,73 @@
 
         /* Aktivní tlačítko */
         .button.active {
-            background-color: #657b54; /* Tmavší zelená pro aktivní stav */
-            transform: scale(1.1); /* Mírně zvětšit pro efekt */
+            background-color: #657b54; /* aktivní stav */
+            transform: scale(1.1); /* zvětšit pro efekt */
         }
 
         /* Styl pro sekce */
         .section-content {
-            background-color: #ffffff; /* Původní bílá barva */
-            padding: 20px; /* Vnitřní odsazení (mezera uvnitř sekce) */
-            margin: 20px auto; /* Vnější odsazení (mezi sekcemi a okraji stránky), auto znamená, že se sekce zarovná na střed */
-            border-radius: 15px; /* Zaoblení rohů sekce */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Jemný stín kolem sekce */
-            width: 850px; /* Pevná šířka sekce */
-            line-height: 1.8; /* Výška řádků (mezi jednotlivými řádky textu) */
-            text-align: justify; /* Zarovnání textu do bloku (roztáhne text přes celou šířku) */
-            display: none; /* Sekce je skrytá na začátku (pravděpodobně zobrazení pomocí JavaScriptu) */
-            box-sizing: border-box; /* Zahrnuje padding a border do šířky a výšky elementu */
-            font-size: 1rem; /* Základní velikost písma (1rem je standardní velikost, která závisí na výchozí velikosti písma prohlížeče) */
+            background-color: #ffffff; 
+            padding: 20px; /* vnitřní odsazení (mezera uvnitř sekce) */
+            margin: 20px auto; /* vnější odsazení (mezi sekcemi a okraji stránky), auto znamená, že se sekce zarovná na střed */
+            border-radius: 15px; /* zaoblení rohů sekce */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /*jemný stín kolem sekce */
+            width: 850px; 
+            line-height: 1.8; 
+            text-align: justify; 
+            display: none; /* Sekce je skrytá na začátku */
+            box-sizing: border-box; 
+            font-size: 1rem; 
         }
 
         .section-content h1 {
-            color: #4a7c59; /* Jemný odstín zelené pro elegantní vzhled */
+            color: #4a7c59; 
         }
-
-
-
 
         /* Styl pro nadpis sekce */
         .experience-header {
-            display: flex; /* Flexbox pro flexibilní uspořádání elementů */
-            justify-content: space-between; /* Rozloží obsah na začátek a konec řádku (rozdělení prostor mezi elementy) */
-            align-items: center; /* Vertikální centrování položek (pokud by byly různé výšky) */
-            color: #4a7c59; /* Jemný odstín zelené pro elegantní vzhled */
+            display: flex; /*  flexibilní uspořádání elementů */
+            justify-content: space-between; 
+            align-items: center; 
+            color: #4a7c59; 
 
         }
 
-
         /* Styl pro zaměstnavatele a logo */
-        .company {/* Styl pro zaměstnavatele a logo */
-            background-color: #d7e4c5; /* Jemný odstín */
-            padding: 5px 10px; /* Zmenšíme padding pro zúžení výšky proužku */
-            border-radius: 8px; /* Zaoblení rohů */
-            margin-bottom: 10px; /* Spodní mezera mezi jednotlivými firmami */
-            display: flex; /* Flexbox pro rozložení položek v řadě */
-            align-items: center; /* Vertikální centrování textu (logo + název firmy) */
-            gap: 14px; /* Mezera mezi jednotlivými položkami ve flexboxu */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Jemný stín kolem sekce */
-            height: 50px; /* Nastavení výšky proužku, aby nebyl příliš vysoký */
+        .company {
+            background-color: #d7e4c5;
+            padding: 5px 10px; 
+            border-radius: 8px; /* zaoblení rohů */
+            margin-bottom: 10px; /* spodní mezera mezi jednotlivými firmami */
+            display: flex; 
+            align-items: center;
+            gap: 14px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 50px; 
         }
 
         /* Nastavení pro logo v rámci .company */
         .company img {
-            height: 4em; /* Výška obrázku zůstává stejná */
-            width: auto; /* Šířka obrázku se přizpůsobí automaticky podle výšky */
+            height: 4em; /* výška obrázku  stejná */
+            width: auto; /* šířka obrázku automaticky podle výšky */
         }
 
         /* Styl pro název firmy */
         .company h2 {
-            margin: 0; /* Odstraní výchozí mezery kolem nadpisu */
-            font-size: 1.7rem; /* Zvýšení velikosti písma názvu firmy */
-            color: #3f4f2f; /* Tmavší odstín zelené */
-            font-family: "Garamond", serif; /* Nastaví písmo na Garamond nebo podobné serifové písmo */
-            display: flex; /* Flexbox pro zarovnání textu */
-            align-items: center; /* Vertikální centrování textu (zarovná text na střed výšky) */
+            margin: 0; 
+            font-size: 1.7rem; 
+            color: #3f4f2f; 
+            font-family: "Garamond", serif; 
+            display: flex; 
+            align-items: center; 
         }
 
 
         /* Styl pro datum */
         .section-content .date {
-            font-style: italic; /* Nastaví text na kurzívu */
-            font-size: 0.9rem; /* Zmenší velikost písma na 0.9rem */
-            color: #555; /* Nastaví tmavší šedou barvu pro datum */
+            font-style: italic;
+            font-size: 0.9rem; 
+            color: #555;
         }
 
 
@@ -160,10 +156,10 @@
         }
         /* Styl pro nazev pozice */
         .position h2 {
-            font-size: 1.3rem; /* Nastaví velikost písma na 1.3násobek základní velikosti */
-            margin-bottom: 8px; /* Přidá mezeru pod nadpis */
-            color: #445744; /* Nastaví tmavší zelenou barvu pro název pozice */
-            font-family: "Garamond", serif; /* Použije písmo Garamond */
+            font-size: 1.3rem; 
+            margin-bottom: 8px; 
+            color: #445744; 
+            font-family: "Garamond", serif; 
         }
 
 
@@ -181,47 +177,47 @@
         }
 
         #welcome-text h1 {
-            margin: 10px 0; /* Opraveno pro konzistenci */
-            font-size: 1.7rem; /* Mírně zvětšena velikost nadpisu pro lepší vizuální hierarchii */
-            font-family: "Garamond", serif; /* Použije písmo Garamond */
-            text-align: center; /* Nadpis zarovnán na střed pro zvýraznění */
-            color: #4a7c59; /* Jemný odstín zelené pro elegantní vzhled */
+            margin: 10px 0; 
+            font-size: 1.7rem; 
+            font-family: "Garamond", serif; 
+            text-align: center; 
+            color: #4a7c59; 
         }
 
         #welcome-text h2 {
-            margin: 10px 0; /* Opraveno pro konzistenci */
-            font-size: 1rem; /* Mírně zvětšena velikost nadpisu pro lepší vizuální hierarchii */
+            margin: 10px 0; 
+            font-size: 1rem; 
             font-family: "Comic Sans MS", sans-serif;
-            text-align: justify; /* Nadpis zarovnán na střed pro zvýraznění */
-            color: #4a7c59; /* Jemný odstín zelené pro elegantní vzhled */
+            text-align: justify; 
+            color: #4a7c59; 
         }
 
 
         /* Styl pro tlačítka přepínání jazyků */
         .language-button {
-            background-color: #748a64; /* Tmavší zelená pro jazyková tlačítka */
+            background-color: #748a64;
             color: white;
             border: none;
-            padding: 8px 16px; /* Menší padding než hlavní tlačítka */
+            padding: 8px 16px; 
             border-radius: 20px;
-            font-size: 0.9rem; /* Trochu menší písmo než hlavní tlačítka */
+            font-size: 0.9rem; 
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             font-family: "Garamond", sans-serif;
-            float: right; /* Zarovnání doprava v rámci sekce */
-            margin-right: 10px; /* Tento margin přidá mezery mezi tlačítka */
+            float: right; 
+            margin-right: 10px; /* mezery mezi tlačítka */
         }
 
         /* Změna barvy při hoveru */
         .language-button:hover {
-            background-color: #657b54; /* Světlejší zelená při hoveru */
-            transform: scale(1.05); /* Trochu zvětšení při hoveru */
+            background-color: #657b54; /*  zelená při hoveru */
+            transform: scale(1.05); /*  zvětšení při hoveru */
         }
 
         /* Styl pro tlačítko CV */
         .cv-box {
-            background-color: #748a64; /* Tmavší zelená pro tlačítko CV */
-            padding: 8px 16px; /* Menší padding než hlavní tlačítka */
+            background-color: #748a64; 
+            padding: 8px 16px; /* padding než hlavní tlačítka */
             border-radius: 20px;
             font-weight: bold;
             text-decoration: none;
@@ -236,7 +232,7 @@
 
         /* Změna barvy při hoveru */
         .cv-box:hover {
-            background-color: #657b54; /* Tmavší odstín při hoveru */
+            background-color: #657b54; 
             color: white;
         }
     </style>
@@ -256,7 +252,7 @@
         <button class="button" id="btn-contact" onclick="toggleSection('contact')">Kontakt</button>
         <button class="button" id="btn-projects" onclick="toggleSection('projects')">Moje výtvory</button>
     </div>
-    <!-- Úvodní text -->
+    
     <!-- Úvodní text -->
     <div id="welcome-text" class="section-content">
         <h1>🌟 Vítejte na mém digitálním plátně! 🌟</h1>
@@ -276,8 +272,6 @@
 
         <p>Marie</p>
     </div>
-
-
 
     <!-- Sekce "O mně" -->
     <div id="about" class="section-content">
@@ -319,8 +313,6 @@
         }
     }
     </script>
-
-
 
     <!-- Sekce "Moje výtvory" -->
     <div id="projects" class="section-content">
@@ -427,7 +419,7 @@
             <li><strong>E-mailem:</strong> <a href="mailto:marusimovcova@gmail.com">marusimovcova@gmail.com</a>, který upřednostňuji.</li>
             <li><strong>Telefonicky:</strong> (+420) 728 883 022. Vždy ovšem budu ráda, když si dáme dopředu vědět o tom, kdy si zavoláme.</li>
             <li>Najdete mě na <strong>LinkedInu:</strong> <a href="https://www.linkedin.com/in/marie-simovcova" target="_blank">linkedin.com/in/marie-simovcova</a>.</li>
-            <li>A nově i na <strong>GitHubu:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a>.</li>
+            <!-- <li>A nově i na <strong>GitHubu:</strong> <a href="https://github.com/marusima" target="_blank">github.com/marusima</a>.</li> -->
         </ul>
 
         <h3>Co oceňuji:</h3>
@@ -444,17 +436,17 @@
                 section.style.display = section.id === sectionId ? "block" : "none";
             });
 
-            // Change class for active buttons
+            // změna pro aktivní tlačítka
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(button => {
                 if (button.id === 'btn-' + sectionId) {
-                    button.classList.add('active'); // Add .active class for the open button
+                    button.classList.add('active'); 
                 } else {
-                    button.classList.remove('active'); // Remove .active class for others
+                    button.classList.remove('active'); 
                 }
             });
 
-            // Hide the welcome text when a section is opened
+            // skrýt welcome text
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
                 welcomeText.style.display = 'none';
@@ -464,12 +456,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const welcomeText = document.getElementById('welcome-text');
             if (welcomeText) {
-                welcomeText.style.display = 'block'; // Ensure welcome text is shown on initial load
+                welcomeText.style.display = 'block'; 
             }
         });
     </script>
-
-
 
 </body>
 
