@@ -127,7 +127,7 @@ function drawGame() {
             // hráč
             if (x === player.x && y === player.y) {
                 const img = document.createElement("img");
-                img.src = "../static/player.jpg"; // správně k static
+                img.src = "../static/player.png"; // správně k static
                 img.alt = "player";
                 cell.appendChild(img);
             } 
@@ -141,7 +141,7 @@ function drawGame() {
             // černá díra (zabírá 2x2)
             else if (x === hole.x && y === hole.y) {
                 const img = document.createElement("img");
-                img.src = "../static/hole.png";
+                img.src = "../static/hole.jpg";
                 img.alt = "hole";
                 img.style.width = "106px";  // 2*50px + mezera
                 img.style.height = "106px"; 
