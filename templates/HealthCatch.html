@@ -128,8 +128,8 @@ body {
 <!-- Úvodní Modal -->
 <div class="modal" id="intro-modal">
     <h2>Vítej v Lovu zdraví!</h2>
-    <p>Jsi nemocný človíček a sbíráš zdravé věci pro své zdraví, abys byl zase jako rybička. 🌱</p>
-    <p>Ale opatrně, kolem tebe jsou i věci nezdravé. Ty tvoji nemoc jen prodlouží.</p>
+    <p>Jsi nemocný človíček a sbíráš zdravé věci pro své zdraví 🌱</p>
+    <p>Ale opatrně, kolem tebe jsou i věci nezdravé 🍷🍔🍹. Ty tvoji nemoc jen prodlouží.</p>
     <p>Zvol si, kolik zdravých věcí si potřebuješ ulovit (1–15), aby ses uzdravil.</p>
     <input type="number" id="target-input" min="1" max="15" value="5">
     <br>
@@ -158,7 +158,6 @@ let score = 0;
 let targetScore = 5;
 let gameInterval = null;
 
-// Úvodní modal
 introModal.style.display = 'block';
 
 function startGame(){
@@ -179,7 +178,6 @@ function randomPosition(){
     return { x: Math.floor(Math.random()*gameWidth), y: Math.floor(Math.random()*gameHeight) };
 }
 
-// Vytvoření itemu a překážky
 function createItem() {
     return { pos: randomPosition(), img: healthyItems[Math.floor(Math.random()*healthyItems.length)] };
 }
@@ -201,7 +199,6 @@ function generateObstacles(){
     return arr;
 }
 
-// Vykreslení hry
 function drawGame(){
     game.innerHTML='';
     for(let y=0;y<gameHeight;y++){
@@ -251,13 +248,17 @@ function movePlayer(){
     player.y += direction.y;
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
-        gameOver("💫 Vyletěl js mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
+        gameOver("💫 Vyletěl jsi mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
         return;
     }
 
     let obsHit = obstacles.find(o => o.pos.x===player.x && o.pos.y===player.y);
     if(obsHit){
-        gameOver("🍷 Alkohol narušil tvoje uzdravování, a hra tak končí!");
+        score = 0;
+        drawGame();
+        scoreEl.textContent += " ❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo.";
+        item = createItem();
+        obstacles = generateObstacles();
         return;
     }
 
@@ -274,21 +275,18 @@ function movePlayer(){
     drawGame();
 }
 
-// Konec hry
 function gameOver(msg){
     modal.style.display='block';
     gameoverText.textContent=msg;
     direction={x:0,y:0};
 }
 
-// Restart hry
 function restartGame(){
     modal.style.display='none';
     score=0;
     resetGame();
 }
 
-// Reset hry
 function resetGame(){
     player = { x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2) };
     item = createItem();
