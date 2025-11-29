@@ -148,7 +148,7 @@ const introModal = document.getElementById("intro-modal");
 const targetInput = document.getElementById("target-input");
 
 const healthyItems = ["clover.png", "tea.png", "ginger.png"];
-const unhealthyItems = ["alcohol.png", "alcohol2.png"];
+const unhealthyItems = ["alcohol.png", "alcohol2.png", "coctail.png", "fastfood.png"];
 
 let player = { x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2) };
 let item = null;
@@ -237,11 +237,11 @@ function drawGame(){
     let comment='';
     if(percent===0) comment='🌱 Začínáme, hodně zdraví!';
     else if(percent<25) comment='💪 Málo zdraví, sbírej dál!';
-    else if(percent<50) comment='🌿 Polovina cesty, jde to skvěle!';
-    else if(percent<75) comment='🍵 Už skoro, drž se!';
-    else if(percent<90) comment='🍀 Poslední úsilí, skoro hotovo!';
+    else if(percent<50) comment='🌿 Skoro polovina cesty, jde to skvěle!';
+    else if(percent<75) comment='🍵 Jsi v půlce, drž se!';
+    else if(percent<90) comment='🍀 Ještě kousek, nepřestávej!';
     else if(percent<100) comment='✨ Skoro hotovo, poslední věc!';
-    else comment='🏆 Cíl dosažen, gratulujeme!';
+    else comment='🏆 A jsi zdravý přesně jak slíbeno!';
     scoreEl.textContent=`💚 ${score}/${targetScore} - ${comment}`;
 }
 
