@@ -16,16 +16,39 @@ body {
     overflow: hidden;
 }
 
-/* Herní kontejner */
+/* Blikající hvězdičky na pozadí */
+.stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    color: white;
+    font-size: 2px;
+    animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+    0%,100% {opacity: 0.8;}
+    50% {opacity: 0.2;}
+}
+
+/* Herní wrapper a skóre */
 #game-wrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    z-index: 5;
+    position: relative;
 }
 
-/* Score box vlevo */
+/* Skóre vlevo */
 #score {
-    font-size: 32px;
+    font-size: 36px;
     background: rgba(255,255,255,0.1);
     padding: 12px 16px;
     border-radius: 12px;
@@ -47,6 +70,7 @@ body {
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 0 30px rgba(255,255,255,0.2);
+    z-index: 1;
 }
 
 .cell {
@@ -99,6 +123,8 @@ body {
 </head>
 <body>
 
+<div class="stars" id="stars"></div>
+
 <div id="game-wrapper">
     <div id="score">⭐ 0</div>
     <div id="game-container">
@@ -112,6 +138,19 @@ body {
 </div>
 
 <script>
+// Generování blikajících hvězdiček
+const starsContainer = document.getElementById('stars');
+for(let i=0;i<150;i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random()*window.innerWidth+'px';
+    star.style.top = Math.random()*window.innerHeight+'px';
+    star.style.fontSize = (Math.random()*2+1)+'px';
+    star.style.animationDuration = (Math.random()*3+1)+'s';
+    starsContainer.appendChild(star);
+}
+
+// Hra
 const gameSize = 15;
 const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
@@ -120,40 +159,52 @@ const gameoverText = document.getElementById("gameover-text");
 
 let player = { x: 7, y: 7 };
 let star = randomPosition();
-let hole = randomPosition(); // 1x1 pole
+let holes = generateHoles();
 let direction = { x: 0, y: 0 };
 let score = 0;
 
-// Funkce pro náhodnou pozici
+// Náhodná pozice
 function randomPosition() {
-    return {
-        x: Math.floor(Math.random() * gameSize),
-        y: Math.floor(Math.random() * gameSize)
-    };
+    return { x: Math.floor(Math.random()*gameSize), y: Math.floor(Math.random()*gameSize) };
+}
+
+// Vygenerování černých děr (4–8)
+function generateHoles() {
+    const numHoles = Math.floor(Math.random()*5)+4; // 4–8
+    let arr = [];
+    while(arr.length<numHoles){
+        let h = randomPosition();
+        // Zajistit, aby nebyl na hráči ani hvězdě ani duplicitní
+        if(!((h.x===player.x && h.y===player.y) || (h.x===star.x && h.y===star.y)) &&
+           !arr.some(e=>e.x===h.x && e.y===h.y)){
+            arr.push(h);
+        }
+    }
+    return arr;
 }
 
 // Vykreslení hry
 function drawGame() {
-    game.innerHTML = '';
-    for (let y=0; y<gameSize; y++) {
-        for (let x=0; x<gameSize; x++) {
+    game.innerHTML='';
+    for(let y=0;y<gameSize;y++){
+        for(let x=0;x<gameSize;x++){
             const cell = document.createElement('div');
-            cell.className = 'cell';
+            cell.className='cell';
 
-            if (x===player.x && y===player.y) {
-                const img = document.createElement('img');
-                img.src = '../static/player.png';
-                img.alt = 'player';
+            if(x===player.x && y===player.y){
+                const img=document.createElement('img');
+                img.src='../static/player.png';
+                img.alt='player';
                 cell.appendChild(img);
-            } else if (x===star.x && y===star.y) {
-                const img = document.createElement('img');
-                img.src = '../static/star.png';
-                img.alt = 'star';
+            } else if(x===star.x && y===star.y){
+                const img=document.createElement('img');
+                img.src='../static/star.png';
+                img.alt='star';
                 cell.appendChild(img);
-            } else if (x===hole.x && y===hole.y) {
-                const img = document.createElement('img');
-                img.src = '../static/hole.jpg';
-                img.alt = 'hole';
+            } else if(holes.some(h=>h.x===x && h.y===y)){
+                const img=document.createElement('img');
+                img.src='../static/hole.jpg';
+                img.alt='hole';
                 cell.appendChild(img);
             }
 
@@ -168,57 +219,57 @@ function movePlayer() {
     player.y += direction.y;
 
     // Vyletění z mapy
-    if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
+    if(player.x<0 || player.x>=gameSize || player.y<0 || player.y>=gameSize){
         gameOver("💫 Vyletěli jste hluboko do vesmíru a už není návratu!");
         return;
     }
 
     // Kolize s černou dírou
-    if (player.x === hole.x && player.y === hole.y) {
+    if(holes.some(h=>h.x===player.x && h.y===player.y)){
         gameOver("⚫ Haha! Černá díra vás pohltí a už vás neuvidí ani hvězdy!");
         return;
     }
 
     // Sebraní hvězdy
-    if (player.x === star.x && player.y === star.y) {
+    if(player.x===star.x && player.y===star.y){
         score++;
-        scoreEl.textContent = "⭐ " + score;
-        star = randomPosition();
-        hole = randomPosition();
+        scoreEl.textContent="⭐ "+score;
+        star=randomPosition();
+        holes=generateHoles();
     }
 
     drawGame();
 }
 
 // Konec hry
-function gameOver(msg) {
-    modal.style.display = 'block';
-    gameoverText.textContent = msg;
-    direction = { x:0, y:0 };
+function gameOver(msg){
+    modal.style.display='block';
+    gameoverText.textContent=msg;
+    direction={x:0,y:0};
 }
 
 // Restart hry
-function restartGame() {
-    modal.style.display = 'none';
-    player = { x:7, y:7 };
-    star = randomPosition();
-    hole = randomPosition();
-    score = 0;
-    scoreEl.textContent = "⭐ 0";
+function restartGame(){
+    modal.style.display='none';
+    player={x:7,y:7};
+    star=randomPosition();
+    holes=generateHoles();
+    score=0;
+    scoreEl.textContent="⭐ 0";
     drawGame();
 }
 
 // Ovládání šipkami
-document.addEventListener('keydown', (e)=>{
-    if(e.key==='ArrowUp') direction={x:0, y:-1};
-    if(e.key==='ArrowDown') direction={x:0, y:1};
-    if(e.key==='ArrowLeft') direction={x:-1, y:0};
-    if(e.key==='ArrowRight') direction={x:1, y:0};
+document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowUp') direction={x:0,y:-1};
+    if(e.key==='ArrowDown') direction={x:0,y:1};
+    if(e.key==='ArrowLeft') direction={x:-1,y:0};
+    if(e.key==='ArrowRight') direction={x:1,y:0};
 });
 
 // Inicializace
 drawGame();
-setInterval(movePlayer, 300);
+setInterval(movePlayer,300);
 </script>
 
 </body>
