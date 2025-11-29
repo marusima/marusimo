@@ -15,10 +15,17 @@
         color: white;
     }
 
+    #score {
+        position: absolute;
+        top: 20px;
+        font-size: 26px;
+        text-shadow: 0 0 10px #fff;
+    }
+
     #game {
         display: grid;
-        grid-template-columns: repeat(10, 50px);
-        grid-template-rows: repeat(10, 50px);
+        grid-template-columns: repeat(15, 50px);
+        grid-template-rows: repeat(15, 50px);
         gap: 2px;
         background: rgba(255,255,255,0.08);
         padding: 10px;
@@ -39,15 +46,9 @@
     }
 
     .cell img {
-        width: 80%;
-        height: 80%;
-    }
-
-    #score {
-        position: absolute;
-        top: 20px;
-        font-size: 26px;
-        text-shadow: 0 0 10px #fff;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 </style>
 
@@ -58,19 +59,19 @@
 <div id="game"></div>
 
 <script>
-const size = 10;
+const size = 15;
 const game = document.getElementById("game");
 const scoreText = document.getElementById("score");
 
-// player
-let player = { x: 4, y: 4 };
+// Player
+let player = { x: 7, y: 7 };
 let direction = { x: 0, y: 0 };
 let score = 0;
 
-// star
+// Star
 let star = { x: 0, y: 0 };
 
-// obstacles
+// Holes (obstacles)
 let holes = [];
 
 function createGrid() {
@@ -102,7 +103,8 @@ function placeStar() {
 
 function generateHoles() {
     holes = [];
-    let count = 5 + Math.floor(score / 3);
+    let count = 10 + Math.floor(score / 2);
+
     for (let i = 0; i < count; i++) {
         let h;
         while (true) {
@@ -124,15 +126,15 @@ function draw() {
         game.children[i].innerHTML = "";
     }
 
-    // star
+    // Star
     getCell(star.x, star.y).innerHTML = `<img src="static/star.png">`;
 
-    // holes
+    // Holes
     holes.forEach(h => {
         getCell(h.x, h.y).innerHTML = `<img src="static/hole.png">`;
     });
 
-    // player
+    // Player
     getCell(player.x, player.y).innerHTML = `<img src="static/player.png">`;
 }
 
@@ -142,19 +144,19 @@ function move() {
         y: player.y + direction.y
     };
 
-    // walls
+    // Border collision
     if (newPos.x < 0 || newPos.x >= size || newPos.y < 0 || newPos.y >= size) {
         return gameOver();
     }
 
-    // hole collision
+    // Hole collision
     if (holes.some(h => h.x === newPos.x && h.y === newPos.y)) {
         return gameOver();
     }
 
     player = newPos;
 
-    // star collected
+    // Collect star
     if (player.x === star.x && player.y === star.y) {
         score++;
         scoreText.textContent = `⭐ Score: ${score}`;
@@ -171,7 +173,7 @@ function gameOver() {
 }
 
 function resetGame() {
-    player = { x: 4, y: 4 };
+    player = { x: 7, y: 7 };
     score = 0;
     direction = { x: 0, y: 0 };
     scoreText.textContent = "⭐ Score: 0";
@@ -187,12 +189,12 @@ document.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") direction = {x:1, y:0};
 });
 
-// init
+// Init
 createGrid();
 placeStar();
 generateHoles();
 draw();
-setInterval(move, 250);
+setInterval(move, 500); // ⭐ POMALEJŠÍ pohyb
 </script>
 
 </body>
