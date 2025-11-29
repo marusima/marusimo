@@ -8,22 +8,38 @@
         background: radial-gradient(circle at center, #0a0a0a, #000000, #000015);
         color: white;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         height: 100vh;
         margin: 0;
         font-family: Arial, sans-serif;
+        padding: 20px;
     }
 
     #score {
-        position: absolute;
-        top: 10px;
-        left: 10px;
         font-size: 28px;
         background: rgba(255,255,255,0.1);
-        padding: 6px 12px;
+        padding: 8px 12px;
         border-radius: 10px;
         box-shadow: 0 0 10px #fff;
+        margin-right: 20px;
+        height: fit-content;
+    }
+
+    #game-container {
+        position: relative;
+    }
+
+    #message {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        color: yellow;
+        text-shadow: 0 0 8px black;
+        pointer-events: none;
     }
 
     #game {
@@ -49,19 +65,22 @@
         user-select: none;
     }
 
-    #message {
-        position: absolute;
-        top: 50px;
-        font-size: 28px;
-        text-shadow: 0 0 10px white;
+    .cell img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px;
     }
 </style>
 </head>
 <body>
 
 <div id="score">⭐ 0</div>
-<div id="message"></div>
-<div id="game"></div>
+
+<div id="game-container">
+    <div id="message"></div>
+    <div id="game"></div>
+</div>
 
 <script>
 const gameSize = 15;
@@ -109,15 +128,24 @@ function drawGame() {
 
             // hráč
             if (x === player.x && y === player.y) {
-                cell.textContent = "🧑‍🚀";
+                const img = document.createElement("img");
+                img.src = "./static/player.jpg";
+                img.alt = "player";
+                cell.appendChild(img);
             }
             // hvězda
             else if (x === star.x && y === star.y) {
-                cell.textContent = "⭐";
+                const img = document.createElement("img");
+                img.src = "./static/star.png"; // můžeš změnit na emoji, pokud chceš
+                img.alt = "star";
+                cell.appendChild(img);
             }
             // černá díra 2x2
             else if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
-                cell.textContent = "⚫";
+                const img = document.createElement("img");
+                img.src = "./static/hole.png";
+                img.alt = "hole";
+                cell.appendChild(img);
             }
 
             game.appendChild(cell);
@@ -132,14 +160,14 @@ function movePlayer() {
 
     // hrany mapy
     if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
-        endGame("You floated off into space!");
+        endGame("💫 Vyletěli jste hluboko do vesmíru a už není návratu!");
         return;
     }
 
     // kolize s černou dírou 2x2
     if ((player.x === hole.x || player.x === hole.x+1) && 
         (player.y === hole.y || player.y === hole.y+1)) {
-        endGame("You fell into a black hole!");
+        endGame("Haha! Černá díra vás pohltila a už vás neuvidí ani hvězdy!");
         return;
     }
 
@@ -156,7 +184,7 @@ function movePlayer() {
 
 // konec hry
 function endGame(msg) {
-    message.innerText = msg + " 💀 Game Over";
+    message.innerText = msg;
     direction = { x: 0, y: 0 };
 }
 
@@ -165,13 +193,4 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
     if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
     if (e.key === "ArrowLeft") direction = { x: -1, y: 0 };
-    if (e.key === "ArrowRight") direction = { x: 1, y: 0 };
-});
-
-// start
-drawGame();
-setInterval(movePlayer, 400);
-</script>
-
-</body>
-</html>
+    if (e.key =
