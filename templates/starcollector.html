@@ -227,6 +227,7 @@ function generateHoles() {
 }
 
 // Vykreslení hry
+// Vykreslení hry + komentáře ke skóre
 function drawGame(){
     game.innerHTML='';
     for(let y=0;y<gameHeight;y++){
@@ -254,8 +255,21 @@ function drawGame(){
             game.appendChild(cell);
         }
     }
-    scoreEl.textContent = `⭐ ${score} - Ulovte ${targetScore} zázraků!`;
+
+    // Výpočet procent cíle
+    let percent = Math.floor((score/targetScore)*100);
+    let comment = "";
+    if(percent === 0) comment = "🛸 Startujeme, hodně štěstí!";
+    else if(percent < 25) comment = "🌟 Málo hvězdiček, ještě dlouhá cesta!";
+    else if(percent < 50) comment = "✨ Skvělý začátek, sbírej dál!";
+    else if(percent < 75) comment = "🚀 Pěkně se daří, téměř polovina!";
+    else if(percent < 90) comment = "💫 Už skoro tam, poslední úsilí!";
+    else if(percent < 100) comment = "🌌 Skoro hotovo, poslední hvězdičky!";
+    else comment = "🎉 Cíl dosažen, gratulujeme!";
+
+    scoreEl.textContent = `⭐ ${score} / ${targetScore} - ${comment}`;
 }
+
 
 // Pohyb hráče
 function movePlayer() {
