@@ -15,15 +15,15 @@
         font-family: Arial, sans-serif;
     }
 
-    #scoreboard {
+    #score {
         position: absolute;
-        left: 20px;
-        top: 20px;
-        font-size: 26px;
-        background: rgba(20,20,20,0.6);
-        padding: 10px 16px;
+        top: 10px;
+        left: 10px;
+        font-size: 28px;
+        background: rgba(255,255,255,0.1);
+        padding: 6px 12px;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(255,255,255,0.15);
+        box-shadow: 0 0 10px #fff;
     }
 
     #game {
@@ -49,16 +49,9 @@
         user-select: none;
     }
 
-    .cell img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 6px;
-    }
-
     #message {
         position: absolute;
-        top: 15px;
+        top: 50px;
         font-size: 28px;
         text-shadow: 0 0 10px white;
     }
@@ -66,106 +59,136 @@
 </head>
 <body>
 
+<div id="score">⭐ 0</div>
 <div id="message"></div>
-<div id="scoreboard">⭐ Score: <span id="score">0</span></div>
 <div id="game"></div>
 
 <script>
-    const gameSize = 15;
-    const game = document.getElementById("game");
-    const message = document.getElementById("message");
-    const scoreText = document.getElementById("score");
+const gameSize = 15;
+const game = document.getElementById("game");
+const message = document.getElementById("message");
+const scoreEl = document.getElementById("score");
 
-    let player = { x: 7, y: 7 };
-    let star = randomPosition();
-    let holes = generateHoles(5);
-    let direction = { x: 0, y: 0 };
-    let score = 0;
+let player = { x: 7, y: 7 };
+let star = randomPosition();
+let holes = generateHoles(3); // počet 2x2 černých děr
+let direction = { x: 0, y: 0 };
+let score = 0;
 
-    function randomPosition() {
-        return {
-            x: Math.floor(Math.random() * gameSize),
-            y: Math.floor(Math.random() * gameSize)
-        };
-    }
+// náhodná pozice pro 1x1 hvězdu
+function randomPosition() {
+    return {
+        x: Math.floor(Math.random() * gameSize),
+        y: Math.floor(Math.random() * gameSize)
+    };
+}
 
-    function generateHoles(amount) {
-        let arr = [];
-        for (let i = 0; i < amount; i++) {
-            arr.push(randomPosition());
+// generování černých děr (2x2)
+function generateHoles(amount) {
+    let arr = [];
+    for (let i = 0; i < amount; i++) {
+        let pos;
+        while (true) {
+            pos = { x: Math.floor(Math.random()*(gameSize-1)), y: Math.floor(Math.random()*(gameSize-1)) };
+            // zabráníme překrytí hráče a hvězdy
+            if (!overlapPlayerOrStar(pos, 2)) break;
         }
-        return arr;
+        arr.push(pos);
     }
+    return arr;
+}
 
-    function drawGame() {
-        game.innerHTML = "";
+// kontrola překrytí hráče/hvězdy
+function overlapPlayerOrStar(pos, size) {
+    for (let dx=0; dx<size; dx++) {
+        for (let dy=0; dy<size; dy++) {
+            if ((player.x === pos.x+dx && player.y === pos.y+dy) ||
+                (star.x === pos.x+dx && star.y === pos.y+dy)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
-        for (let y = 0; y < gameSize; y++) {
-            for (let x = 0; x < gameSize; x++) {
-                const cell = document.createElement("div");
-                cell.classList.add("cell");
+// vykreslení hry
+function drawGame() {
+    game.innerHTML = "";
 
-                if (x === player.x && y === player.y) {
-                    let img = document.createElement("img");
-                    img.src = "player.jpg";   // ← FUNGUJE
-                    cell.appendChild(img);
-                } 
-                else if (x === star.x && y === star.y) {
-                    cell.textContent = "⭐";
-                }
-                else {
-                    for (let hole of holes) {
-                        if (hole.x === x && hole.y === y) {
-                            let img = document.createElement("img");
-                            img.src = "hole.jpg";    // ← FUNGUJE
-                            cell.appendChild(img);
-                        }
+    for (let y = 0; y < gameSize; y++) {
+        for (let x = 0; x < gameSize; x++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+
+            // hráč
+            if (x === player.x && y === player.y) {
+                cell.textContent = "🧑‍🚀";
+            }
+            // hvězda
+            else if (x === star.x && y === star.y) {
+                cell.textContent = "⭐";
+            }
+            // černé díry 2x2
+            else {
+                for (let hole of holes) {
+                    if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
+                        cell.textContent = "⚫";
                     }
                 }
-
-                game.appendChild(cell);
             }
+
+            game.appendChild(cell);
+        }
+    }
+}
+
+// pohyb hráče
+function movePlayer() {
+    player.x += direction.x;
+    player.y += direction.y;
+
+    // hrany mapy
+    if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
+        endGame("You floated off into space!");
+        return;
+    }
+
+    // kolize s černou dírou
+    for (let hole of holes) {
+        if ((player.x === hole.x || player.x === hole.x+1) && 
+            (player.y === hole.y || player.y === hole.y+1)) {
+            endGame("You fell into a black hole!");
+            return;
         }
     }
 
-    function movePlayer() {
-        player.x += direction.x;
-        player.y += direction.y;
-
-        if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
-            endGame("You floated off into space!");
-        }
-
-        for (let hole of holes) {
-            if (player.x === hole.x && player.y === hole.y) {
-                endGame("You fell into a black hole!");
-            }
-        }
-
-        if (player.x === star.x && player.y === star.y) {
-            score++;
-            scoreText.textContent = score;
-            star = randomPosition();
-            holes = generateHoles(5);
-        }
-
-        drawGame();
+    // sebrání hvězdy
+    if (player.x === star.x && player.y === star.y) {
+        score++;
+        scoreEl.textContent = "⭐ " + score;
+        star = randomPosition();
+        holes = generateHoles(3);
     }
-
-    function endGame(msg) {
-        message.innerText = msg + " 💀 Game Over";
-        direction = { x: 0, y: 0 };
-    }
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
-        if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
-        if (e.key === "ArrowLeft") direction = { x: -1, y: 0 };
-        if (e.key === "ArrowRight") direction = { x: 1, y: 0 };
-    });
 
     drawGame();
-    setInterval(movePlayer, 400);
+}
+
+function endGame(msg) {
+    message.innerText = msg + " 💀 Game Over";
+    direction = { x: 0, y: 0 };
+}
+
+// šipky
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
+    if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
+    if (e.key === "ArrowLeft") direction = { x: -1, y: 0 };
+    if (e.key === "ArrowRight") direction = { x: 1, y: 0 };
+});
+
+// inicializace
+drawGame();
+setInterval(movePlayer, 400);
 </script>
 
 </body>
