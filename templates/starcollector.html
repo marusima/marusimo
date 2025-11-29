@@ -71,11 +71,11 @@ const scoreEl = document.getElementById("score");
 
 let player = { x: 7, y: 7 };
 let star = randomPosition();
-let holes = generateHoles(3); // počet 2x2 černých děr
+let hole = randomHole(); // jedna černá díra 2x2
 let direction = { x: 0, y: 0 };
 let score = 0;
 
-// náhodná pozice pro 1x1 hvězdu
+// náhodná pozice hvězdy (1x1)
 function randomPosition() {
     return {
         x: Math.floor(Math.random() * gameSize),
@@ -83,32 +83,19 @@ function randomPosition() {
     };
 }
 
-// generování černých děr (2x2)
-function generateHoles(amount) {
-    let arr = [];
-    for (let i = 0; i < amount; i++) {
-        let pos;
-        while (true) {
-            pos = { x: Math.floor(Math.random()*(gameSize-1)), y: Math.floor(Math.random()*(gameSize-1)) };
-            // zabráníme překrytí hráče a hvězdy
-            if (!overlapPlayerOrStar(pos, 2)) break;
-        }
-        arr.push(pos);
-    }
-    return arr;
-}
-
-// kontrola překrytí hráče/hvězdy
-function overlapPlayerOrStar(pos, size) {
-    for (let dx=0; dx<size; dx++) {
-        for (let dy=0; dy<size; dy++) {
-            if ((player.x === pos.x+dx && player.y === pos.y+dy) ||
-                (star.x === pos.x+dx && star.y === pos.y+dy)) {
-                return true;
-            }
+// náhodná pozice černé díry 2x2
+function randomHole() {
+    while (true) {
+        let h = {
+            x: Math.floor(Math.random() * (gameSize-1)),
+            y: Math.floor(Math.random() * (gameSize-1))
+        };
+        // aby se nepřekrývala s hráčem nebo hvězdou
+        if (!((player.x >= h.x && player.x <= h.x+1 && player.y >= h.y && player.y <= h.y+1) ||
+              (star.x >= h.x && star.x <= h.x+1 && star.y >= h.y && star.y <= h.y+1))) {
+            return h;
         }
     }
-    return false;
 }
 
 // vykreslení hry
@@ -128,13 +115,9 @@ function drawGame() {
             else if (x === star.x && y === star.y) {
                 cell.textContent = "⭐";
             }
-            // černé díry 2x2
-            else {
-                for (let hole of holes) {
-                    if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
-                        cell.textContent = "⚫";
-                    }
-                }
+            // černá díra 2x2
+            else if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
+                cell.textContent = "⚫";
             }
 
             game.appendChild(cell);
@@ -153,13 +136,11 @@ function movePlayer() {
         return;
     }
 
-    // kolize s černou dírou
-    for (let hole of holes) {
-        if ((player.x === hole.x || player.x === hole.x+1) && 
-            (player.y === hole.y || player.y === hole.y+1)) {
-            endGame("You fell into a black hole!");
-            return;
-        }
+    // kolize s černou dírou 2x2
+    if ((player.x === hole.x || player.x === hole.x+1) && 
+        (player.y === hole.y || player.y === hole.y+1)) {
+        endGame("You fell into a black hole!");
+        return;
     }
 
     // sebrání hvězdy
@@ -167,18 +148,19 @@ function movePlayer() {
         score++;
         scoreEl.textContent = "⭐ " + score;
         star = randomPosition();
-        holes = generateHoles(3);
+        hole = randomHole();
     }
 
     drawGame();
 }
 
+// konec hry
 function endGame(msg) {
     message.innerText = msg + " 💀 Game Over";
     direction = { x: 0, y: 0 };
 }
 
-// šipky
+// ovládání šipkami
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
     if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
@@ -186,7 +168,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") direction = { x: 1, y: 0 };
 });
 
-// inicializace
+// start
 drawGame();
 setInterval(movePlayer, 400);
 </script>
