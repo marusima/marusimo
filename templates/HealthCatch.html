@@ -244,10 +244,10 @@ function drawGame(){
 
     let percent = Math.floor((score/targetScore)*100);
     let comment='';
-    if(percent===0) comment='🌱 Začínáme, hodně zdraví!';
-    else if(percent<25) comment='💪 Málo zdraví, sbírej dál!';
-    else if(percent<50) comment='🌿 Skoro polovina cesty, jde to skvěle!';
-    else if(percent<75) comment='🍵 Jsi v půlce, drž se!';
+    if(percent===0) comment='🌱 A jedeme od začátku,.. hodně štěstí ke zdraví!';
+    else if(percent<25) comment='💪 Málo zdraví, potřebuješ víc!';
+    else if(percent<50) comment='🌿 To už je lepší, jde to skvěle!';
+    else if(percent<75) comment='🍵 Jsi za půlkou, drž se!';
     else if(percent<90) comment='🍀 Ještě kousek, nepřestávej!';
     else if(percent<100) comment='✨ Skoro hotovo, poslední věc!';
     else comment='🏆 A jsi zdravý přesně jak slíbeno!';
@@ -263,7 +263,7 @@ function movePlayer(){
     player.y += direction.y;
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
-        gameOver("💫 Vyletěl jsi mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
+        gameOver("💫 Vyletěl jsi mimo louku zdraví a budeš už navždy nemocný.. Anebo, chceš hrát znovu?");
         return;
     }
 
