@@ -172,8 +172,8 @@ for(let i=0;i<150;i++){
 }
 
 // Hra
-const gameWidth = 25;
-const gameHeight = 15;
+const gameWidth = 20;
+const gameHeight = 10;
 const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
 const modal = document.getElementById("gameover-modal");
@@ -263,6 +263,7 @@ function movePlayer() {
     player.y += direction.y;
 
     // Vyletění z mapy
+    // Kontrola vyletění
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
         gameOver("💫 Vyletěli jste hluboko do vesmíru a už není návratu!");
         return;
