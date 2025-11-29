@@ -196,8 +196,12 @@ function startGame(){
         targetScore = val;
         introModal.style.display='none';
         resetGame();
+        // Spustit pohyb hráče
+        if(!window.gameInterval) {
+            window.gameInterval = setInterval(movePlayer, 300);
+        }
     } else {
-        alert("Zadejte číslo od 1 do 15!");
+        alert("Zadejte číslo od 1 do 15! Bude to váš cíl, tedy kolik zázraků budete potřebovat pro věčné štěstí.");
     }
 }
 
