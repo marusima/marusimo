@@ -140,7 +140,7 @@ body {
     <h2>Vítej v Lovu zdraví!</h2>
     <p>Jsi nemocný človíček a sbíráš zdravé věci pro své zdraví 🌱</p>
     <p>Ale opatrně, kolem tebe jsou i věci nezdravé 🍷🍔🍹. Ty tvoji nemoc jen prodlouží.</p>
-    <p>Zvol si, kolik zdravých věcí si potřebuješ ulovit (1–15), aby ses uzdravil.</p>
+    <p>Zvol si, kolik zdravých věcí potřebuješ ulovit (1–15), aby ses uzdravil.</p>
     <input type="number" id="target-input" min="1" max="15" value="5">
     <br>
     <button onclick="startGame()">Chci si ulovit své zdraví!</button>
@@ -256,11 +256,11 @@ function drawGame(){
 }
 
 // Pohyb hráče
+let feedbackTimeout = null; // časovač pro hlášku
+
 function movePlayer(){
     player.x += direction.x;
     player.y += direction.y;
-
-    feedbackMessage = ''; // vymažeme předchozí hlášku
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
         gameOver("💫 Vyletěl jsi mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
@@ -270,10 +270,18 @@ function movePlayer(){
     let obsHit = obstacles.find(o => o.pos.x===player.x && o.pos.y===player.y);
     if(obsHit){
         score = 0;
-        feedbackMessage = "❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo.";
+        feedbackMessage = "❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo!";
+        drawGame(); // okamžitě vykreslí hlášku
+
+        // Zruší starý timeout a nastaví nový na 3 vteřiny
+        if(feedbackTimeout) clearTimeout(feedbackTimeout);
+        feedbackTimeout = setTimeout(()=>{
+            feedbackMessage = '';
+            drawGame();
+        }, 3000);
+
         item = createItem();
         obstacles = generateObstacles();
-        drawGame();
         return;
     }
 
@@ -285,10 +293,15 @@ function movePlayer(){
         }
         item = createItem();
         obstacles = generateObstacles();
+
+        // Sebrání zdravé věci = vymaže hlášku
+        if(feedbackTimeout) clearTimeout(feedbackTimeout);
+        feedbackMessage = '';
     }
 
     drawGame();
 }
+
 
 function gameOver(msg){
     modal.style.display='block';
