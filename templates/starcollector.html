@@ -4,73 +4,73 @@
 <meta charset="UTF-8">
 <title>Star Collector</title>
 <style>
-    body {
-        background: radial-gradient(circle at center, #0a0a0a, #000000, #000015);
-        color: white;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
+body {
+    background: radial-gradient(circle at center, #0a0a0a, #000000, #000015);
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
 
-    #score {
-        font-size: 28px;
-        background: rgba(255,255,255,0.1);
-        padding: 8px 12px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px #fff;
-        margin-right: 20px;
-        height: fit-content;
-    }
+#score {
+    font-size: 28px;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #fff;
+    margin-right: 20px;
+    height: fit-content;
+}
 
-    #game-container {
-        position: relative;
-    }
+#game-container {
+    position: relative;
+}
 
-    #message {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 24px;
-        color: yellow;
-        text-shadow: 0 0 8px black;
-        pointer-events: none;
-    }
+#message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: yellow;
+    text-shadow: 0 0 8px black;
+    pointer-events: none;
+}
 
-    #game {
-        display: grid;
-        grid-template-columns: repeat(15, 45px);
-        grid-template-rows: repeat(15, 45px);
-        gap: 3px;
-        background: rgba(0,0,0,0.6);
-        padding: 12px;
-        border-radius: 12px;
-        box-shadow: 0 0 30px rgba(255,255,255,0.1);
-    }
+#game {
+    display: grid;
+    grid-template-columns: repeat(15, 45px);
+    grid-template-rows: repeat(15, 45px);
+    gap: 3px;
+    background: rgba(0,0,0,0.6);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
 
-    .cell {
-        width: 45px;
-        height: 45px;
-        background: #0f0f1a;
-        border-radius: 6px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 32px;
-        user-select: none;
-    }
+.cell {
+    width: 45px;
+    height: 45px;
+    background: #0f0f1a;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    user-select: none;
+}
 
-    .cell img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 6px;
-    }
+.cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
 </style>
 </head>
 <body>
@@ -94,7 +94,7 @@ let hole = randomHole(); // jedna černá díra 2x2
 let direction = { x: 0, y: 0 };
 let score = 0;
 
-// náhodná pozice hvězdy (1x1)
+// náhodná pozice hvězdy 1x1
 function randomPosition() {
     return {
         x: Math.floor(Math.random() * gameSize),
@@ -102,14 +102,13 @@ function randomPosition() {
     };
 }
 
-// náhodná pozice černé díry 2x2
+// jedna černá díra 2x2
 function randomHole() {
     while (true) {
         let h = {
             x: Math.floor(Math.random() * (gameSize-1)),
             y: Math.floor(Math.random() * (gameSize-1))
         };
-        // aby se nepřekrývala s hráčem nebo hvězdou
         if (!((player.x >= h.x && player.x <= h.x+1 && player.y >= h.y && player.y <= h.y+1) ||
               (star.x >= h.x && star.x <= h.x+1 && star.y >= h.y && star.y <= h.y+1))) {
             return h;
@@ -120,30 +119,24 @@ function randomHole() {
 // vykreslení hry
 function drawGame() {
     game.innerHTML = "";
-
     for (let y = 0; y < gameSize; y++) {
         for (let x = 0; x < gameSize; x++) {
             const cell = document.createElement("div");
             cell.classList.add("cell");
 
-            // hráč
             if (x === player.x && y === player.y) {
                 const img = document.createElement("img");
-                img.src = "./static/player.jpg";
+                img.src = "../static/player.jpg"; // správně do static
                 img.alt = "player";
                 cell.appendChild(img);
-            }
-            // hvězda
-            else if (x === star.x && y === star.y) {
+            } else if (x === star.x && y === star.y) {
                 const img = document.createElement("img");
-                img.src = "./static/star.png"; // můžeš změnit na emoji, pokud chceš
+                img.src = "../static/star.png";
                 img.alt = "star";
                 cell.appendChild(img);
-            }
-            // černá díra 2x2
-            else if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
+            } else if ((x === hole.x || x === hole.x+1) && (y === hole.y || y === hole.y+1)) {
                 const img = document.createElement("img");
-                img.src = "./static/hole.png";
+                img.src = "../static/hole.jpg";
                 img.alt = "hole";
                 cell.appendChild(img);
             }
@@ -158,16 +151,16 @@ function movePlayer() {
     player.x += direction.x;
     player.y += direction.y;
 
-    // hrany mapy
+    // vyletění z mapy
     if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
         endGame("💫 Vyletěli jste hluboko do vesmíru a už není návratu!");
         return;
     }
 
     // kolize s černou dírou 2x2
-    if ((player.x === hole.x || player.x === hole.x+1) && 
+    if ((player.x === hole.x || player.x === hole.x+1) &&
         (player.y === hole.y || player.y === hole.y+1)) {
-        endGame("Haha! Černá díra vás pohltila a už vás neuvidí ani hvězdy!");
+        endGame("⚫ Haha! Černá díra vás pohltí a už vás neuvidí ani hvězdy!");
         return;
     }
 
@@ -185,12 +178,21 @@ function movePlayer() {
 // konec hry
 function endGame(msg) {
     message.innerText = msg;
-    direction = { x: 0, y: 0 };
+    direction = { x:0, y:0 };
 }
 
 // ovládání šipkami
 document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
-    if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
-    if (e.key === "ArrowLeft") direction = { x: -1, y: 0 };
-    if (e.key =
+    if (e.key === "ArrowUp") direction = { x:0, y:-1 };
+    if (e.key === "ArrowDown") direction = { x:0, y:1 };
+    if (e.key === "ArrowLeft") direction = { x:-1, y:0 };
+    if (e.key === "ArrowRight") direction = { x:1, y:0 };
+});
+
+// inicializace
+drawGame();
+setInterval(movePlayer, 400);
+</script>
+
+</body>
+</html>
