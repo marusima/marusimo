@@ -243,6 +243,8 @@ function drawGame(){
 }
 
 // Pohyb hráče
+let warningTimeout = null; // pro hlášky
+
 function movePlayer(){
     player.x += direction.x;
     player.y += direction.y;
@@ -256,9 +258,18 @@ function movePlayer(){
     if(obsHit){
         score = 0;
         drawGame();
+        const originalText = scoreEl.textContent;
         scoreEl.textContent += " ❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo.";
-        item = createItem();
-        obstacles = generateObstacles();
+
+        // Pokud už běží timeout, zrušit ho
+        if(warningTimeout) clearTimeout(warningTimeout);
+
+        warningTimeout = setTimeout(()=>{
+            scoreEl.textContent = originalText;
+            item = createItem();
+            obstacles = generateObstacles();
+            drawGame();
+        }, 3000); // 3 sekundy
         return;
     }
 
@@ -274,6 +285,7 @@ function movePlayer(){
 
     drawGame();
 }
+
 
 function gameOver(msg){
     modal.style.display='block';
