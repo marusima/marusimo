@@ -127,13 +127,13 @@ body {
 
 <!-- Úvodní Modal -->
 <div class="modal" id="intro-modal">
-    <h2>Vítejte v Lovu zdraví!</h2>
+    <h2>Vítej v Lovu zdraví!</h2>
     <p>Jsi nemocný človíček a sbíráš zdravé věci pro své zdraví, abys byl zase jako rybička. 🌱</p>
     <p>Ale opatrně, kolem tebe jsou i věci nezdravé. Ty tvoji nemoc jen prodlouží.</p>
     <p>Zvol si, kolik zdravých věcí si potřebuješ ulovit (1–15), aby ses uzdravil.</p>
     <input type="number" id="target-input" min="1" max="15" value="5">
     <br>
-    <button onclick="startGame()">Start!</button>
+    <button onclick="startGame()">Chci si ulovit své zdraví!</button>
 </div>
 
 <script>
@@ -251,20 +251,20 @@ function movePlayer(){
     player.y += direction.y;
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
-        gameOver("💫 Vyletěli jste mimo zelenou louku, konec hry!");
+        gameOver("💫 Vyletěl js mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
         return;
     }
 
     let obsHit = obstacles.find(o => o.pos.x===player.x && o.pos.y===player.y);
     if(obsHit){
-        gameOver("🍷 Alkohol vás zdržel a hra končí!");
+        gameOver("🍷 Alkohol narušil tvoje uzdravování, a hra tak končí!");
         return;
     }
 
     if(player.x===item.pos.x && player.y===item.pos.y){
         score++;
         if(score>=targetScore){
-            gameOver("🎉 Gratulujeme! Sbírka zdraví dokončena! 🌟");
+            gameOver("🎉 Sbírka zdraví dokončena! 🌟");
             return;
         }
         item = createItem();
