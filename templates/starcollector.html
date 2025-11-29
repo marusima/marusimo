@@ -90,8 +90,8 @@ body {
     border-radius: 8px;
 }
 
-/* Modal Game Over */
-#gameover-modal {
+/* Modaly */
+.modal {
     display: none;
     position: fixed;
     top: 50%;
@@ -105,12 +105,22 @@ body {
     z-index: 100;
 }
 
-#gameover-modal h2 {
-    font-size: 28px;
+.modal h2 {
+    font-size: 24px;
     margin-bottom: 15px;
 }
 
-#gameover-modal button {
+.modal input {
+    font-size: 20px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 80%;
+}
+
+.modal button {
     font-size: 20px;
     padding: 8px 20px;
     border-radius: 8px;
@@ -126,19 +136,30 @@ body {
 <div class="stars" id="stars"></div>
 
 <div id="game-wrapper">
-    <div id="score">⭐ 0</div>
+    <div id="score">⭐ 0 - Dobrodružství čeká!</div>
     <div id="game-container">
         <div id="game"></div>
     </div>
 </div>
 
-<div id="gameover-modal">
+<!-- Game Over Modal -->
+<div class="modal" id="gameover-modal">
     <h2 id="gameover-text"></h2>
     <button onclick="restartGame()">Hrát znovu</button>
 </div>
 
+<!-- Úvodní Modal -->
+<div class="modal" id="intro-modal">
+    <h2>Vítejte ve vesmíru!</h2>
+    <p>Zde můžete ulovit všechny zázraky světa. 🌌</p>
+    <p>Zvolte si, kolik zázraků dnes chcete ulovit (1–15):</p>
+    <input type="number" id="target-input" min="1" max="15" value="5">
+    <br>
+    <button onclick="startGame()">Start!</button>
+</div>
+
 <script>
-// Generování blikajících hvězdiček
+// Blikající hvězdičky
 const starsContainer = document.getElementById('stars');
 for(let i=0;i<150;i++){
     const star = document.createElement('div');
@@ -156,12 +177,29 @@ const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
 const modal = document.getElementById("gameover-modal");
 const gameoverText = document.getElementById("gameover-text");
+const introModal = document.getElementById("intro-modal");
+const targetInput = document.getElementById("target-input");
 
-let player = { x: 7, y: 7 };
+let player = { x:7, y:7 };
 let star = randomPosition();
-let holes = generateHoles();
-let direction = { x: 0, y: 0 };
+let holes = [];
+let direction = { x:0, y:0 };
 let score = 0;
+let targetScore = 5; // default
+
+// Úvodní modal
+introModal.style.display = 'block';
+
+function startGame(){
+    const val = parseInt(targetInput.value);
+    if(val>=1 && val<=15){
+        targetScore = val;
+        introModal.style.display='none';
+        resetGame();
+    } else {
+        alert("Zadejte číslo od 1 do 15!");
+    }
+}
 
 // Náhodná pozice
 function randomPosition() {
@@ -174,7 +212,6 @@ function generateHoles() {
     let arr = [];
     while(arr.length<numHoles){
         let h = randomPosition();
-        // Zajistit, aby nebyl na hráči ani hvězdě ani duplicitní
         if(!((h.x===player.x && h.y===player.y) || (h.x===star.x && h.y===star.y)) &&
            !arr.some(e=>e.x===h.x && e.y===h.y)){
             arr.push(h);
@@ -184,7 +221,7 @@ function generateHoles() {
 }
 
 // Vykreslení hry
-function drawGame() {
+function drawGame(){
     game.innerHTML='';
     for(let y=0;y<gameSize;y++){
         for(let x=0;x<gameSize;x++){
@@ -211,6 +248,7 @@ function drawGame() {
             game.appendChild(cell);
         }
     }
+    scoreEl.textContent = `⭐ ${score} - Ulovte ${targetScore} zázraků!`;
 }
 
 // Pohyb hráče
@@ -226,14 +264,17 @@ function movePlayer() {
 
     // Kolize s černou dírou
     if(holes.some(h=>h.x===player.x && h.y===player.y)){
-        gameOver("⚫ Haha! Černá díra vás pohltí a už vás neuvidí ani hvězdy!");
+        gameOver("⚫ Haha! Černá díra vás pohltila a už vás neuvidí ani hvězdy!");
         return;
     }
 
     // Sebraní hvězdy
     if(player.x===star.x && player.y===star.y){
         score++;
-        scoreEl.textContent="⭐ "+score;
+        if(score>=targetScore){
+            gameOver("🎉 Gratulujeme! Ulovili jste si své dnešní štěstí a všechny zázraky vesmíru! 🌟");
+            return;
+        }
         star=randomPosition();
         holes=generateHoles();
     }
@@ -251,11 +292,16 @@ function gameOver(msg){
 // Restart hry
 function restartGame(){
     modal.style.display='none';
-    player={x:7,y:7};
+    score=0;
+    resetGame();
+}
+
+// Reset hry
+function resetGame(){
+    player={x:7, y:7};
     star=randomPosition();
     holes=generateHoles();
-    score=0;
-    scoreEl.textContent="⭐ 0";
+    direction={x:0, y:0};
     drawGame();
 }
 
@@ -267,9 +313,7 @@ document.addEventListener('keydown', e=>{
     if(e.key==='ArrowRight') direction={x:1,y:0};
 });
 
-// Inicializace
-drawGame();
-setInterval(movePlayer,300);
+// Inicializace (počáteční modal již zobrazen)
 </script>
 
 </body>
