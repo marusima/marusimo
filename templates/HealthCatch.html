@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>Lov Zdraví</title>
+<title>Lov zdraví</title>
 <style>
 body {
     margin: 0;
@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #a0d8a0, #70b070);
+    background: radial-gradient(circle at center, #003300, #001100);
     font-family: Arial, sans-serif;
     color: white;
     overflow: hidden;
@@ -21,25 +21,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 5;
+    position: relative;
+}
+
+/* Skóre pod herním polem */
+#score {
+    font-size: 24px;
+    background: rgba(255,255,255,0.1);
+    padding: 10px 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+    box-shadow: 0 0 15px #fff;
 }
 
 /* Herní plátno */
-#game {
-    display: grid;
-    grid-template-columns: repeat(20, 50px);
-    grid-template-rows: repeat(10, 50px);
-    gap: 3px;
-    background: rgba(34,139,34,0.4);
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+#game-container {
+    position: relative;
 }
 
-/* Jednotlivé políčka */
+#game {
+    display: grid;
+    grid-template-columns: repeat(20, 60px);
+    grid-template-rows: repeat(10, 60px);
+    gap: 3px;
+    background: rgba(0,50,0,0.8);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+    z-index: 1;
+}
+
 .cell {
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle at center, #b0e0a0 0%, #70b070 100%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at center, #004400 0%, #002200 100%);
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -53,15 +69,6 @@ body {
     border-radius: 8px;
 }
 
-/* Skóre a komentáře */
-#score {
-    font-size: 24px;
-    margin-top: 10px;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 12px;
-}
-
 /* Modaly */
 .modal {
     display: none;
@@ -69,7 +76,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(30,50,30,0.95);
+    background: rgba(20,20,30,0.95);
     padding: 30px 40px;
     border-radius: 16px;
     box-shadow: 0 0 20px #fff;
@@ -89,7 +96,7 @@ body {
     border: none;
     margin-bottom: 10px;
     text-align: center;
-    width: 60%;
+    width: 80%;
 }
 
 .modal button {
@@ -98,7 +105,7 @@ body {
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    background: #ffcc00;
+    background: #00cc44;
     color: #000;
 }
 </style>
@@ -106,8 +113,10 @@ body {
 <body>
 
 <div id="game-wrapper">
-    <div id="game"></div>
-    <div id="score">💚 0 - Začínáme s lovem zdraví!</div>
+    <div id="game-container">
+        <div id="game"></div>
+    </div>
+    <div id="score">💚 0 - Dobrodružství začíná!</div>
 </div>
 
 <!-- Game Over Modal -->
@@ -118,15 +127,16 @@ body {
 
 <!-- Úvodní Modal -->
 <div class="modal" id="intro-modal">
-    <h2>Vítejte u Lovu Zdraví!</h2>
-    <p>Pomozte nemocnému človíčkovi nasbírat zdraví 🍀🍵🫚 a vyhnout se alkoholu 🍷🍸</p>
-    <p>Zvolte si, kolik zdravých věcí dnes chcete nasbírat (1–15):</p>
+    <h2>Vítejte v Lovu zdraví!</h2>
+    <p>Jste nemocný človíček a sbíráte zdravé věci pro své zdraví 🌱</p>
+    <p>Zvolte si, kolik zdravých věcí chcete ulovit (1–15):</p>
     <input type="number" id="target-input" min="1" max="15" value="5">
     <br>
     <button onclick="startGame()">Start!</button>
 </div>
 
 <script>
+// Hra
 const gameWidth = 20;
 const gameHeight = 10;
 const game = document.getElementById("game");
@@ -136,18 +146,19 @@ const gameoverText = document.getElementById("gameover-text");
 const introModal = document.getElementById("intro-modal");
 const targetInput = document.getElementById("target-input");
 
+const healthyItems = ["clover.png", "tea.png", "ginger.png"];
+const unhealthyItems = ["alcohol.png", "alcoholc2.png"];
+
 let player = { x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2) };
-let item = randomPosition();
+let item = null;
 let obstacles = [];
 let direction = { x:0, y:0 };
 let score = 0;
 let targetScore = 5;
 let gameInterval = null;
 
-const healthyItems = ['clover.png','tea.png','ginger.png'];
-const unhealthyItems = ['alcohol.png','alcoholc2.png'];
-
-introModal.style.display='block';
+// Úvodní modal
+introModal.style.display = 'block';
 
 function startGame(){
     const val = parseInt(targetInput.value);
@@ -155,7 +166,9 @@ function startGame(){
         targetScore = val;
         introModal.style.display='none';
         resetGame();
-        if(!gameInterval) gameInterval = setInterval(movePlayer, 300);
+        if(!gameInterval){
+            gameInterval = setInterval(movePlayer, 300);
+        }
     } else {
         alert("Zadejte číslo od 1 do 15!");
     }
@@ -165,19 +178,29 @@ function randomPosition(){
     return { x: Math.floor(Math.random()*gameWidth), y: Math.floor(Math.random()*gameHeight) };
 }
 
+// Vytvoření itemu a překážky
+function createItem() {
+    return { pos: randomPosition(), img: healthyItems[Math.floor(Math.random()*healthyItems.length)] };
+}
+function createObstacle() {
+    return { pos: randomPosition(), img: unhealthyItems[Math.floor(Math.random()*unhealthyItems.length)] };
+}
+
 function generateObstacles(){
-    const numObs = Math.floor(Math.random()*4)+3; // 3–6 překážek
+    const numObs = Math.floor(Math.random()*4)+3; // 3–6
     let arr=[];
     while(arr.length<numObs){
-        let o = randomPosition();
-        if(!((o.x===player.x && o.y===player.y) || (o.x===item.x && o.y===item.y)) &&
-           !arr.some(e=>e.x===o.x && e.y===o.y)){
+        let o = createObstacle();
+        if(!((o.pos.x===player.x && o.pos.y===player.y) || 
+             (o.pos.x===item.pos.x && o.pos.y===item.pos.y)) &&
+           !arr.some(e=>e.pos.x===o.pos.x && e.pos.y===o.pos.y)){
             arr.push(o);
         }
     }
     return arr;
 }
 
+// Vykreslení hry
 function drawGame(){
     game.innerHTML='';
     for(let y=0;y<gameHeight;y++){
@@ -190,23 +213,25 @@ function drawGame(){
                 img.src='../static/sick.png';
                 img.alt='player';
                 cell.appendChild(img);
-            } else if(x===item.x && y===item.y){
+            } else if(x===item.pos.x && y===item.pos.y){
                 const img=document.createElement('img');
-                img.src='../static/' + healthyItems[Math.floor(Math.random()*healthyItems.length)];
+                img.src='../static/' + item.img;
                 img.alt='healthy';
                 cell.appendChild(img);
-            } else if(obstacles.some(o=>o.x===x && o.y===y)){
-                const img=document.createElement('img');
-                img.src='../static/' + unhealthyItems[Math.floor(Math.random()*unhealthyItems.length)];
-                img.alt='obstacle';
-                cell.appendChild(img);
+            } else {
+                let obs = obstacles.find(o => o.pos.x===x && o.pos.y===y);
+                if(obs){
+                    const img=document.createElement('img');
+                    img.src='../static/' + obs.img;
+                    img.alt='obstacle';
+                    cell.appendChild(img);
+                }
             }
 
             game.appendChild(cell);
         }
     }
 
-    // Komentáře ke skóre
     let percent = Math.floor((score/targetScore)*100);
     let comment='';
     if(percent===0) comment='🌱 Začínáme, hodně zdraví!';
@@ -216,58 +241,62 @@ function drawGame(){
     else if(percent<90) comment='🍀 Poslední úsilí, skoro hotovo!';
     else if(percent<100) comment='✨ Skoro hotovo, poslední věc!';
     else comment='🏆 Cíl dosažen, gratulujeme!';
-
     scoreEl.textContent=`💚 ${score}/${targetScore} - ${comment}`;
 }
 
+// Pohyb hráče
 function movePlayer(){
     player.x += direction.x;
     player.y += direction.y;
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
-        gameOver('💫 Vyletěl jste mimo zelený svět zdraví!');
+        gameOver("💫 Vyletěli jste mimo zelenou louku, konec hry!");
         return;
     }
 
-    if(obstacles.some(o=>o.x===player.x && o.y===player.y)){
-        alert('🍷 Oooops! Alkohol! Ztrácíte 1 bod.');
-        if(score>0) score--;
-        direction={x:0,y:0};
+    let obsHit = obstacles.find(o => o.pos.x===player.x && o.pos.y===player.y);
+    if(obsHit){
+        gameOver("🍷 Alkohol vás zdržel a hra končí!");
+        return;
     }
 
-    if(player.x===item.x && player.y===item.y){
+    if(player.x===item.pos.x && player.y===item.pos.y){
         score++;
         if(score>=targetScore){
-            gameOver('🎉 Gratulujeme! Nasbírali jste všechno zdraví! 🌟');
+            gameOver("🎉 Gratulujeme! Sbírka zdraví dokončena! 🌟");
             return;
         }
-        item=randomPosition();
-        obstacles=generateObstacles();
+        item = createItem();
+        obstacles = generateObstacles();
     }
 
     drawGame();
 }
 
+// Konec hry
 function gameOver(msg){
     modal.style.display='block';
     gameoverText.textContent=msg;
     direction={x:0,y:0};
 }
 
+// Restart hry
 function restartGame(){
     modal.style.display='none';
     score=0;
     resetGame();
 }
 
+// Reset hry
 function resetGame(){
-    player={x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2)};
-    item=randomPosition();
-    obstacles=generateObstacles();
-    direction={x:0,y:0};
+    player = { x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2) };
+    item = createItem();
+    obstacles = generateObstacles();
+    direction = {x:0, y:0};
     drawGame();
 }
 
+// Ovládání šipkami
 document.addEventListener('keydown', e=>{
     if(e.key==='ArrowUp') direction={x:0,y:-1};
     if(e.key==='ArrowDown') direction={x:0,y:1};
