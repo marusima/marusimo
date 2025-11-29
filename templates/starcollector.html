@@ -5,7 +5,7 @@
 <title>Star Collector</title>
 <style>
     body {
-        background: #1a1a1a;
+        background: radial-gradient(circle at center, #0a0a0a, #000000, #000015);
         color: white;
         display: flex;
         justify-content: center;
@@ -17,34 +17,32 @@
 
     #game {
         display: grid;
-        grid-template-columns: repeat(15, 40px);
-        grid-template-rows: repeat(15, 40px);
-        gap: 2px;
-        background: #000;
-        padding: 10px;
-        border-radius: 10px;
+        grid-template-columns: repeat(15, 45px);
+        grid-template-rows: repeat(15, 45px);
+        gap: 3px;
+        background: rgba(0,0,0,0.6);
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.1);
     }
 
     .cell {
-        width: 40px;
-        height: 40px;
-        background: #222;
+        width: 45px;
+        height: 45px;
+        background: #0f0f1a;
+        border-radius: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .cell img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        image-rendering: pixelated;
+        font-size: 32px;
+        user-select: none;
     }
 
     #message {
         position: absolute;
-        font-size: 30px;
-        top: 20px;
+        top: 15px;
+        font-size: 28px;
+        text-shadow: 0 0 10px white;
     }
 </style>
 </head>
@@ -73,8 +71,7 @@
     function generateHoles(amount) {
         let arr = [];
         for (let i = 0; i < amount; i++) {
-            let pos = randomPosition();
-            arr.push(pos);
+            arr.push(randomPosition());
         }
         return arr;
     }
@@ -88,21 +85,15 @@
                 cell.classList.add("cell");
 
                 if (x === player.x && y === player.y) {
-                    let img = document.createElement("img");
-                    img.src = "./static/player.png";
-                    cell.appendChild(img);
+                    cell.textContent = "🧑‍🚀";  // player
                 } 
                 else if (x === star.x && y === star.y) {
-                    let img = document.createElement("img");
-                    img.src = "./static/star.png";
-                    cell.appendChild(img);
+                    cell.textContent = "⭐";  // star
                 }
                 else {
                     for (let hole of holes) {
                         if (hole.x === x && hole.y === y) {
-                            let img = document.createElement("img");
-                            img.src = "./static/hole.png";
-                            cell.appendChild(img);
+                            cell.textContent = "⚫";  // black hole
                         }
                     }
                 }
@@ -117,12 +108,12 @@
         player.y += direction.y;
 
         if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
-            endGame("You fell off the map!");
+            endGame("You floated off into space!");
         }
 
         for (let hole of holes) {
             if (player.x === hole.x && player.y === hole.y) {
-                endGame("You fell into a hole!");
+                endGame("You fell into a black hole!");
             }
         }
 
@@ -135,7 +126,7 @@
     }
 
     function endGame(msg) {
-        message.innerText = msg + " Game Over 💀";
+        message.innerText = msg + " 💀 Game Over";
         direction = { x: 0, y: 0 };
     }
 
