@@ -63,8 +63,8 @@ body {
 
 #game {
     display: grid;
-    grid-template-columns: repeat(15, 60px);
-    grid-template-rows: repeat(15, 60px);
+    grid-template-columns: repeat(25, 60px); /* 25 sloupců */
+    grid-template-rows: repeat(15, 60px);    /* 15 řádků */
     gap: 3px;
     background: rgba(0,0,0,0.8);
     padding: 15px;
@@ -172,7 +172,8 @@ for(let i=0;i<150;i++){
 }
 
 // Hra
-const gameSize = 15;
+const gameWidth = 25;
+const gameHeight = 15;
 const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
 const modal = document.getElementById("gameover-modal");
@@ -180,12 +181,13 @@ const gameoverText = document.getElementById("gameover-text");
 const introModal = document.getElementById("intro-modal");
 const targetInput = document.getElementById("target-input");
 
-let player = { x:7, y:7 };
+let player = { x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2) };
 let star = randomPosition();
 let holes = [];
 let direction = { x:0, y:0 };
 let score = 0;
 let targetScore = 5; // default
+let gameInterval = null;
 
 // Úvodní modal
 introModal.style.display = 'block';
@@ -197,17 +199,17 @@ function startGame(){
         introModal.style.display='none';
         resetGame();
         // Spustit pohyb hráče
-        if(!window.gameInterval) {
-            window.gameInterval = setInterval(movePlayer, 300);
+        if(!gameInterval) {
+            gameInterval = setInterval(movePlayer, 300);
         }
     } else {
-        alert("Zadejte číslo od 1 do 15! Bude to váš cíl, tedy kolik zázraků budete potřebovat pro věčné štěstí.");
+        alert("Zadejte číslo od 1 do 15!");
     }
 }
 
 // Náhodná pozice
 function randomPosition() {
-    return { x: Math.floor(Math.random()*gameSize), y: Math.floor(Math.random()*gameSize) };
+    return { x: Math.floor(Math.random()*gameWidth), y: Math.floor(Math.random()*gameHeight) };
 }
 
 // Vygenerování černých děr (4–8)
@@ -227,8 +229,8 @@ function generateHoles() {
 // Vykreslení hry
 function drawGame(){
     game.innerHTML='';
-    for(let y=0;y<gameSize;y++){
-        for(let x=0;x<gameSize;x++){
+    for(let y=0;y<gameHeight;y++){
+        for(let x=0;x<gameWidth;x++){
             const cell = document.createElement('div');
             cell.className='cell';
 
@@ -261,14 +263,14 @@ function movePlayer() {
     player.y += direction.y;
 
     // Vyletění z mapy
-    if(player.x<0 || player.x>=gameSize || player.y<0 || player.y>=gameSize){
+    if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
         gameOver("💫 Vyletěli jste hluboko do vesmíru a už není návratu!");
         return;
     }
 
     // Kolize s černou dírou
     if(holes.some(h=>h.x===player.x && h.y===player.y)){
-        gameOver("⚫ Haha! Černá díra vás pohltila a už vás neuvidí ani hvězdy!");
+        gameOver("⚫ Haha! Černá díra vás pohltí a už vás neuvidí ani hvězdy!");
         return;
     }
 
@@ -302,7 +304,7 @@ function restartGame(){
 
 // Reset hry
 function resetGame(){
-    player={x:7, y:7};
+    player={x: Math.floor(gameWidth/2), y: Math.floor(gameHeight/2)};
     star=randomPosition();
     holes=generateHoles();
     direction={x:0, y:0};
@@ -316,8 +318,6 @@ document.addEventListener('keydown', e=>{
     if(e.key==='ArrowLeft') direction={x:-1,y:0};
     if(e.key==='ArrowRight') direction={x:1,y:0};
 });
-
-// Inicializace (počáteční modal již zobrazen)
 </script>
 
 </body>
