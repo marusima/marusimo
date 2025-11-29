@@ -17,18 +17,8 @@ body {
 }
 
 /* Blikající hvězdičky na pozadí */
-.stars {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
 .star {
     position: absolute;
-    color: white;
-    font-size: 2px;
     animation: twinkle 2s infinite;
 }
 
@@ -160,6 +150,7 @@ body {
 </div>
 
 <script>
+    
 // Blikající hvězdičky
 const starsContainer = document.getElementById('stars');
 for(let i=0;i<150;i++){
@@ -167,10 +158,13 @@ for(let i=0;i<150;i++){
     star.className = 'star';
     star.style.left = Math.random()*window.innerWidth+'px';
     star.style.top = Math.random()*window.innerHeight+'px';
-    star.style.fontSize = (Math.random()*2+1)+'px';
+    star.style.width = star.style.height = (Math.random()*2+1)+'px'; // velikost
+    star.style.borderRadius = '50%'; // kruh
+    star.style.backgroundColor = 'white';
     star.style.animationDuration = (Math.random()*3+1)+'s';
     starsContainer.appendChild(star);
 }
+
 
 // Hra
 const gameWidth = 20;
