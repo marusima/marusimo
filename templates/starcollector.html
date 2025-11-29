@@ -15,6 +15,18 @@
         font-family: Arial, sans-serif;
     }
 
+    /* SCORE LEFT */
+    #scoreboard {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        font-size: 26px;
+        background: rgba(20,20,20,0.6);
+        padding: 10px 16px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.15);
+    }
+
     #game {
         display: grid;
         grid-template-columns: repeat(15, 45px);
@@ -38,6 +50,13 @@
         user-select: none;
     }
 
+    .cell img {
+        width: 95%;
+        height: 95%;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
     #message {
         position: absolute;
         top: 15px;
@@ -49,17 +68,20 @@
 <body>
 
 <div id="message"></div>
+<div id="scoreboard">⭐ Score: <span id="score">0</span></div>
 <div id="game"></div>
 
 <script>
     const gameSize = 15;
     const game = document.getElementById("game");
     const message = document.getElementById("message");
+    const scoreText = document.getElementById("score");
 
     let player = { x: 7, y: 7 };
     let star = randomPosition();
     let holes = generateHoles(5);
     let direction = { x: 0, y: 0 };
+    let score = 0;
 
     function randomPosition() {
         return {
@@ -85,15 +107,19 @@
                 cell.classList.add("cell");
 
                 if (x === player.x && y === player.y) {
-                    cell.textContent = "🧑‍🚀";  // player
+                    let img = document.createElement("img");
+                    img.src = "./static/player.jpg";
+                    cell.appendChild(img);
                 } 
                 else if (x === star.x && y === star.y) {
-                    cell.textContent = "⭐";  // star
+                    cell.textContent = "⭐";
                 }
                 else {
                     for (let hole of holes) {
                         if (hole.x === x && hole.y === y) {
-                            cell.textContent = "⚫";  // black hole
+                            let img = document.createElement("img");
+                            img.src = "./static/hole.jpg";
+                            cell.appendChild(img);
                         }
                     }
                 }
@@ -118,6 +144,8 @@
         }
 
         if (player.x === star.x && player.y === star.y) {
+            score++;
+            scoreText.textContent = score;
             star = randomPosition();
             holes = generateHoles(5);
         }
