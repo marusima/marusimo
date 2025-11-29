@@ -35,6 +35,15 @@ body {
     box-shadow: 0 0 15px #fff;
 }
 
+/* Hláška pod skóre */
+#feedback {
+    font-size: 20px;
+    margin-top: 8px;
+    min-height: 26px; /* zachová prostor i když není hláška */
+    color: #ffcc00;
+    text-align: center;
+}
+
 /* Herní plátno */
 #game-container {
     position: relative;
@@ -117,6 +126,7 @@ body {
         <div id="game"></div>
     </div>
     <div id="score">💚 0 - Dobrodružství začíná!</div>
+    <div id="feedback"></div>
 </div>
 
 <!-- Game Over Modal -->
@@ -142,6 +152,7 @@ const gameWidth = 20;
 const gameHeight = 10;
 const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
+const feedbackEl = document.getElementById("feedback");
 const modal = document.getElementById("gameover-modal");
 const gameoverText = document.getElementById("gameover-text");
 const introModal = document.getElementById("intro-modal");
@@ -157,6 +168,7 @@ let direction = { x:0, y:0 };
 let score = 0;
 let targetScore = 5;
 let gameInterval = null;
+let feedbackMessage = '';
 
 introModal.style.display = 'block';
 
@@ -240,14 +252,15 @@ function drawGame(){
     else if(percent<100) comment='✨ Skoro hotovo, poslední věc!';
     else comment='🏆 A jsi zdravý přesně jak slíbeno!';
     scoreEl.textContent=`💚 ${score}/${targetScore} - ${comment}`;
+    feedbackEl.textContent = feedbackMessage;
 }
 
 // Pohyb hráče
-let warningTimeout = null; // pro hlášky
-
 function movePlayer(){
     player.x += direction.x;
     player.y += direction.y;
+
+    feedbackMessage = ''; // vymažeme předchozí hlášku
 
     if(player.x<0 || player.x>=gameWidth || player.y<0 || player.y>=gameHeight){
         gameOver("💫 Vyletěl jsi mimo zelenou louku a ztrácíš možnost lovit své zdraví!");
@@ -257,19 +270,10 @@ function movePlayer(){
     let obsHit = obstacles.find(o => o.pos.x===player.x && o.pos.y===player.y);
     if(obsHit){
         score = 0;
+        feedbackMessage = "❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo.";
+        item = createItem();
+        obstacles = generateObstacles();
         drawGame();
-        const originalText = scoreEl.textContent;
-        scoreEl.textContent += " ❌ Opravdu jsi musel tohle nezdravé? Zpomalilo to tvoje uzdravování, snad ti to za to stálo.";
-
-        // Pokud už běží timeout, zrušit ho
-        if(warningTimeout) clearTimeout(warningTimeout);
-
-        warningTimeout = setTimeout(()=>{
-            scoreEl.textContent = originalText;
-            item = createItem();
-            obstacles = generateObstacles();
-            drawGame();
-        }, 3000); // 3 sekundy
         return;
     }
 
@@ -286,7 +290,6 @@ function movePlayer(){
     drawGame();
 }
 
-
 function gameOver(msg){
     modal.style.display='block';
     gameoverText.textContent=msg;
@@ -296,6 +299,7 @@ function gameOver(msg){
 function restartGame(){
     modal.style.display='none';
     score=0;
+    feedbackMessage = '';
     resetGame();
 }
 
