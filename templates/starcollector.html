@@ -1,45 +1,34 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Star Collector ✨</title>
-
+<title>Star Collector</title>
 <style>
     body {
+        background: #1a1a1a;
+        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background: linear-gradient(#0e1b3a, #1d2d50);
-        font-family: "Comic Sans MS", sans-serif;
-        color: white;
-    }
-
-    #score {
-        position: absolute;
-        top: 20px;
-        font-size: 26px;
-        text-shadow: 0 0 10px #fff;
+        margin: 0;
+        font-family: Arial, sans-serif;
     }
 
     #game {
         display: grid;
-        grid-template-columns: repeat(15, 50px);
-        grid-template-rows: repeat(15, 50px);
+        grid-template-columns: repeat(15, 40px);
+        grid-template-rows: repeat(15, 40px);
         gap: 2px;
-        background: rgba(255,255,255,0.08);
+        background: #000;
         padding: 10px;
-        border-radius: 15px;
-        border: 2px solid rgba(255,255,255,0.3);
-        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        border-radius: 10px;
     }
 
     .cell {
-        width: 50px;
-        height: 50px;
-        background: rgba(255,255,255,0.05);
-        border-radius: 10px;
-        overflow: hidden;
+        width: 40px;
+        height: 40px;
+        background: #222;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -49,152 +38,116 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+        image-rendering: pixelated;
+    }
+
+    #message {
+        position: absolute;
+        font-size: 30px;
+        top: 20px;
     }
 </style>
-
 </head>
 <body>
 
-<div id="score">⭐ Score: 0</div>
+<div id="message"></div>
 <div id="game"></div>
 
 <script>
-const size = 15;
-const game = document.getElementById("game");
-const scoreText = document.getElementById("score");
+    const gameSize = 15;
+    const game = document.getElementById("game");
+    const message = document.getElementById("message");
 
-// Player
-let player = { x: 7, y: 7 };
-let direction = { x: 0, y: 0 };
-let score = 0;
+    let player = { x: 7, y: 7 };
+    let star = randomPosition();
+    let holes = generateHoles(5);
+    let direction = { x: 0, y: 0 };
 
-// Star
-let star = { x: 0, y: 0 };
-
-// Holes (obstacles)
-let holes = [];
-
-function createGrid() {
-    game.innerHTML = "";
-    for (let i = 0; i < size * size; i++) {
-        const div = document.createElement("div");
-        div.classList.add("cell");
-        game.appendChild(div);
-    }
-}
-
-function getCell(x, y) {
-    return game.children[y * size + x];
-}
-
-function placeStar() {
-    while (true) {
-        let s = {
-            x: Math.floor(Math.random() * size),
-            y: Math.floor(Math.random() * size),
+    function randomPosition() {
+        return {
+            x: Math.floor(Math.random() * gameSize),
+            y: Math.floor(Math.random() * gameSize)
         };
-        if (!(s.x === player.x && s.y === player.y) &&
-            !holes.some(h => h.x === s.x && h.y === s.y)) {
-            star = s;
-            break;
-        }
     }
-}
 
-function generateHoles() {
-    holes = [];
-    let count = 10 + Math.floor(score / 2);
+    function generateHoles(amount) {
+        let arr = [];
+        for (let i = 0; i < amount; i++) {
+            let pos = randomPosition();
+            arr.push(pos);
+        }
+        return arr;
+    }
 
-    for (let i = 0; i < count; i++) {
-        let h;
-        while (true) {
-            h = {
-                x: Math.floor(Math.random() * size),
-                y: Math.floor(Math.random() * size),
-            };
-            if (!(h.x === player.x && h.y === player.y) &&
-                !(h.x === star.x && h.y === star.y)) {
-                holes.push(h);
-                break;
+    function drawGame() {
+        game.innerHTML = "";
+
+        for (let y = 0; y < gameSize; y++) {
+            for (let x = 0; x < gameSize; x++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+
+                if (x === player.x && y === player.y) {
+                    let img = document.createElement("img");
+                    img.src = "./static/player.png";
+                    cell.appendChild(img);
+                } 
+                else if (x === star.x && y === star.y) {
+                    let img = document.createElement("img");
+                    img.src = "./static/star.png";
+                    cell.appendChild(img);
+                }
+                else {
+                    for (let hole of holes) {
+                        if (hole.x === x && hole.y === y) {
+                            let img = document.createElement("img");
+                            img.src = "./static/hole.png";
+                            cell.appendChild(img);
+                        }
+                    }
+                }
+
+                game.appendChild(cell);
             }
         }
     }
-}
 
-function draw() {
-    for (let i = 0; i < size * size; i++) {
-        game.children[i].innerHTML = "";
+    function movePlayer() {
+        player.x += direction.x;
+        player.y += direction.y;
+
+        if (player.x < 0 || player.x >= gameSize || player.y < 0 || player.y >= gameSize) {
+            endGame("You fell off the map!");
+        }
+
+        for (let hole of holes) {
+            if (player.x === hole.x && player.y === hole.y) {
+                endGame("You fell into a hole!");
+            }
+        }
+
+        if (player.x === star.x && player.y === star.y) {
+            star = randomPosition();
+            holes = generateHoles(5);
+        }
+
+        drawGame();
     }
 
-    // Star
-    getCell(star.x, star.y).innerHTML = `<img src="static/star.png">`;
+    function endGame(msg) {
+        message.innerText = msg + " Game Over 💀";
+        direction = { x: 0, y: 0 };
+    }
 
-    // Holes
-    holes.forEach(h => {
-        getCell(h.x, h.y).innerHTML = `<img src="static/hole.png">`;
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp") direction = { x: 0, y: -1 };
+        if (e.key === "ArrowDown") direction = { x: 0, y: 1 };
+        if (e.key === "ArrowLeft") direction = { x: -1, y: 0 };
+        if (e.key === "ArrowRight") direction = { x: 1, y: 0 };
     });
 
-    // Player
-    getCell(player.x, player.y).innerHTML = `<img src="static/player.png">`;
-}
-
-function move() {
-    const newPos = {
-        x: player.x + direction.x,
-        y: player.y + direction.y
-    };
-
-    // Border collision
-    if (newPos.x < 0 || newPos.x >= size || newPos.y < 0 || newPos.y >= size) {
-        return gameOver();
-    }
-
-    // Hole collision
-    if (holes.some(h => h.x === newPos.x && h.y === newPos.y)) {
-        return gameOver();
-    }
-
-    player = newPos;
-
-    // Collect star
-    if (player.x === star.x && player.y === star.y) {
-        score++;
-        scoreText.textContent = `⭐ Score: ${score}`;
-        placeStar();
-        generateHoles();
-    }
-
-    draw();
-}
-
-function gameOver() {
-    alert("💫 Game Over! Your score: " + score);
-    resetGame();
-}
-
-function resetGame() {
-    player = { x: 7, y: 7 };
-    score = 0;
-    direction = { x: 0, y: 0 };
-    scoreText.textContent = "⭐ Score: 0";
-    placeStar();
-    generateHoles();
-    draw();
-}
-
-document.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp") direction = {x:0, y:-1};
-    if (e.key === "ArrowDown") direction = {x:0, y:1};
-    if (e.key === "ArrowLeft") direction = {x:-1, y:0};
-    if (e.key === "ArrowRight") direction = {x:1, y:0};
-});
-
-// Init
-createGrid();
-placeStar();
-generateHoles();
-draw();
-setInterval(move, 500); // ⭐ POMALEJŠÍ pohyb
+    drawGame();
+    setInterval(movePlayer, 400);
 </script>
 
 </body>
