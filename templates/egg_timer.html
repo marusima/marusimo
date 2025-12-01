@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EggTimer Deluxe — Roztomilé vaření vajíček 🥚</title>
+<style>
+:root{
+  --bg:#fff8ec;
+  --panel:#fff;
+  --accent:#ffd66b;
+  --accent-dark:#ffb84d;
+  --muted:#6b6b6b;
+  --green:#6fcf97;
+  --red:#ff6b6b;
+  --shadow: 0 10px 30px rgba(0,0,0,0.12);
+  --egg-size:220px;
+  --btn-radius:14px;
+}
+
+/* Page */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg, #fffdf6 0%, #fff6e3 50%, #fff3d9 100%);
+  color:#222;
+  padding:24px;
+}
+
+/* Card */
+.card{
+  width: min(860px, 96vw);
+  background:var(--panel);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:28px;
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:24px;
+  align-items:center;
+}
+
+/* Left: controls */
+.controls{
+  padding:12px 8px;
+}
+
+.header {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:14px;
+}
+.logo {
+  font-size:32px;
+  line-height:1;
+}
+.title{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:0.2px;
+}
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin-top:6px;
+}
+
+/* Buttons row */
+.btn-row{
+  display:flex;
+  gap:10px;
+  margin:18px 0 22px 0;
+  flex-wrap:wrap;
+}
+.timer-btn{
+  background: linear-gradient(180deg,var(--accent), var(--accent-dark));
+  border: none;
+  padding:12px 18px;
+  border-radius: var(--btn-radius);
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow: 0 6px 14px rgba(255,160,60,0.28);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  user-select:none;
+}
+.timer-btn:hover{ transform: translateY(-4px); }
+.timer-btn[aria-pressed="true"]{
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(255,160,60,0.28);
+}
+
+/* small info under buttons */
+.info {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+/* Controls: extra buttons */
+.controls-bottom{
+  display:flex;
+  gap:10px;
+  margin-top:6px;
+}
+.small-btn{
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* Right: visual egg + timer */
+.preview{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+
+/* Egg visual */
+.egg-wrap{
+  width:var(--egg-size);
+  height:var(--egg-size);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, #fff7e6 40%, #ffeaa9 60%, #ffd88a 100%);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12), inset 0 -6px 12px rgba(0,0,0,0.04);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Yolk (the face) */
+.yolk{
+  width:48%;
+  height:48%;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 25%, #fff7cc 0%, #ffd24d 40%, #ffb81f 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), inset 0 -4px 8px rgba(255,255,255,0.2);
+  font-size:44px;
+  transition: transform .34s cubic-bezier(.2,.9,.2,1), filter .2s;
+}
+
+/* "boil" steam puffs */
+.puff{
+  position:absolute;
+  top:12%;
+  left:20%;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.6);
+  filter: blur(2px);
+  opacity:0;
+  transform:translateY(6px) scale(.6);
+}
+.puff.p1{ left:18%; top:10%; }
+.puff.p2{ left:28%; top:8%; width:14px;height:14px; }
+.puff.p3{ left:40%; top:12%; width:16px;height:16px; }
+
+/* Timer big */
+.timer-display{
+  font-weight:800;
+  font-size:48px;
+  letter-spacing:1px;
+  color:#2b2b2b;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* message under timer */
+.timer-msg{
+  font-size:15px;
+  color:var(--muted);
+}
+
+/* Progress ring (simple) */
+.progress{
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* animations */
+@keyframes boilPuff {
+  0%{ opacity:0; transform:translateY(6px) scale(.6); }
+  30%{ opacity:0.7; transform:translateY(-6px) scale(1); }
+  100%{ opacity:0; transform:translateY(-16px) scale(1.2); }
+}
+
+/* tiny wobble when ticking */
+.wobble { animation: wobbleAnim .9s ease-in-out infinite; }
+@keyframes wobbleAnim {
+  0%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-4px) rotate(-1.2deg); }
+  100%{ transform: translateY(0) rotate(0deg); }
+}
+
+/* footer tiny */
+.footer{
+  grid-column:1/-1;
+  margin-top:6px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Responsive */
+@media (max-width:880px){
+  .card{ grid-template-columns: 1fr; padding:18px; }
+  .preview{ margin-top:6px; }
+  .egg-wrap{ width:180px; height:180px; }
+}
+</style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <section class="controls" aria-label="Ovládání časovače">
+      <div class="header">
+        <div class="logo">🥚</div>
+        <div>
+          <div id="title" class="title">EggTimer Deluxe</div>
+          <div class="subtitle">Vyber si, jak chceš vajíčko — klikni na tlačítko a spusť odpočet!</div>
+        </div>
+      </div>
+
+      <div class="btn-row" role="tablist" aria-label="Možnosti vaření">
+        <button class="timer-btn" data-seconds="180" id="btn-soft" aria-pressed="false">
+          🥰 Na měkko <small style="opacity:.85;font-weight:600">— 3:00</small>
+        </button>
+
+        <button class="timer-btn" data-seconds="300" id="btn-medium" aria-pressed="false">
+          🙂 Hnilíčko <small style="opacity:.85;font-weight:600">— 5:00</small>
+        </button>
+
+        <button class="timer-btn" data-seconds="480" id="btn-hard" aria-pressed="false">
+          💪 Na tvrdo <small style="opacity:.85;font-weight:600">— 8:00</small>
+        </button>
+
+        <button class="timer-btn" data-seconds="600" id="btn-extra" aria-pressed="false">
+          👑 Extra královské <small style="opacity:.85;font-weight:600">— 10:00</small>
+        </button>
+      </div>
+
+      <div class="info">Po výběru se tlačítko zvýrazní a odpočet začne. Můžeš pauznout / obnovit.</div>
+
+      <div class="controls-bottom">
+        <button class="small-btn" id="pauseBtn">⏸ Pauza</button>
+        <button class="small-btn" id="resumeBtn">▶ Pokračovat</button>
+        <button class="small-btn" id="resetBtn">↺ Reset</button>
+        <button class="small-btn" id="customBtn">⏱ Vlastní čas</button>
+      </div>
+    </section>
+
+    <aside class="preview" aria-live="polite" aria-atomic="true">
+      <div class="egg-wrap" id="eggWrap" aria-hidden="false">
+        <div class="puff p1" id="p1"></div>
+        <div class="puff p2" id="p2"></div>
+        <div class="puff p3" id="p3"></div>
+
+        <div class="yolk" id="yolk">☺️</div>
+
+        <svg class="progress" id="progressSvg" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" stroke="rgba(255,255,255,0.06)" stroke-width="8" fill="none"></circle>
+          <circle cx="50" cy="50" r="46" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none"
+                  stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 50 50)" id="progressCircle"></circle>
+        </svg>
+      </div>
+
+      <div class="timer-display" id="timeDisplay">00:00</div>
+      <div class="timer-msg" id="timerMsg">Vyber recept a stiskni start ♥</div>
+    </aside>
+
+    <div class="footer">Roztomilý časovač vajíček — vytvořeno pro tebe. 🥚💛</div>
+  </main>
+
+<script>
+/* EggTimer Deluxe — JS */
+(function(){
+  const btns = Array.from(document.querySelectorAll('.timer-btn'));
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resumeBtn = document.getElementById('resumeBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const customBtn = document.getElementById('customBtn');
+
+  const timeDisplay = document.getElementById('timeDisplay');
+  const timerMsg = document.getElementById('timerMsg');
+  const yolk = document.getElementById('yolk');
+  const eggWrap = document.getElementById('eggWrap');
+  const progressCircle = document.getElementById('progressCircle');
+  const puffEls = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
+
+  let duration = 0;      // total seconds selected
+  let remaining = 0;     // remaining seconds
+  let timer = null;
+  let running = false;
+  let startTs = null;
+
+  // sound on finish
+  function ding(){
+    // short pleasant beep using WebAudio
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = 880;
+      g.gain.value = 0.0001;
+      o.connect(g);
+      g.connect(ctx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 1.1);
+      o.stop(ctx.currentTime + 1.15);
+    }catch(e){ console.log('Audio error', e) }
+  }
+
+  function formatTime(s){
+    const mm = String(Math.floor(s/60)).padStart(2,'0');
+    const ss = String(s%60).padStart(2,'0');
+    return `${mm}:${ss}`;
+  }
+
+  // set progress circle from 0..1
+  function setProgress(ratio){
+    const total = 289; // approx circumference for r=46
+    const off = total * (1 - Math.min(Math.max(ratio,0),1));
+    progressCircle.style.strokeDashoffset = off;
+  }
+
+  function setActiveButton(btn){
+    btns.forEach(b=> b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+  }
+
+  function clearActiveButtons(){
+    btns.forEach(b=> b.setAttribute('aria-pressed','false'));
+  }
+
+  function startCountdown(sec){
+    // start new countdown
+    if(timer) { clearInterval(timer); timer=null; }
+    duration = sec;
+    remaining = sec;
+    startTs = Date.now();
+    running = true;
+    updateUI();
+    timer = setInterval(tick, 250); // 4x/sec for smoothish UI
+    eggWrap.classList.add('wobble');
+    startPuffs();
+    timerMsg.textContent = "Vajíčko se vaří... klidně si dej čaj ☕";
+  }
+
+  function tick(){
+    // compute elapsed from start to avoid drift
+    const elapsed = Math.floor((Date.now() - startTs)/1000);
+    remaining = Math.max(duration - elapsed, 0);
+    updateUI();
+    if(remaining <= 0){
+      finish();
+    }
+  }
+
+  function pause(){
+    if(!running) return;
+    running = false;
+    clearInterval(timer);
+    timer = null;
+    // freeze remaining by recomputing
+    const elapsed = Math.floor((Date.now() - startTs)/1000);
+    remaining = Math.max(duration - elapsed, 0);
+    duration = remaining; // so resume continues
+    eggWrap.classList.remove('wobble');
+    stopPuffs();
+    timerMsg.textContent = "Pozastaveno — můžeš pokračovat";
+  }
+
+  function resume(){
+    if(running) return;
+    if(remaining <= 0) return;
+    running = true;
+    startTs = Date.now() - (duration - remaining)*1000;
+    timer = setInterval(tick, 250);
+    eggWrap.classList.add('wobble');
+    startPuffs();
+    timerMsg.textContent = "Pokračuje vaření...";
+  }
+
+  function resetAll(){
+    if(timer) { clearInterval(timer); timer=null; }
+    running = false;
+    duration = 0;
+    remaining = 0;
+    startTs = null;
+    clearActiveButtons();
+    updateUI();
+    eggWrap.classList.remove('wobble');
+    stopPuffs();
+    timerMsg.textContent = "Vyber recept a stiskni start ♥";
+  }
+
+  function finish(){
+    if(timer){ clearInterval(timer); timer=null; }
+    running = false;
+    remaining = 0;
+    setProgress(1);
+    eggWrap.classList.remove('wobble');
+    stopPuffs();
+    yolk.textContent = "🎉";
+    timerMsg.textContent = "Hotovo! Otevři vajíčko a dobrou chuť! 🍳";
+    ding();
+    // confetti-ish simple animation: pulse
+    yolk.style.transform = 'scale(1.18)';
+    setTimeout(()=> yolk.style.transform = '', 600);
+    // after short while, set smiling face back
+    setTimeout(()=> { yolk.textContent = "☺️"; }, 1600);
+    clearActiveButtons();
+  }
+
+  function updateUI(){
+    timeDisplay.textContent = formatTime(remaining);
+    // progress ratio = elapsed/duration
+    const ratio = duration > 0 ? ( (duration - remaining) / duration ) : 0;
+    setProgress(ratio);
+    // change yolk face depending on doneness
+    if(duration > 0){
+      const donePerc = Math.round((1 - (remaining / duration)) * 100);
+      if(donePerc < 20) yolk.textContent = "😌";
+      else if(donePerc < 50) yolk.textContent = "🙂";
+      else if(donePerc < 85) yolk.textContent = "😋";
+      else yolk.textContent = "😄";
+    } else {
+      yolk.textContent = "☺️";
+      setProgress(0);
+    }
+    // if paused show little hint
+  }
+
+  // puffs: animate three puffs when running
+  let puffInterval = null;
+  function startPuffs(){
+    if(puffInterval) clearInterval(puffInterval);
+    puffInterval = setInterval(()=>{
+      puffEls.forEach((p,i)=>{
+        // small delay between puffs
+        setTimeout(()=> {
+          p.style.animation = 'none';
+          // trigger reflow
+          void p.offsetWidth;
+          p.style.animation = `boilPuff ${800 + Math.random()*600}ms ease-out forwards`;
+        }, i * 120);
+      });
+    }, 700);
+  }
+  function stopPuffs(){
+    if(puffInterval) { clearInterval(puffInterval); puffInterval=null; }
+    puffEls.forEach(p=> { p.style.animation = 'none'; p.style.opacity = 0; });
+  }
+
+  // event listeners
+  btns.forEach(b=>{
+    b.addEventListener('click', (e)=>{
+      const s = Number(b.getAttribute('data-seconds'));
+      setActiveButton(b);
+      startCountdown(s);
+    });
+  });
+
+  pauseBtn.addEventListener('click', ()=> pause());
+  resumeBtn.addEventListener('click', ()=> resume());
+  resetBtn.addEventListener('click', ()=> resetAll());
+
+  customBtn.addEventListener('click', ()=>{
+    const minutes = prompt("Zadej délku vaření v minutách (např. 4 = 4 minuty):", "4");
+    const m = Number(minutes);
+    if(!isNaN(m) && m > 0 && m < 240){
+      // create a fake active state for clarity
+      clearActiveButtons();
+      startCountdown(Math.round(m*60));
+    } else {
+      alert("Zadej prosím číslo (1–240).");
+    }
+  });
+
+  // keyboard shortcuts: 1..4 map to buttons
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === '1') btns[0].click();
+    if(e.key === '2') btns[1].click();
+    if(e.key === '3') btns[2].click();
+    if(e.key === '4') btns[3].click();
+
+    if(e.key === ' ') { // space toggles pause/resume
+      e.preventDefault();
+      if(running) pause(); else resume();
+    }
+  });
+
+  // init UI
+  resetAll();
+})();
+</script>
+</body>
+</html>
