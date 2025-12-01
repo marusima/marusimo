@@ -284,7 +284,7 @@ body{
       </div>
 
       <div class="timer-display" id="timeDisplay">00:00</div>
-      <div class="timer-msg" id="timerMsg">Vyber recept a stiskni start ♥</div>
+      <div class="timer-msg" id="timerMsg">Vyber plán a stiskni start ♥</div>
     </aside>
 
     <div class="footer">Roztomilý časovač vajíček — vytvořeno pro tebe. 🥚💛</div>
@@ -364,7 +364,7 @@ body{
     timer = setInterval(tick, 250); // 4x/sec for smoothish UI
     eggWrap.classList.add('wobble');
     startPuffs();
-    timerMsg.textContent = "Vajíčko se vaří... klidně si dej čaj ☕";
+    timerMsg.textContent = "Vajíčko se vaří... klidně si dej čaj ☕.";
   }
 
   function tick(){
@@ -388,7 +388,7 @@ body{
     duration = remaining; // so resume continues
     eggWrap.classList.remove('wobble');
     stopPuffs();
-    timerMsg.textContent = "Pozastaveno — můžeš pokračovat";
+    timerMsg.textContent = "Pozastaveno — můžeš pokračovat.";
   }
 
   function resume(){
@@ -412,7 +412,7 @@ body{
     updateUI();
     eggWrap.classList.remove('wobble');
     stopPuffs();
-    timerMsg.textContent = "Vyber recept a stiskni start ♥";
+    timerMsg.textContent = "Vyber plán a stiskni start ♥.";
   }
 
   function finish(){
@@ -423,7 +423,7 @@ body{
     eggWrap.classList.remove('wobble');
     stopPuffs();
     yolk.textContent = "🎉";
-    timerMsg.textContent = "Hotovo! Otevři vajíčko a dobrou chuť! 🍳";
+    timerMsg.textContent = "Hotovo! Rozklepni vajíčko a nech si chutnat! 🍳";
     ding();
     // confetti-ish simple animation: pulse
     yolk.style.transform = 'scale(1.18)';
